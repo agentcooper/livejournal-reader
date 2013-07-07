@@ -1,0 +1,11 @@
+<a class="b-back" href="/">b</a>
+
+<article class="b-post" ng-show="body">
+  <header class="b-post__header">
+    <h1 class="b-post__title">{{title}}</h1>
+    <a href="/read/{{user}}"><span class="b-lj_user">{{user}}</span></a>
+  </header>
+  <p ng-bind-html-unsafe="body" class="b-post__body"></p>
+
+  <div data-blink post-id="post_id", user="user"></div>
+</article>

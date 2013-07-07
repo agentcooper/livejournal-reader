@@ -1,0 +1,21 @@
+<div class="b-comments">
+
+  <script type="text/ng-template" id="tree_item_renderer.html">
+
+    <div class="b-thread__comment" ng-class="{ 'b-thread__comment_author': isAuthor(comment) }">
+      <a class="b-thread__username" href="/read/{{comment.postername}}">{{comment.postername}}</a>
+      <p class="b-thread__body" ng-bind-html-unsafe="comment.body | prettify"></p>
+    </div>
+
+    <ul class="b-thread" ng-if="comment.children">
+      <li ng-repeat="comment in comment.children" ng-include="'tree_item_renderer.html'"></li>
+    </ul>
+  </script>
+
+  <ul class="b-thread">
+    <li ng-repeat="comment in comments" ng-include="'tree_item_renderer.html'"></li>
+  </ul>
+
+  <span class="b-comments__more" ng-show="hasMore()" ng-click="loadMore()">Load more</span>
+
+</div>

@@ -1,0 +1,12 @@
+<!-- <h1 class="b-header">Топ ЖЖ</h1> -->
+<ol class="b-rating">
+
+
+  <li ng-repeat="post in rating" class="b-boop" ng-controller="Post" ng-click="load()">
+    <span class="b-boop__header">{{post.subject}}</span>
+    <span>{{post.ljuser[0].journal}}</span>
+    <p class="b-boop__body" ng-bind-html-unsafe="post.body"></p>
+    <span class="b-boop__comments">{{post.reply_count}}</span>
+  </li>
+
+</ol>

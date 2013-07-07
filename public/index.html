@@ -1,0 +1,64 @@
+<!doctype html>
+<html ng-app="lj">
+  <head>
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+    <script src="http://code.angularjs.org/1.1.5/angular-sanitize.js"></script>
+    <script src="/lib/ng-infinite-scroll.js"></script>
+
+    <script>
+    var LJ = angular.module('lj', ['ngSanitize', 'infinite-scroll']);
+
+    var scroll = {
+      _last: {},
+
+      save: function($location) {
+        this._last[$location.url()] = $(document).scrollTop();
+        console.log(this._last);
+      },
+
+      restore: function($location) {
+        $(document).scrollTop(this._last[$location.url()]);
+        console.log('restoring');
+      }
+    };
+    </script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
+
+    <script src="/service/text.js"></script>
+    <script src="/service/rating.js"></script>
+
+    <script src="/controller/entry.js"></script>
+    <script src="/controller/feed.js"></script>
+    <script src="/controller/history.js"></script>
+    <script src="/controller/journal.js"></script>
+    <script src="/controller/post.js"></script>
+    <script src="/controller/rating.js"></script>
+
+    <script src="/directive/comments.js"></script>
+    <script src="/stuff.js"></script>
+
+    <script src="/router.js"></script>
+  </head>
+  <body>
+    <base href="/">
+
+    <div class="b-main">
+      <ng-view></ng-view>
+    </div>
+
+    <div class="b-sidebar">
+
+      <ul class="b-menu">
+        <li class="b-menu__item"><a href="/">Top</a></li>
+        <li class="b-menu__item"><a href="/feed/">Feed</a></li>
+        <li class="b-menu__item"><a href="/history">History</a></li>
+      </ul>
+    </div>
+  </body>
+</html>

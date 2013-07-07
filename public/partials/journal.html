@@ -1,0 +1,17 @@
+<ol class="b-feed">
+
+  <h1>Журналъ</h1>
+
+  <li ng-repeat="entry in journal" class="b-entry" ng-controller="Post">
+    <span class="b-boop__header">{{entry.subject_raw}}</span>
+
+    <div class="b-post_aside">
+      <img class="b-post__userpic" ng-src="{{entry.poster_userpic_url}}">
+      <span class="b-post__username">{{entry.username}}</span>
+    </div>
+
+    <p class="b-entry__body" ng-bind-html-unsafe="entry.body"></p>
+    <span class="b-boop__comments">{{entry.reply_count}}</span>
+  </li>
+
+</ol>

@@ -1,0 +1,20 @@
+<ol class="b-feed" infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-immediate-check="false" infinite-scroll-disabled="busy">
+
+  <h1 class="b-header">Френдлента</h1>
+
+  <li ng-repeat="entry in feed" class="b-entry" ng-controller="Post" >
+    <h2 class="b-entry__header">{{entry.subject_raw}}</h2>
+
+    <div class="b-post_aside" ng-click="go(entry.username);">
+      <img class="b-post__userpic" ng-src="{{entry.poster_userpic_url}}">
+      <p class="b-post__username">{{entry.username}}</p>
+      <p class="b-post__time">{{entry.logtime | timeAgo }}<p>
+    </div>
+
+    <p class="b-entry__body" ng-bind-html-unsafe="entry.body"></p>
+    <a href class="b-boop__comments" ng-click="entry.loadComments = true;">{{entry.reply_count}}</a>
+
+    <div ng-if="entry.loadComments" data-blink post-id="entry.ditemid", user="entry.username"></div>
+  </li>
+
+</ol>
