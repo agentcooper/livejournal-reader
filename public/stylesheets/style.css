@@ -495,3 +495,16 @@ background-repeat: no-repeat;
 .b-thread__body > p:first-child {
   margin-top: 0;
 }
+
+.b-thread__userpic {
+  width: 35px;
+  height: 35px;
+  background-size: cover;
+  position: absolute;
+  margin-left: -46px;
+  margin-top: 5px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.46);
+}

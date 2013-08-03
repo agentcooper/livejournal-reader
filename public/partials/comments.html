@@ -3,6 +3,8 @@
   <script type="text/ng-template" id="tree_item_renderer.html">
 
     <div class="b-thread__comment" ng-class="{ 'b-thread__comment_author': isAuthor(comment) }">
+      <div class="b-thread__userpic" ng-style="{ 'background-image': 'url(' + comment.userpic + ')' }"></div>
+
       <a class="b-thread__username" href="/read/{{comment.postername}}">{{comment.postername}}</a>
       <p class="b-thread__body" ng-bind-html-unsafe="comment.body | prettify"></p>
     </div>

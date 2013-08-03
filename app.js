@@ -9,11 +9,9 @@ var express = require('express'),
 
 var app = express();
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 4000);
 app.use(express.favicon());
 app.use(express.logger('dev'));
-app.use(express.bodyParser());
-app.use(express.methodOverride());
 app.use(app.router);
 
 app.use(function(req, res, next) {
@@ -38,7 +36,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
