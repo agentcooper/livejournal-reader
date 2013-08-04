@@ -1,4 +1,5 @@
-LJ.directive('blink', function($http) {
+angular.module('LJ')
+.directive('blink', ['$http', function($http) {
   return {
     templateUrl: '/partials/comments.html',
 
@@ -57,4 +58,5 @@ LJ.directive('blink', function($http) {
       });
     }
   };
-});
+
+}]);

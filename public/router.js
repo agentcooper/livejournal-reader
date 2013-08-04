@@ -1,4 +1,7 @@
-LJ.config(function($routeProvider, $locationProvider) {
+angular.module('LJ')
+.config(['$routeProvider', '$locationProvider',
+function( $routeProvider,   $locationProvider) {
+
   $locationProvider.html5Mode(true);
 
   $routeProvider.
@@ -27,4 +30,5 @@ LJ.config(function($routeProvider, $locationProvider) {
       templateUrl: '/partials/history.html',
       controller: 'History'
     });
-});
+
+}]);

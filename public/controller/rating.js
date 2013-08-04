@@ -1,4 +1,7 @@
-function Rating($scope, $http, $route, $timeout, $location, ratingFactory) {
+angular.module('LJ').
+controller('Rating', ['$scope', '$http', '$route', '$timeout', '$location', 'ratingFactory',
+             function( $scope,   $http,   $route,   $timeout,   $location,   ratingFactory  ) {
+
   $scope.loading = true;
 
   ratingFactory.get(function(data) {
@@ -10,4 +13,5 @@ function Rating($scope, $http, $route, $timeout, $location, ratingFactory) {
       scroll.restore($location);
     }, 0);
   });
-}
+
+}]);

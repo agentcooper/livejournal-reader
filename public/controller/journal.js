@@ -1,4 +1,7 @@
-function Journal($scope, $http, $route, $routeParams, $location, Text) {
+angular.module('LJ').
+controller('Journal', ['$scope', '$http', '$route', '$routeParams', '$location', 'Text',
+              function( $scope,   $http,   $route,   $routeParams,   $location,   Text  ) {
+
   $http.get('/api/journal', {
     params: {
       user: $routeParams.user,
@@ -12,4 +15,5 @@ function Journal($scope, $http, $route, $routeParams, $location, Text) {
 
     console.log(journal);
   });
-}
+
+}]);

@@ -1,4 +1,4 @@
-LJ.factory('ratingFactory', function($http) {
+angular.module('LJ').factory('ratingFactory', ['$http', function($http) {
   var factory = {},
       cached = null;
 
@@ -8,18 +8,36 @@ LJ.factory('ratingFactory', function($http) {
       return;
     }
 
-    $http.jsonp('http://l-stat.livejournal.com/tools/endpoints/ratings.bml', {
+    var str = 'http://l-api.livejournal.com/__api/?request=';
+
+    var obj = {
+      "jsonrpc": "2.0",
+      "method": "homepage.get_rating",
+      "params": {
+        "homepage":1,
+        "sort": "visitors",
+        "page": 0,
+        "country": "cyr",
+        "locale": "ru_RU",
+        "category_id":0
+      },
+      "id": Date.now()
+    }
+
+    $http.jsonp(str + encodeURIComponent(JSON.stringify(obj)), {
       params: {
-        callback: 'JSON_CALLBACK',
-        homepage: 1,
-        sort: 'visitors',
-        country: 'cyr'
+        callback: 'JSON_CALLBACK'
       }
     }).success(function(data) {
-      cached = data.slice(0, 150);
+      if (!data.result) {
+        console.error(data);
+      }
+
+      cached = data.result.rating.slice(0, 150);
       callback(cached);
     });
   }
 
   return factory;
-});
+
+}]);

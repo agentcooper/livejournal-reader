@@ -1,4 +1,4 @@
-LJ.factory('historyFactory', function() {
+angular.module('LJ').factory('historyFactory', function() {
   var factory = {};
 
   factory.history = JSON.parse(localStorage.getItem('history')) || [];
@@ -26,7 +26,10 @@ LJ.factory('historyFactory', function() {
   return factory;
 });
 
-LJ.controller('History', function($scope, historyFactory) {
+angular.module('LJ').
+controller('History', ['$scope', 'historyFactory',
+              function( $scope,   historyFactory  ) {
+
   $scope.history = historyFactory.history;
 
   $scope.toggleFavorite = historyFactory.toggleFavorite;
@@ -38,4 +41,5 @@ LJ.controller('History', function($scope, historyFactory) {
       return $scope.settings.showFavorites ? entry.favorite : true;
     });
   }
-});
+
+}]);

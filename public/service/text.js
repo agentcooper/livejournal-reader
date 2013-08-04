@@ -1,11 +1,12 @@
-LJ.filter('prettify', function ($sanitize, Text) {
+angular.module('LJ')
+.filter('prettify', ['Text', function(Text) {
   return function (text, length, end) {
     return Text.prettify(text);
   };
-});
+}]);
 
 
-LJ.factory('Text', function($filter) {
+angular.module('LJ').factory('Text', ['$filter', function($filter) {
   var factory = {};
 
   function process(body) {
@@ -85,4 +86,5 @@ LJ.factory('Text', function($filter) {
   }
 
   return factory;
-});
+
+}]);

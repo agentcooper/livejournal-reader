@@ -1,44 +1,49 @@
 <!doctype html>
-<html ng-app="lj">
+<html ng-app="LJ">
   <head>
+    <meta charset="utf-8">
+
+    <!-- @ifdef DEBUG -->
     <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" />
+    <!-- @endif -->
+
+    <!-- @ifndef DEBUG -->
+    <link rel="stylesheet" href="/build/style.css" type="text/css" />
+    <!-- @endif -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
-    <script src="http://code.angularjs.org/1.1.5/angular-sanitize.js"></script>
-    <script src="/lib/ng-infinite-scroll.js"></script>
-
-    <script type="text/ng-template" id="rating.html">
-      <!-- @include partials/rating.html -->
+    <!-- @ifndef DEBUG -->
+    <script type="text/ng-template" id="/partials/rating.html">
+      <!-- @include build/partials/rating.html -->
     </script>
-    <script type="text/ng-template" id="post.html">
-      <!-- @include partials/post.html -->
+    <script type="text/ng-template" id="/partials/post.html">
+      <!-- @include build/partials/post.html -->
     </script>
-    <script type="text/ng-template" id="journal.html">
-      <!-- @include partials/journal.html -->
+    <script type="text/ng-template" id="/partials/feed.html">
+      <!-- @include build/partials/feed.html -->
     </script>
-
-    <script>
-    var LJ = angular.module('lj', ['ngSanitize', 'infinite-scroll']);
-
-    var scroll = {
-      _last: {},
-
-      save: function($location) {
-        this._last[$location.url()] = $(document).scrollTop();
-        console.log(this._last);
-      },
-
-      restore: function($location) {
-        $(document).scrollTop(this._last[$location.url()]);
-        console.log('restoring');
-      }
-    };
+    <script type="text/ng-template" id="/partials/journal.html">
+      <!-- @include build/partials/journal.html -->
     </script>
+    <script type="text/ng-template" id="/partials/comments.html">
+      <!-- @include build/partials/comments.html -->
+    </script>
+    <script type="text/ng-template" id="/partials/comment_tree.html">
+      <!-- @include build/partials/comment_tree.html -->
+    </script>
+    <!-- @endif -->
 
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
+    <!-- @ifndef DEBUG -->
+    <script src="/build/script.js"></script>
+    <!-- @endif -->
+
+    <!-- @ifdef DEBUG -->
+    <script src="/bower_components/jquery/jquery.min.js"></script>
+    <script src="/bower_components/angular-unstable/angular.min.js"></script>
+    <script src="/bower_components/momentjs/min/moment.min.js"></script>
+
+    <script src="/stuff.js"></script>
 
     <script src="/service/text.js"></script>
     <script src="/service/rating.js"></script>
@@ -49,11 +54,12 @@
     <script src="/controller/journal.js"></script>
     <script src="/controller/post.js"></script>
     <script src="/controller/rating.js"></script>
-
     <script src="/directive/comments.js"></script>
-    <script src="/stuff.js"></script>
 
     <script src="/router.js"></script>
+    <script src="/lib/ng-infinite-scroll.js"></script>
+    <!-- @endif -->
+
   </head>
   <body>
     <base href="/">

@@ -1,4 +1,21 @@
-LJ.factory('nowTime', ['$timeout', function($timeout) {
+angular.module('LJ', ['infinite-scroll']);
+
+var scroll = {
+  _last: {},
+
+  save: function($location) {
+    this._last[$location.url()] = $(document).scrollTop();
+    console.log(this._last);
+  },
+
+  restore: function($location) {
+    $(document).scrollTop(this._last[$location.url()]);
+    console.log('restoring');
+  }
+};
+
+angular.module('LJ')
+.factory('nowTime', ['$timeout', function($timeout) {
   var nowTime;
   (function updateTime() {
     nowTime = Date.now();
@@ -9,7 +26,8 @@ LJ.factory('nowTime', ['$timeout', function($timeout) {
   };
 }]);
 
-LJ.filter('timeAgo', ['nowTime', function(now) {
+angular.module('LJ')
+.filter('timeAgo', ['nowTime', function(now) {
   return function(input) {
     return moment(input * 1000).from(now());
   };

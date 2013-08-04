@@ -1,47 +1,53 @@
-function Feed($scope, $http, $timeout, $location, Text) {
-  $scope.feed = [];
+angular.module('LJ')
+.controller('Feed', [
+  '$scope', '$http', '$timeout', '$location', 'Text',
 
-  $scope.loadMore = function(done) {
-    if ($scope.busy) {
-      return;
-    }
-    $scope.busy = true;
+  function($scope, $http, $timeout, $location, Text) {
+    $scope.feed = [];
 
-    $http.get('/api/feed', {
-      params: {
-        skip: $scope.feed.length,
-        itemshow: 7
+    $scope.loadMore = function(done) {
+      if ($scope.busy) {
+        return;
       }
-    }).success(function(feed) {
+      $scope.busy = true;
 
-      console.log(feed.entries.length);
+      $http.get('/api/feed', {
+        params: {
+          skip: $scope.feed.length,
+          itemshow: 7
+        }
+      }).success(function(feed) {
 
-      feed.entries.forEach(function(entry) {
-        entry.body = Text.prettify(entry.body);
-        entry.loadComments = false;
+        console.log(feed.entries.length);
+
+        feed.entries.forEach(function(entry) {
+          entry.body = Text.prettify(entry.body);
+          entry.loadComments = false;
+        });
+
+        $scope.feed = $scope.feed.concat(feed.entries);
+
+        $timeout(function() {
+          $scope.busy = false;
+        }, 100);
+
+        if (typeof done === 'function') {
+          done();
+        }
       });
+    }
 
-      $scope.feed = $scope.feed.concat(feed.entries);
+    $scope.go = function(username) {
+      scroll.save($location);
 
+      $location.path('/read/' + username);
+    }
+
+    $scope.loadMore(function() {
       $timeout(function() {
-        $scope.busy = false;
-      }, 100);
-
-      if (typeof done === 'function') {
-        done();
-      }
+        scroll.restore($location);
+      }, 0);
     });
   }
 
-  $scope.go = function(username) {
-    scroll.save($location);
-
-    $location.path('/read/' + username);
-  }
-
-  $scope.loadMore(function() {
-    $timeout(function() {
-      scroll.restore($location);
-    }, 0);
-  });
-}
+]);
