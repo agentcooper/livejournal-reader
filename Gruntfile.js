@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 
           'public/lib/ng-infinite-scroll.js'
         ],
-        dest: 'public/build.js'
+        dest: 'public/build/script.js'
       }
     },
 

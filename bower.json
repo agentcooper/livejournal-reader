@@ -1,6 +1,6 @@
 {
   "name": "ljreader",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -8,6 +8,7 @@
     "test",
     "tests"
   ],
+
   "dependencies": {
     "angular-unstable": "1.1.5",
     "jquery": "1.10.2",
