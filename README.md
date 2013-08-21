@@ -5,11 +5,8 @@ git clone git@github.com:agentcooper/livejournal-reader.git
 cd livejournal-reader
 
 npm install
-
-cd public
 bower install
 grunt
-cd ../
 
 node app.js
 ```
