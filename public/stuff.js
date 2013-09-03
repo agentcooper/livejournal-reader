@@ -1,4 +1,4 @@
-angular.module('LJ', ['infinite-scroll']);
+angular.module('LJ', ['infinite-scroll', 'ngProgress']);
 
 var scroll = {
   _last: {},

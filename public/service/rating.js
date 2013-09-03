@@ -1,6 +1,10 @@
-angular.module('LJ').factory('ratingFactory', ['$http', function($http) {
+angular.module('LJ')
+.factory('ratingFactory', ['$http', 'progressbar',
+                  function( $http,   progressbar ) {
   var factory = {},
       cached = null;
+
+  progressbar.color('#3F5F9E');
 
   factory.get = function(callback) {
     if (cached) {
@@ -24,6 +28,7 @@ angular.module('LJ').factory('ratingFactory', ['$http', function($http) {
       "id": Date.now()
     }
 
+    progressbar.start();
     $http.jsonp(str + encodeURIComponent(JSON.stringify(obj)), {
       params: {
         callback: 'JSON_CALLBACK'
@@ -32,6 +37,8 @@ angular.module('LJ').factory('ratingFactory', ['$http', function($http) {
       if (!data.result) {
         console.error(data);
       }
+
+      progressbar.complete();
 
       cached = data.result.rating.slice(0, 150);
       callback(cached);

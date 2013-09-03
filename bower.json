@@ -8,10 +8,10 @@
     "test",
     "tests"
   ],
-
   "dependencies": {
     "angular-unstable": "1.1.5",
     "jquery": "1.10.2",
-    "momentjs": "~2.1.0"
+    "momentjs": "~2.1.0",
+    "ngprogress": "~0.0.3"
   }
 }
