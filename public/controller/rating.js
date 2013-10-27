@@ -8,7 +8,7 @@ controller('Rating', ['$scope', '$http', '$route', '$timeout', '$location', 'rat
     $scope.rating = data;
 
     $timeout(function() {
-      window.ratingHeight = $('body').height();
+      window.ratingHeight = $('.b-rating').height();
     }, 0);
   });
 
@@ -17,7 +17,7 @@ controller('Rating', ['$scope', '$http', '$route', '$timeout', '$location', 'rat
     // hacky way to set correct scroll position
     // after back button for Chrome
     if (window.ratingHeight) {
-      $('body').css({ height: window.ratingHeight });
+      $('.b-rating').css({ height: window.ratingHeight });
     }
 
     $timeout(function() {
