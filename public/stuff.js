@@ -8,7 +8,7 @@ var scroll = {
   },
 
   restore: function($location) {
-    $(window).scrollTop(that._last[$location.url()]);
+    $(window).scrollTop(this._last[$location.url()]);
   }
 };
 
