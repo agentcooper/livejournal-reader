@@ -4,13 +4,11 @@ var scroll = {
   _last: {},
 
   save: function($location) {
-    this._last[$location.url()] = $(document).scrollTop();
-    console.log(this._last);
+    this._last[$location.url()] = $(window).scrollTop();
   },
 
   restore: function($location) {
-    $(document).scrollTop(this._last[$location.url()]);
-    console.log('restoring');
+    $(window).scrollTop(that._last[$location.url()]);
   }
 };
 
