@@ -5,7 +5,7 @@
     <h1 class="b-post__title">{{title}}</h1>
     <a href="/read/{{user}}"><span class="b-lj_user">{{user}}</span></a>
   </header>
-  <p ng-bind-html-unsafe="body" class="b-post__body"></p>
+  <p lj-html-live="body" class="b-post__body"></p>
 
   <div lj-comments post-id="post_id" user="user"></div>
 </article>

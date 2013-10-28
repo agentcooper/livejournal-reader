@@ -11,7 +11,7 @@
       <p class="b-post__time">{{entry.logtime | timeAgo }}<p>
     </div>
 
-    <p class="b-entry__body" ng-bind-html-unsafe="entry.body"></p>
+    <p class="b-entry__body" lj-html="entry.body"></p>
     <a href class="b-boop__comments" ng-click="entry.loadComments = true;">{{entry.reply_count}}</a>
 
     <div ng-if="entry.loadComments" lj-comments post-id="entry.ditemid" user="entry.username"></div>

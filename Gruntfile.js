@@ -27,8 +27,12 @@ module.exports = function(grunt) {
         },
         src: [
           'public/bower_components/jquery/jquery.min.js',
-          'public/bower_components/angular-unstable/angular.min.js',
+
+          'public/bower_components/angular/angular.min.js',
+          'public/bower_components/angular-route/angular-route.min.js',
+
           'public/bower_components/momentjs/min/moment.min.js',
+
           'public/build/script.js'
         ],
         dest: 'public/build/script.js'

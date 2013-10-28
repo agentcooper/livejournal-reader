@@ -10,7 +10,7 @@
       <span class="b-post__username">{{entry.username}}</span>
     </div>
 
-    <p class="b-entry__body" ng-bind-html-unsafe="entry.body"></p>
+    <p class="b-entry__body" lj-html="entry.body"></p>
     <span class="b-boop__comments">{{entry.reply_count}}</span>
   </li>
 

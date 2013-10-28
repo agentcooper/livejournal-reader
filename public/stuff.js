@@ -1,4 +1,24 @@
-angular.module('LJ', ['infinite-scroll', 'ngProgress']);
+angular.module('LJ', [
+  'ngRoute',
+  'infinite-scroll',
+  'ngProgress'
+]);
+
+angular.module('LJ')
+  .directive('ljHtml', function () {
+    return function link(scope, element, attrs) {
+      element.html(scope.$eval(attrs.ljHtml) || '');
+    };
+  })
+  .directive('ljHtmlLive', function () {
+    return function link(scope, element, attrs) {
+      scope.$watch(function () {
+        return scope.$eval(attrs.ljHtmlLive);
+      }, function (value) {
+        element.html(value || '');
+      });
+    };
+  });
 
 var scroll = {
   _last: {},
