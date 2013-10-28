@@ -1,5 +1,5 @@
 angular.module('LJ')
-.directive('blink', ['$http', function($http) {
+.directive('ljComments', ['$http', function($http) {
   return {
     templateUrl: '/partials/comments.html',
 
