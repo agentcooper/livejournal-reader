@@ -11,6 +11,8 @@ grunt
 node app.js
 ```
 
+To work with non-minified resources, set `DEBUG` to `true` in `Gruntfile.js`.
+
 Features:
 * Scroll position is saved when switching between top and selected post
 * Infinite scrolling friends feed with inline comments
