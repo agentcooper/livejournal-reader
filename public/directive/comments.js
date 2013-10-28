@@ -1,5 +1,6 @@
 angular.module('LJ')
-.directive('ljComments', ['$http', function($http) {
+.directive('ljComments', ['$http', 'progressbar',
+                 function( $http ,  progressbar ) {
   return {
     templateUrl: '/partials/comments.html',
 
@@ -19,7 +20,7 @@ angular.module('LJ')
         return scope.page < scope.pages;
       };
 
-      scope.load = function() {
+      scope.load = function(callback) {
         $http.get('/api/comments/', {
           params: {
             user: scope.user,
@@ -32,12 +33,20 @@ angular.module('LJ')
           scope.comments = scope.comments.concat(result.comments);
           scope.pages = result.pages;
           scope.loading = false;
+
+          if (typeof callback === 'function') {
+            callback(result);
+          }
         });
       }
 
       scope.loadMore = function() {
         scope.page += 1;
-        scope.load();
+
+        progressbar.start();
+        scope.load(function() {
+          progressbar.complete();
+        });
       };
 
       scope.isAuthor = function(comment) {
