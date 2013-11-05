@@ -14,7 +14,9 @@ module.exports = function(grunt) {
 
           'public/router.js',
 
-          'public/lib/ng-infinite-scroll.js'
+          'public/bower_components/ngProgress/ngProgress.js',
+
+          'public/bower_components/ngInfiniteScroll/ng-infinite-scroll.js'
         ],
         dest: 'public/build/script.js'
       }
