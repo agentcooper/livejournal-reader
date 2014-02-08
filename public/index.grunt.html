@@ -32,6 +32,9 @@
     <script type="text/ng-template" id="/partials/comment_tree.html">
       <!-- @include build/partials/comment_tree.html -->
     </script>
+    <script type="text/ng-template" id="/partials/social.html">
+      <!-- @include build/partials/social.html -->
+    </script>
     <!-- @endif -->
 
     <!-- @ifndef DEBUG -->
@@ -57,6 +60,7 @@
     <script src="/controller/journal.js"></script>
     <script src="/controller/post.js"></script>
     <script src="/controller/rating.js"></script>
+    <script src="/controller/social.js"></script>
     <script src="/directive/comments.js"></script>
 
     <script src="/router.js"></script>
@@ -72,9 +76,11 @@
 
       <ul class="b-menu">
         <li class="b-menu__item"><a href="/">Top</a></li>
+        <li class="b-menu__item"><a href="/socialtop">Social top</a></li>
         <li class="b-menu__item"><a href="/feed/">Feed</a></li>
         <li class="b-menu__item"><a href="/history">History</a></li>
       </ul>
+
     </div>
   </body>
 </html>

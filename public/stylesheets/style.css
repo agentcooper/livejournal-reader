@@ -508,3 +508,99 @@ background-repeat: no-repeat;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.46);
 }
+
+
+
+
+
+
+
+/* ljtweets */
+
+.b-entry {
+  padding-top: 10px;
+  }
+
+  .b-entry__title {
+    font-size: 1.3em;
+    }
+
+  .b-entry__tweets {
+    text-decoration: none;
+    border-bottom: 1px dotted;
+    }
+
+  .b-entry__twitter {
+    }
+
+    .b-entry__twitter:before {
+      content: url('../images/twitter.png');
+      vertical-align: text-top;
+      }
+
+  .b-entry__livejournal {
+    padding-left: 10px;
+    }
+
+    .b-entry__livejournal:before {
+      content: url('../images/livejournal.png');
+      vertical-align: text-top;
+      padding-right: 2px;
+      }
+
+  .b-entry__fb {
+    padding-left: 10px;
+    }
+
+    .b-entry__fb:before {
+      content: url('../images/facebook.png');
+      vertical-align: text-top;
+      padding-right: 2px;
+      }
+
+
+.b-pseudo {
+  text-decoration: none;
+  border-bottom: 1px dotted;
+  }
+
+.b-selected {
+  color: red;
+  }
+
+.b-lj_user {
+  font-weight: bold;
+  }
+
+  .b-lj_user:before {
+    content: url('../images/userhead.png');
+    vertical-align: text-top;
+    padding-right: 1px;
+    }
+
+.b-tweet_list {
+  display: table;
+  }
+
+  .b-tweet_list__info {
+    display: table-row;
+    }
+
+  .b-tweet_list__user {
+    display: table-cell;
+    }
+
+  .b-tweet_list__followers {
+    display: table-cell;
+    padding-left: 10px;
+    }
+
+  .b-tweet_list__tweet {
+    display: table-cell;
+    padding-left: 10px;
+    }
+
+.b-crockford {
+  text-align: center;
+  max-height: 50px;
+  }

@@ -29,6 +29,10 @@ function( $routeProvider,   $locationProvider) {
     when('/history', {
       templateUrl: '/partials/history.html',
       controller: 'History'
+    }).
+    when('/socialtop', {
+      templateUrl: '/partials/social.html',
+      controller: 'SocialCtrl'
     });
 
 }]);

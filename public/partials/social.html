@@ -1,0 +1,31 @@
+
+<div class="b-rating">
+<h1 class="b-header">Social top</h1>
+
+<ul>
+  <li ng-repeat="post in top">
+
+    <p class="b-boop__header">
+      <a ng-href="/read/{{post.journal}}/{{post.postId}}">{{ post.title }}</a>
+    </p>
+
+    <p>{{post.at | date: 'MMM d, y HH:mm'}} {{post.user}}</p>
+
+
+    <span class="b-entry__twitter"><a href="javascript:void(0);" class="b-entry__tweets" ng-click="post.show = !post.show"><ng-pluralize
+        count="post.tweet_count"
+        when="{'one': '1 tweet','other': '{} tweets'}">
+      </ng-pluralize></a> with total <span class="b-entry__followers">{{ post.followers_count }} followers</span></span><span class="b-entry__fb">{{ post.fb_count }} shares</span><span class="b-entry__livejournal">{{ post.comments }} comments</span></p>
+
+    <ul class="b-tweet_list" ng-show="post.show">
+      <li ng-repeat="tweet in post.tweets" class="b-tweet_list__info">
+        <span class="b-tweet_list__user"><a href="http://twitter.com/{{ tweet.user }}" target="_blank">@{{ tweet.user }}</a></span>
+        <span class="b-tweet_list__followers">{{ tweet.followers }}</span>
+        <span class="b-tweet_list__tweet">{{ tweet.text }}</span>
+      </li>
+    </ul>
+
+  </li>
+</ul>
+
+</div>
