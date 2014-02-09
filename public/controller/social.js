@@ -17,11 +17,38 @@ angular.module('LJ')
   return factory;
 
 }])
-.controller('SocialCtrl', ['$scope', 'Social', 
-                  function( $scope,   Social ) {
+.controller('SocialCtrl', ['$scope', 'Social', '$timeout', '$location', 
+                  function( $scope,   Social ,  $timeout ,  $location ) {
 
   Social.get(function(top) {
     $scope.top = top;
+
+    $timeout(function() {
+      window.socialHeight = $('.b-social').height();
+    }, 0);
+  });
+
+  $scope.toggle = function(event, post) {
+    post.show = !post.show;
+
+    return false;
+  };
+
+  $scope.$on('$locationChangeStart', function(event, next, current) {
+    scroll.save(current);
+  });
+
+  $scope.$on('$viewContentLoaded', function() {
+
+    // hacky way to set correct scroll position
+    // after back button for Chrome
+    if (window.socialHeight) {
+      $('.b-social').css({ height: window.socialHeight });
+    }
+
+    $timeout(function() {
+      scroll.restore($location);
+    }, 0);
   });
 
 }]);

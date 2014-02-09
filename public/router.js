@@ -30,7 +30,7 @@ function( $routeProvider,   $locationProvider) {
       templateUrl: '/partials/history.html',
       controller: 'History'
     }).
-    when('/socialtop', {
+    when('/social', {
       templateUrl: '/partials/social.html',
       controller: 'SocialCtrl'
     });

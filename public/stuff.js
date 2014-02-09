@@ -24,11 +24,15 @@ var scroll = {
   _last: {},
 
   save: function($location) {
-    this._last[$location.url()] = $(window).scrollTop();
+    var url = (typeof $location === 'object') ? $location.absUrl() : $location;
+
+    this._last[url] = $(window).scrollTop();
   },
 
   restore: function($location) {
-    $(window).scrollTop(this._last[$location.url()]);
+    var url = (typeof $location === 'object') ? $location.absUrl() : $location;
+
+    $(window).scrollTop(this._last[url]);
   }
 };
 
@@ -48,6 +52,11 @@ angular.module('LJ')
 .filter('timeAgo', ['nowTime', function(now) {
   return function(input) {
     return moment(input * 1000).from(now());
+  };
+}])
+.filter('timeAgo2', [function() {
+  return function(input) {
+    return moment(input).fromNow();;
   };
 }]);
 
