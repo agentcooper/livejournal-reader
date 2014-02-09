@@ -10,8 +10,8 @@
   ],
   "dependencies": {
     "jquery": "1.10.2",
-    "angular": "v1.2.0-rc.3",
-    "angular-route": "v1.2.0-rc.3",
+    "angular": "v1.2.12",
+    "angular-route": "v1.2.12",
     "ngprogress": "~0.0.3",
     "momentjs": "~2.1.0",
     "ngInfiniteScroll": "~1.0.0"
