@@ -63,6 +63,13 @@ angular.module('LJ')
   return function(input) {
     return moment(input).fromNow();;
   };
+}])
+.filter('reader', [function() {
+  return function(input) {
+    var post = LJ.parseLink(input);
+
+    return '/read/' + post.journal + '/' + post.postId;
+  };
 }]);
 
 // auto-paragraph
@@ -108,3 +115,48 @@ function replaceURLWithHTMLLinks(text) {
     var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
     return text.replace(exp,"<a href='$1'>$1</a>");
 }
+
+
+
+var LJ = {};
+
+var rxLink = [
+  /([0-9a-zA-Z-_]+)\.livejournal\.com\/([0-9]+)\.html/,
+  /m\.livejournal\.com\/read\/[a-z]+\/([0-9a-zA-Z_-]+)\/(\d+)/,
+  /users\.livejournal\.com\/([0-9a-zA-Z-_]+)\/([0-9]+).html/
+];
+
+
+LJ.parseLink = function(url) {
+  if (!url) {
+    return null;
+  }
+
+  for (var i = 0, match; i < rxLink.length; i++) {
+    match = url.match(rxLink[i]);
+
+    if (match && match.length === 3) {
+      return { journal: match[1], postId: match[2] };
+    }
+  }
+
+  return null;
+};
+
+$(function() {
+  $(document.body).on('click', 'a', function(event) {
+    var href = $(this).attr('href');
+
+    if (href) {
+      var post = LJ.parseLink(href);
+
+      console.log(post);
+     
+      if (post) {
+        $(this).removeAttr('_target');
+
+        $(this).attr('href', '/read/' + post.journal + '/' + post.postId);
+      } 
+    }
+  });
+});

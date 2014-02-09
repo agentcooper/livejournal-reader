@@ -3,7 +3,7 @@
   <h1>Журналъ</h1>
 
   <li ng-repeat="entry in journal" class="b-entry" ng-controller="Post">
-    <span class="b-boop__header">{{entry.subject_raw}}</span>
+    <span class="b-boop__header"><a ng-href="{{ entry.url }}">{{entry.subject_raw || '(no subject)'}}</a></span>
 
     <div class="b-post_aside">
       <img class="b-post__userpic" ng-src="{{entry.poster_userpic_url}}">

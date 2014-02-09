@@ -648,3 +648,9 @@ background-repeat: no-repeat;
   padding-top: 1em;
   color: black;
 }
+
+/* overrides */
+
+.b-entry__body img[src*="/img/userinfo.gif"] {
+  display: none;
+}
