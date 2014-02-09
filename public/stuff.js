@@ -10,6 +10,11 @@ angular.module('LJ')
       element.html(scope.$eval(attrs.ljHtml) || '');
     };
   })
+  .directive('ljText', function () {
+    return function link(scope, element, attrs) {
+      element.text(scope.$eval(attrs.ljText) || '');
+    };
+  })
   .directive('ljHtmlLive', function () {
     return function link(scope, element, attrs) {
       scope.$watch(function () {

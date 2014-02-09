@@ -14,21 +14,20 @@
 
     <a class="b-social-link" href="/read/{{post.journal}}/{{post.postId}}">
 
-      <span class="b-social-header">{{ post.title }}</span>
-      <span class="b-social-details"><span class="user">{{post.journal}}</span>, {{ post.at | timeAgo2 }}</span>
+      <span class="b-social-header" lj-text="post.title"></span>
+      <span class="b-social-details"><span class="user" lj-text="post.journal"></span>, {{ post.at | timeAgo2 }}</span>
 
       <div class="b-social-stats">
-        <span class="b-entry__twitter"><span class="b-entry__tweets" ng-click="toggleTweets($event, post);"><ng-pluralize count="post.tweet_count" when="{'one': '1 tweet','other': '{} tweets'}"></ng-pluralize></span> with total <span class="b-entry__followers">{{ post.followers_count }} followers</span></span><span class="b-entry__fb">{{ post.fb_count }} shares</span><span class="b-entry__livejournal">{{ post.comments }} comments</span>
+        <span class="b-entry__twitter"><span class="b-entry__tweets" ng-click="toggleTweets($event, post);"><ng-pluralize count="post.tweet_count" when="{'one': '1 tweet','other': '{} tweets'}"></ng-pluralize></span> with total <span class="b-entry__followers"><span lj-text="post.followers_count"></span> followers</span></span><span class="b-entry__fb"><span lj-text="post.fb_count"></span> shares</span><span class="b-entry__livejournal"><span lj-text="post.comments"></span> comments</span>
       </div>
-
     </a>
 
-    <div ng-show="post.show">
+    <div ng-if="post.show">
       <ul class="b-tweet_list">
         <li ng-repeat="tweet in post.tweets" class="b-tweet_list__info">
-          <span class="b-tweet_list__user"><a href="http://twitter.com/{{ tweet.user }}" target="_blank">@{{ tweet.user }}</a></span>
-          <span class="b-tweet_list__followers">{{ tweet.followers }}</span>
-          <span class="b-tweet_list__tweet">{{ tweet.text }}</span>
+          <span class="b-tweet_list__user"><a href="http://twitter.com/{{ tweet.user }}" target="_blank">@<span lj-text="tweet.user"></span></a></span>
+          <span class="b-tweet_list__followers" lj-text="tweet.followers"></span>
+          <span class="b-tweet_list__tweet" lj-text="tweet.text"></span>
         </li>
       </ul>
     </div>

@@ -1,4 +1,19 @@
 angular.module('LJ')
+.factory('App', ['progressbar', function(progressbar) {
+
+  var factory = {};
+
+  factory.startProgress = function() {
+    progressbar.start();
+  };
+
+  factory.doneProgress = function() {
+    progressbar.complete();
+  };
+
+  return factory;
+
+}])
 .factory('Social', ['$http', function($http) {
 
   var factory = {};
@@ -17,14 +32,39 @@ angular.module('LJ')
   return factory;
 
 }])
-.controller('SocialCtrl', ['$scope', 'Social', '$timeout', '$location', 
-                  function( $scope,   Social ,  $timeout ,  $location ) {
+.controller('SocialCtrl', ['$scope', 'Social', '$timeout', '$location', 'App', 
+                  function( $scope,   Social ,  $timeout ,  $location ,  App ) {
 
   $scope.predicate = 'at';
   $scope.reverse = true;
 
+  $scope.top = [];
+
+  /*
+   * obj.to
+   * obj.from
+   * obj.chunk
+   * obj.delay
+   */
+  function progressiveCopy(obj, callback) {
+    var sourceCopy = obj.from.slice();
+
+    (function nextChunk() {
+      if (sourceCopy.length > 0) {
+        Array.prototype.push.apply(obj.to, sourceCopy.splice(0, obj.chunk));
+        $timeout(nextChunk, obj.delay);
+      } else {
+        callback();
+      }
+    })();
+  }
+
+  App.startProgress();
+
   Social.get(function(top) {
     $scope.top = top;
+
+    App.doneProgress();
 
     $timeout(function() {
       window.socialHeight = $('.b-social').height();
