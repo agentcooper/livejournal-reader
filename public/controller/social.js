@@ -24,7 +24,8 @@ angular.module('LJ')
     }
 
     $http.get('/top.json').success(function(res) {
-      factory.top = res.top;
+      factory.top = res;
+      console.log(factory.top);
       callback(factory.top);
     });
   };
