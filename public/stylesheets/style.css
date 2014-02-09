@@ -615,8 +615,13 @@ background-repeat: no-repeat;
   /*padding: 10px;*/
 }
 
-.b-social-item:hover {
+.b-social-link:hover {
   background-color: rgb(244, 249, 253);
+}
+
+.b-social-link:visited,
+.b-social-link:active {
+  color: rgb(85, 26, 139);
 }
 
 .b-social {

@@ -2,3 +2,4 @@ config.js
 public/bower_components
 public/build
 public/index.html
+public/top.json

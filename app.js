@@ -17,7 +17,10 @@ app.use(app.router);
 app.use(function(req, res, next) {
 
   if (/^\/read\//.test(req.url)) {
-    console.log('read');
+    req.url = '/';
+  }
+
+  if (/^\/social/.test(req.url)) {
     req.url = '/';
   }
 

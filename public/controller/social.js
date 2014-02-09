@@ -20,6 +20,9 @@ angular.module('LJ')
 .controller('SocialCtrl', ['$scope', 'Social', '$timeout', '$location', 
                   function( $scope,   Social ,  $timeout ,  $location ) {
 
+  $scope.predicate = 'at';
+  $scope.reverse = true;
+
   Social.get(function(top) {
     $scope.top = top;
 
@@ -28,11 +31,25 @@ angular.module('LJ')
     }, 0);
   });
 
-  $scope.toggle = function(event, post) {
-    post.show = !post.show;
+  $scope.toggleTweets = function(event, post) {
+    event.preventDefault();
+    event.stopPropagation();
 
-    return false;
+    post.show = !post.show;
   };
+
+  $scope.isSelected = function(predicate) {
+    return ($scope.predicate === predicate) ? 'b-selected' : '';
+  };
+
+  $scope.use = function(predicate) {
+    if ($scope.predicate === predicate) {
+      $scope.reverse = !$scope.reverse;
+    } else {
+      $scope.predicate = predicate;
+      $scope.reverse = true;
+    }
+  }
 
   $scope.$on('$locationChangeStart', function(event, next, current) {
     scroll.save(current);

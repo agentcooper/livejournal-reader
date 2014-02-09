@@ -1,8 +1,16 @@
 
 <div class="b-rating">
-<h1 class="b-header">Social top</h1>
+<h1 class="b-header">Топ по социальным сетям</h1>
 
-<ol class="b-social"><li ng-repeat="post in top" class="b-social-item">
+<div class="b-top__controls">
+  Сортировать по
+  <a href="" class="b-pseudo" ng-class="isSelected('at');" ng-click="use('at');">дате</a>,
+  <a href="" class="b-pseudo" ng-class="isSelected('tweet_count');" ng-click="use('tweet_count');">твитам</a>,
+  <a href="" class="b-pseudo" ng-class="isSelected('fb_count');" ng-click="use('fb_count');">фейсбуку</a>,
+  <a href="" class="b-pseudo" ng-class="isSelected('comments');" ng-click="use('comments');">комментариям</a>
+</div>
+
+<ol class="b-social"><li ng-repeat="post in top | orderBy:predicate:reverse" class="b-social-item">
 
     <a class="b-social-link" href="/read/{{post.journal}}/{{post.postId}}">
 
@@ -10,10 +18,20 @@
       <span class="b-social-details"><span class="user">{{post.journal}}</span>, {{ post.at | timeAgo2 }}</span>
 
       <div class="b-social-stats">
-        <span class="b-entry__twitter"><span class="b-entry__tweets" ng-click="toggle($event, post);"><ng-pluralize count="post.tweet_count" when="{'one': '1 tweet','other': '{} tweets'}"></ng-pluralize></span> with total <span class="b-entry__followers">{{ post.followers_count }} followers</span></span><span class="b-entry__fb">{{ post.fb_count }} shares</span><span class="b-entry__livejournal">{{ post.comments }} comments</span>
+        <span class="b-entry__twitter"><span class="b-entry__tweets" ng-click="toggleTweets($event, post);"><ng-pluralize count="post.tweet_count" when="{'one': '1 tweet','other': '{} tweets'}"></ng-pluralize></span> with total <span class="b-entry__followers">{{ post.followers_count }} followers</span></span><span class="b-entry__fb">{{ post.fb_count }} shares</span><span class="b-entry__livejournal">{{ post.comments }} comments</span>
       </div>
 
     </a>
+
+    <div ng-show="post.show">
+      <ul class="b-tweet_list">
+        <li ng-repeat="tweet in post.tweets" class="b-tweet_list__info">
+          <span class="b-tweet_list__user"><a href="http://twitter.com/{{ tweet.user }}" target="_blank">@{{ tweet.user }}</a></span>
+          <span class="b-tweet_list__followers">{{ tweet.followers }}</span>
+          <span class="b-tweet_list__tweet">{{ tweet.text }}</span>
+        </li>
+      </ul>
+    </div>
 
 </li></ol>
 
