@@ -10,7 +10,7 @@ var express = require('express'),
 var app = express();
 
 app.set('port', process.env.PORT || 4000);
-app.use(express.favicon());
+app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
 app.use(express.logger('dev'));
 app.use(app.router);
 
