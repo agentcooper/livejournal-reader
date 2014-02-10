@@ -1,6 +1,6 @@
 angular.module('LJ')
-.directive('ljComments', ['$http', 'progressbar',
-                 function( $http ,  progressbar ) {
+.directive('ljComments', ['$http', 'App',
+                 function( $http ,  App ) {
   return {
     templateUrl: '/partials/comments.html',
 
@@ -43,9 +43,9 @@ angular.module('LJ')
       scope.loadMore = function() {
         scope.page += 1;
 
-        progressbar.start();
+        App.progress.start();
         scope.load(function() {
-          progressbar.complete();
+          App.progress.complete();
         });
       };
 

@@ -1,9 +1,9 @@
 angular.module('LJ')
 .controller('Entry', [
-  '$scope', '$route', '$routeParams', '$http', 'historyFactory', 'Text', 'progressbar',
-  function($scope, $route, $routeParams, $http, historyFactory, Text, progressbar) {
+  '$scope', '$route', '$routeParams', '$http', 'historyFactory', 'Text', 'App',
+  function($scope, $route, $routeParams, $http, historyFactory, Text, App) {
 
-    progressbar.start();
+    App.progress.start();
 
     $http.get('/api/post', {
       params: {
@@ -14,7 +14,7 @@ angular.module('LJ')
     }).success(function(data) {
       console.log(data);
 
-      progressbar.complete();
+      App.progress.complete();
 
       $scope.post_id = Number($routeParams.post_id);
       $scope.body = Text.prettify(data.event);

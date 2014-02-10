@@ -14,8 +14,6 @@ module.exports = function(grunt) {
 
           'public/router.js',
 
-          'public/bower_components/ngprogress/ngProgress.js',
-
           'public/bower_components/ngInfiniteScroll/ng-infinite-scroll.js'
         ],
         dest: 'public/build/script.js'
@@ -34,6 +32,8 @@ module.exports = function(grunt) {
           'public/bower_components/angular-route/angular-route.min.js',
 
           'public/bower_components/momentjs/min/moment.min.js',
+
+          'public/bower_components/ngprogress/build/ngProgress.min.js',
 
           'public/build/script.js'
         ],

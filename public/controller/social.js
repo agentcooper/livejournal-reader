@@ -1,20 +1,24 @@
 angular.module('LJ')
-.factory('App', ['progressbar', function(progressbar) {
-
+.factory('App', ['ngProgress', function(ngProgress) {
   var factory = {};
 
-  factory.startProgress = function() {
-    progressbar.start();
-  };
+  ngProgress.color('#3F5F9E');
 
-  factory.doneProgress = function() {
-    progressbar.complete();
+  factory.progress = {
+    start: function() {
+      ngProgress.reset();
+      ngProgress.start();
+    },
+
+    complete: function() {
+      ngProgress.complete();
+    }
   };
 
   return factory;
-
 }])
-.factory('Social', ['$http', function($http) {
+.factory('Social', ['$http', 'App',
+           function( $http ,  App ) {
 
   var factory = {};
 
@@ -23,7 +27,10 @@ angular.module('LJ')
       return callback(factory.top);
     }
 
+    App.progress.start();
     $http.get('/top.json').success(function(res) {
+      App.progress.complete();
+
       factory.top = res;
       console.log(factory.top);
       callback(factory.top);
@@ -33,8 +40,8 @@ angular.module('LJ')
   return factory;
 
 }])
-.controller('SocialCtrl', ['$scope', 'Social', '$timeout', '$location', 'App', 
-                  function( $scope,   Social ,  $timeout ,  $location ,  App ) {
+.controller('SocialCtrl', ['$scope', 'Social', '$timeout', '$location', 
+                  function( $scope,   Social ,  $timeout ,  $location ) {
 
   $scope.predicate = 'at';
   $scope.reverse = true;
@@ -60,12 +67,8 @@ angular.module('LJ')
     })();
   }
 
-  App.startProgress();
-
   Social.get(function(top) {
     $scope.top = top;
-
-    App.doneProgress();
 
     $timeout(function() {
       window.socialHeight = $('.b-social').height();

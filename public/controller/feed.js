@@ -1,8 +1,8 @@
 angular.module('LJ')
 .controller('Feed', [
-  '$scope', '$http', '$timeout', '$location', 'Text', 'progressbar',
-
-  function($scope, $http, $timeout, $location, Text, progressbar) {
+           '$scope', '$http', '$timeout', '$location', 'Text', 'App',
+  function( $scope ,  $http ,  $timeout ,  $location ,  Text ,  App ) {
+    
     $scope.feed = [];
 
     $scope.loadMore = function(done) {
@@ -11,14 +11,14 @@ angular.module('LJ')
       }
       $scope.busy = true;
 
-      progressbar.start();
+      App.progress.start();
       $http.get('/api/feed', {
         params: {
           skip: $scope.feed.length,
           itemshow: 7
         }
       }).success(function(feed) {
-        progressbar.complete();
+        App.progress.complete();
 
         console.log(feed.entries.length);
 
