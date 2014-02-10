@@ -654,3 +654,85 @@ background-repeat: no-repeat;
 .b-entry__body img[src*="/img/userinfo.gif"] {
   display: none;
 }
+
+
+
+
+
+
+.b-menu-mobile {
+  display: none;
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) {
+
+  .b-post {
+    max-width: 100%;
+    margin: 1em;
+    word-break: break-word;
+  }
+
+  .b-post__body {
+    font-size: 18px;
+  }
+
+  .b-post__body img {
+    max-width: 100%;
+  }
+
+  .b-comments {
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  .b-comments img {
+    max-width: 100%;
+  }
+
+  .b-main {
+    margin: 0;
+  }
+
+  .b-sidebar {
+    right: 0;
+    box-shadow: none;
+    background-color: transparent;
+    height: auto;
+    width: auto;
+  }
+
+  body {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+
+  .b-menu {
+    display: none;
+  }
+
+  .show .b-menu {
+    display: block;
+    background-color: white;
+    opacity: 0.9;
+  }
+
+  .b-menu-mobile {
+    display: block;
+    opacity: 0.5;
+    font-weight: bold;
+    font-size: 1.2em;
+    /*background-color: red;*/
+    margin: 0;
+    padding: 0px 10px 10px 10px;
+  }
+
+  .b-mobile:hover .b-menu {
+    display: block;
+  }
+
+  .b-boop {
+    padding-left: 0;
+    margin-right: 0;
+  }
+}
