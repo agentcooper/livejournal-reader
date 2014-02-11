@@ -33,6 +33,9 @@ function( $routeProvider,   $locationProvider) {
     when('/social', {
       templateUrl: '/partials/social.html',
       controller: 'SocialCtrl'
+    })
+    .when('/about', {
+      templateUrl: '/partials/about.html'
     });
 
 }]);

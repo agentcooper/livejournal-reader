@@ -36,6 +36,10 @@ app.use(function(req, res, next) {
     req.url = '/';
   }
 
+  if (/^\/about$/.test(req.url)) {
+    req.url = '/';
+  }
+
   next();
 });
 
