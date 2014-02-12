@@ -139,7 +139,7 @@ getRating(function(err, rating) {
         built_at: Date.now()
       });
 
-      fs.writeFileSync('public/top.json', output);
+      fs.writeFileSync(__dirname + '/public/top.json', output);
     } else {
       console.error('Bad data', top);
     }
