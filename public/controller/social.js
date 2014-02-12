@@ -31,6 +31,8 @@ angular.module('LJ')
     $http.get('/top.json').success(function(res) {
       App.progress.complete();
 
+      res.top = res.top.slice(0, 200);
+
       factory.top = res;
       console.log(factory.top);
       callback(factory.top);
@@ -43,8 +45,8 @@ angular.module('LJ')
 .controller('SocialCtrl', ['$scope', 'Social', '$timeout', '$location', 
                   function( $scope,   Social ,  $timeout ,  $location ) {
 
-  $scope.predicate = 'at';
-  $scope.reverse = true;
+  $scope.predicate = 'position';
+  $scope.reverse = false;
 
   $scope.top = [];
 

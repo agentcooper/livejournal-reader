@@ -12,7 +12,7 @@ angular.module('LJ')
   })
   .directive('ljText', function () {
     return function link(scope, element, attrs) {
-      element.text(scope.$eval(attrs.ljText) || '');
+      element.text(scope.$eval(attrs.ljText));
     };
   })
   .directive('ljHtmlLive', function () {

@@ -527,7 +527,7 @@ background-repeat: no-repeat;
 
   .b-entry__tweets {
     text-decoration: none;
-    border-bottom: 1px dotted;
+    /*border-bottom: 1px dotted;*/
     }
 
   .b-entry__twitter {
@@ -556,6 +556,16 @@ background-repeat: no-repeat;
       content: url('../images/facebook.png');
       vertical-align: text-top;
       padding-right: 2px;
+      }
+
+  .b-entry__vk {
+    padding-left: 10px;
+    }
+
+      .b-entry__vk:before {
+        content: url('../images/vkontakte.ico');
+        vertical-align: text-top;
+        padding-right: 2px;
       }
 
 
@@ -609,6 +619,15 @@ background-repeat: no-repeat;
   text-decoration: none;
   display: block;
   padding: 10px;
+}
+
+.b-social-image {
+  max-width: 100%;
+}
+
+.b-social-body {
+  color: black;
+  padding-top: 1em;
 }
 
 .b-social-item {

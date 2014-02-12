@@ -5,11 +5,6 @@ function( $routeProvider,   $locationProvider) {
   $locationProvider.html5Mode(true);
 
   $routeProvider.
-    when('/', {
-      templateUrl: '/partials/rating.html',
-      controller: 'Rating',
-      reloadOnSearch: false
-    }).
     when('/read/:user/:post_id', {
       templateUrl: '/partials/post.html',
       controller: 'Entry'
@@ -30,9 +25,10 @@ function( $routeProvider,   $locationProvider) {
       templateUrl: '/partials/history.html',
       controller: 'History'
     }).
-    when('/social', {
+    when('/', {
       templateUrl: '/partials/social.html',
-      controller: 'SocialCtrl'
+      controller: 'SocialCtrl',
+      reloadOnSearch: false
     })
     .when('/about', {
       templateUrl: '/partials/about.html'
