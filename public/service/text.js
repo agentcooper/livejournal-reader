@@ -9,6 +9,8 @@ angular.module('LJ')
 angular.module('LJ').factory('Text', ['$filter', function($filter) {
   var factory = {};
 
+  var rx_lj_comm = /\<lj\s+comm\=\"?([a-zA-Z0-9_]+)\"?\>/ig;
+
   function process(body) {
     body = body.replace('<a name="Read more..."></a>', '');
     // body = body.replace(/<br><br><br>/g, '<br><br>');
@@ -37,7 +39,7 @@ angular.module('LJ').factory('Text', ['$filter', function($filter) {
     // remove center
     $body.find('center, u, font').each(function(index, element) {
       var $element = $(element);
-      $element.replaceWith($element.children());
+      $element.replaceWith($element.contents());
     });
 
     // remove custom fonts and colors
@@ -74,15 +76,12 @@ angular.module('LJ').factory('Text', ['$filter', function($filter) {
     return $body.html();
   }
 
-  function replaceURLWithHTMLLinks(text) {
-    // this looks for urls in html and makes them links
-    // I apologize in advance
-    var exp = /[^\"]((https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    return text.replace(exp, " <a href='$1'>$1</a>");
-  }
-
   factory.prettify = function(text) {
-    return process( p( replaceURLWithHTMLLinks(text) ) );
+    text = text.replace(rx_lj_comm, function(_, comm) {
+      return '<span lj-community>' + comm + '</span>';
+    });
+
+    return process( p(text) );
   }
 
   return factory;
