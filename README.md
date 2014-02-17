@@ -11,7 +11,7 @@ grunt
 node app.js
 ```
 
-To work with non-minified resources, set `DEBUG` to `true` in `Gruntfile.js`.
+Use 'grunt --production' to build for production.
 
 Features:
 * Scroll position is saved when switching between top and selected post

@@ -44,7 +44,7 @@ module.exports = function(grunt) {
     preprocess: {
       options: {
         context: {
-          // DEBUG: true
+          DEBUG: grunt.option('production') ? undefined : true
         }
       },
       html: {
