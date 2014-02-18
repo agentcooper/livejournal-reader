@@ -1,0 +1,53 @@
+.b-history {
+  max-width: 500px;
+  list-style-position: inside;
+}
+
+.b-history__link {
+margin: 0px;
+padding: 10px 30px 10px 15px;
+color: #3F5F9E;
+margin: 0;
+text-decoration: none;
+display: block;
+width: 100%;
+height: 100%;
+box-sizing: border-box;
+}
+
+.b-history__link:hover {
+  background-color: #E4F3FF;
+}
+
+.b-history__entry {
+  position: relative;
+}
+
+.b-history__entry__name {
+  font-size: 1.4em;
+}
+
+.b-history__favorite {
+  visibility: hidden;
+position: absolute;
+right: 0;
+top: 0;
+width: 20px;
+padding: 5px;
+overflow: hidden;
+bottom: 0;
+background-image: url('/images/heart-empty.png');
+background-size: 20px 20px;
+background-position: 50%;
+vertical-align: middle;
+background-repeat: no-repeat;
+}
+
+.b-history__favorite-active {
+  visibility: visible;
+  background-image: url('/images/heart-full.png');
+}
+
+.b-history__entry:hover .b-history__favorite {
+  visibility: visible;
+}
