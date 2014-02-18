@@ -1,9 +1,25 @@
 <div class="b-comments">
 
   <ul class="b-thread">
-    <li ng-repeat="comment in comments" ng-include="'/partials/comment_tree.html'"></li>
+    <li ng-repeat="comment in comments" class="b-comment-level-{{ comment.level > 15 ? 'over-15' : comment.level }}">
+      
+      <div class="b-thread__comment" ng-class="{ 'b-thread__comment_author': isAuthor(comment) }">
+        <div class="b-thread__userpic" ng-style="{ 'background-image': 'url(' + comment.userpic + ')' }"></div>
+
+        <a class="b-thread__username" href="/read/{{comment.postername}}">{{comment.identity_display || comment.postername}}</a>
+        <p class="b-thread__body" lj-html="comment.body"></p>
+      </div>
+
+    </li>
   </ul>
 
-  <span class="b-comments__more" ng-show="hasMore()" ng-click="loadMore()">Load more</span>
+  <span class="b-comments__more" ng-show="hasMore() && !loading" ng-click="loadMore()">Load more</span>
+
+  <div class="b-comments--loading" ng-show="loading">
+    Loading comments
+    <div class="spinner">
+      <div class="rect1"></div>&nbsp;<div class="rect2"></div>&nbsp;<div class="rect3"></div>&nbsp;<div class="rect4"></div>&nbsp;<div class="rect5"></div>
+    </div>
+  </div>
 
 </div>

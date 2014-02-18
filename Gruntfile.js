@@ -76,7 +76,7 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'public/build/style.css': [
-            'public/stylesheets/style.css'
+            'public/stylesheets/*.css'
           ]
         }
       }

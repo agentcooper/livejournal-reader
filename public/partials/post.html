@@ -1,9 +1,7 @@
-<a class="b-back" href="" onclick="history.go(-1);">b</a>
-
 <article class="b-post" ng-show="body">
   <header class="b-post__header">
     <h1 class="b-post__title">{{title}}</h1>
-    <a href="/read/{{user}}"><span class="b-lj_user">{{user}}</span></a>
+    <a href="/read/{{user}}" class="b-lj_user" lj-text="user">{{user}}</a>
   </header>
   <p lj-html-live="body" class="b-post__body"></p>
 

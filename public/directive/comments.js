@@ -1,6 +1,29 @@
 angular.module('LJ')
-.directive('ljComments', ['$http', 'App',
-                 function( $http ,  App ) {
+.directive('ljComments', ['$http', 'App', 'Text',
+                 function( $http ,  App ,  Text ) {
+
+  function process(comments) {
+    var level = {};
+
+    comments.forEach(function(comment) {
+      if (!comment.parentdtalkid) {
+        comment.level = 0;
+      } else {
+        if (level[comment.parentdtalkid]) {
+          comment.level = level[comment.parentdtalkid] + 1;
+        } else {
+          comment.level = 1;
+        }
+        
+        level[comment.dtalkid] = comment.level;
+      }
+
+      comment.body = Text.prettify(comment.body);
+    });
+
+    console.log('processed', comments);
+  }
+
   return {
     templateUrl: '/partials/comments.html',
 
@@ -13,7 +36,7 @@ angular.module('LJ')
       scope.loading = false;
 
       scope.page = 1;
-      scope.page_size = 15;
+      scope.page_size = 10;
       scope.comments = [];
 
       scope.hasMore = function() {
@@ -21,6 +44,7 @@ angular.module('LJ')
       };
 
       scope.load = function(callback) {
+        scope.loading = true;
         $http.get('/api/comments/', {
           params: {
             user: scope.user,
@@ -30,6 +54,10 @@ angular.module('LJ')
           }
         }).success(function(result) {
           console.log(result);
+
+          process(result.comments);
+
+
           scope.comments = scope.comments.concat(result.comments);
           scope.pages = result.pages;
           scope.loading = false;
@@ -43,9 +71,9 @@ angular.module('LJ')
       scope.loadMore = function() {
         scope.page += 1;
 
-        App.progress.start();
+        scope.loading = true;
         scope.load(function() {
-          App.progress.complete();
+          scope.loading = false;
         });
       };
 

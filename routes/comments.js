@@ -10,7 +10,9 @@ exports.get = function(req, res) {
     page: req.query.page || 1,
 
     expand_strategy: 'expand_all',
-    extra: true
+    extra: true,
+
+    format: 'list'
   }, function(err, result) {
     res.json(result);
   });

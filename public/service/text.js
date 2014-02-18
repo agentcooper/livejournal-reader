@@ -11,6 +11,8 @@ angular.module('LJ').factory('Text', ['$filter', function($filter) {
 
   var rx_lj_comm = /\<lj\s+comm\=\"?([a-zA-Z0-9_]+)\"?\>/ig;
 
+  var rx_lj_embed = /\<lj-embed\s+id\=\"?([a-zA-Z0-9_]+)\"?\s*\/?\>/ig;
+
   function process(body) {
     body = body.replace('<a name="Read more..."></a>', '');
     // body = body.replace(/<br><br><br>/g, '<br><br>');
@@ -45,6 +47,8 @@ angular.module('LJ').factory('Text', ['$filter', function($filter) {
     // remove custom fonts and colors
     $body.find('*[style]').removeAttr('style');
 
+    $body.find('*[align]').removeAttr('align');
+
     // remove add friend links
     $body.find('a[href*="add.bml"]').remove();
 
@@ -77,8 +81,12 @@ angular.module('LJ').factory('Text', ['$filter', function($filter) {
   }
 
   factory.prettify = function(text) {
-    text = text.replace(rx_lj_comm, function(_, comm) {
+    text = String(text)
+    .replace(rx_lj_comm, function(_, comm) {
       return '<span lj-community>' + comm + '</span>';
+    })
+    .replace(rx_lj_embed, function(_, embed) {
+      return '<span lj-embed>[lj-embed:' + embed + ']</span>';
     });
 
     return process( p(text) );

@@ -15,7 +15,8 @@ exports.get = function(req, res) {
       auth_method: 'noauth',
       selecttype: 'lastn',
       howmany: 20,
-      parseljtags: 1
+      parseljtags: 1,
+      get_video_ids: true
     }, function(err, journal) {
 
       console.log(err, journal);
