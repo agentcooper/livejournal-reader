@@ -123,4 +123,12 @@ $(function() {
       } 
     }
   });
+
+  $(document.body).on('click', '.cut', function() {
+    var content = $(this);
+
+    content.replaceWith(
+      content.html().replace(/<!--([\s\S]*?)-->/mig, '$1')
+    );
+  });
 });

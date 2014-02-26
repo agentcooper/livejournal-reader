@@ -23,3 +23,16 @@ blockquote {
   color: #575757;
   font-style: italic;
 }
+
+.cut {
+  cursor: pointer;
+  background-color: #E4F3FF;
+  padding: 1em;
+}
+
+.cut:before {
+  content: 'Read more';
+  color: #3F5F9E;
+  display: block;
+  text-align: center;
+}

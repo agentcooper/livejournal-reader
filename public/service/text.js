@@ -57,6 +57,16 @@ angular.module('LJ').factory('Text', ['$filter', function($filter) {
       }
     });
 
+    var cut = $body.children().eq(3).nextUntil();
+
+    if (cut.length > 3) {
+      var div = cut.wrapAll('<div class="cut"><span class="cut-content"></span></div>');
+
+      div.parent().wrap(function() {
+        return '<!--' + $(this).html() + '-->';
+      });
+    }
+
     return $body.html();
   }
 
