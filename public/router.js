@@ -7,7 +7,7 @@ function( $routeProvider,   $locationProvider) {
   $routeProvider.
     when('/read/:user/:post_id', {
       templateUrl: '/partials/post.html',
-      controller: 'Entry'
+      controller: 'Post'
     }).
     when('/read/:user', {
       templateUrl: '/partials/journal.html',
@@ -27,8 +27,7 @@ function( $routeProvider,   $locationProvider) {
     }).
     when('/', {
       templateUrl: '/partials/social.html',
-      controller: 'SocialCtrl',
-      reloadOnSearch: false
+      controller: 'SocialCtrl'
     })
     .when('/about', {
       templateUrl: '/partials/about.html'

@@ -2,17 +2,17 @@
 
   <h1 class="b-header">Френдлента</h1>
 
-  <li ng-repeat="entry in feed" class="b-entry" ng-controller="Post" >
-    <h2 class="b-entry__header">{{entry.subject_raw}}</h2>
+  <li bindonce ng-repeat="entry in feed" class="b-entry">
+    <h2 class="b-entry__header" bo-text="entry.subject_raw"></h2>
 
     <div class="b-post_aside" ng-click="go(entry.username);">
-      <img class="b-post__userpic" ng-src="{{entry.poster_userpic_url}}">
-      <p class="b-post__username">{{entry.username}}</p>
-      <p class="b-post__time">{{entry.logtime | timeAgo }}<p>
+      <img class="b-post__userpic" bo-src="entry.poster_userpic_url">
+      <p class="b-post__username" bo-text="entry.username"></p>
+      <p class="b-post__time" bo-bind="entry.logtime | timeAgo"><p>
     </div>
 
     <p class="b-entry__body" lj-html="entry.body"></p>
-    <a href class="b-boop__comments" ng-click="entry.loadComments = true;">{{entry.reply_count}}</a>
+    <a href class="b-boop__comments" ng-click="entry.loadComments = true;" bo-text="entry.reply_count"></a>
 
     <div ng-if="entry.loadComments" lj-comments post-id="entry.ditemid" user="entry.username"></div>
   </li>

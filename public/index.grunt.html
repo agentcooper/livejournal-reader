@@ -27,9 +27,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- @ifndef DEBUG -->
-    <script type="text/ng-template" id="/partials/rating.html">
-      <!-- @include build/partials/rating.html -->
-    </script>
     <script type="text/ng-template" id="/partials/post.html">
       <!-- @include build/partials/post.html -->
     </script>
@@ -61,6 +58,7 @@
     <script src="/bower_components/jquery/jquery.min.js"></script>
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="/bower_components/angular-bindonce/bindonce.min.js"></script>
     <script src="/bower_components/momentjs/min/moment.min.js"></script>
     <script src="/bower_components/ngProgress/build/ngProgress.js"></script>
     <script src="/bower_components/ngInfiniteScroll/ng-infinite-scroll.js"></script>
@@ -70,7 +68,6 @@
     <script src="/service/text.js"></script>
     <script src="/service/rating.js"></script>
 
-    <script src="/controller/entry.js"></script>
     <script src="/controller/feed.js"></script>
     <script src="/controller/history.js"></script>
     <script src="/controller/journal.js"></script>

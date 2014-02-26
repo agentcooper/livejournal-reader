@@ -1,13 +1,13 @@
 <div class="b-comments">
 
   <ul class="b-thread">
-    <li ng-repeat="comment in comments" class="b-comment-level-{{ comment.level > 15 ? 'over-15' : comment.level }}">
+    <li bindonce ng-repeat="comment in comments" bo-class="'b-comment-level-' + (comment.level > 15 ? 'over-15' : comment.level)">
       
-      <div class="b-thread__comment" ng-class="{ 'b-thread__comment_author': isAuthor(comment) }">
-        <div class="b-thread__userpic" ng-style="{ 'background-image': 'url(' + comment.userpic + ')' }"></div>
+      <div class="b-thread__comment" bo-class="{ 'b-thread__comment_author': isAuthor(comment) }">
+        <div class="b-thread__userpic" bo-style="{ 'background-image': 'url(' + comment.userpic + ')' }"></div>
 
-        <a class="b-thread__username" href="/read/{{comment.postername}}">{{comment.identity_display || comment.postername}}</a>
-        <p class="b-thread__body" lj-html="comment.body"></p>
+        <a class="b-thread__username" bo-href="'/read/' + comment.postername" bo-text="comment.identity_display || comment.postername"></a>
+        <p class="b-thread__body" bo-html="comment.body"></p>
       </div>
 
     </li>

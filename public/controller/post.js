@@ -1,13 +1,18 @@
-angular.module('LJ').
-controller('Post', ['$scope', '$http', '$route', '$location',
-           function( $scope,   $http,   $route,   $location  ) {
+angular.module('LJ')
+.controller('Post', [
+           '$scope', '$route', '$routeParams', 'Cache', 'App', '$document', '$timeout',
+  function( $scope,   $route,   $routeParams,   Cache,   App ,  $document ,  $timeout ) {
 
-  $scope.load = function() {
-    scroll.save($location);
+    Cache.getPost({
+      user: $routeParams.user,
+      post_id: $routeParams.post_id,
+      body: true
+    }, function(post) {
+      $scope.post = post;
+    });
 
-    $location.path(
-      '/read/' + $scope.post.ljuser[0].journal + '/' + $scope.post.post_id
-    );
-  };
-
-}]);
+    $scope.$on('$viewContentLoaded', function() {
+      $document.scrollTop(0);
+    });
+  }
+]);

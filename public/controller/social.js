@@ -31,10 +31,12 @@ angular.module('LJ')
     $http.get('/top.json').success(function(res) {
       App.progress.complete();
 
-      res.top = res.top.slice(0, 200);
+      // TO-DO: try adaptive render
+      res.top.splice(50);
 
       factory.top = res;
       console.log(factory.top);
+
       callback(factory.top);
     });
   };

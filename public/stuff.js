@@ -1,29 +1,9 @@
 angular.module('LJ', [
   'ngRoute',
   'infinite-scroll',
-  'ngProgress'
+  'ngProgress',
+  'pasvaz.bindonce'
 ]);
-
-angular.module('LJ')
-  .directive('ljHtml', function () {
-    return function link(scope, element, attrs) {
-      element.html(scope.$eval(attrs.ljHtml) || '');
-    };
-  })
-  .directive('ljText', function () {
-    return function link(scope, element, attrs) {
-      element.text(scope.$eval(attrs.ljText));
-    };
-  })
-  .directive('ljHtmlLive', function () {
-    return function link(scope, element, attrs) {
-      scope.$watch(function () {
-        return scope.$eval(attrs.ljHtmlLive);
-      }, function (value) {
-        element.html(value || '');
-      });
-    };
-  });
 
 var scroll = {
   _last: {},
@@ -62,13 +42,6 @@ angular.module('LJ')
 .filter('timeAgo2', [function() {
   return function(input) {
     return moment(input).fromNow();;
-  };
-}])
-.filter('reader', [function() {
-  return function(input) {
-    var post = LJ.parseLink(input);
-
-    return '/read/' + post.journal + '/' + post.postId;
   };
 }]);
 
@@ -111,13 +84,6 @@ function p(s) {
   return R('\n</p>$', '</p>');
 }
 
-function replaceURLWithHTMLLinks(text) {
-    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    return text.replace(exp,"<a href='$1'>$1</a>");
-}
-
-
-
 var LJ = {};
 
 var rxLink = [
@@ -150,12 +116,10 @@ $(function() {
     if (href) {
       var post = LJ.parseLink(href);
 
-      console.log(post);
-     
       if (post) {
-        $(this).removeAttr('_target');
-
-        $(this).attr('href', '/read/' + post.journal + '/' + post.postId);
+        $(this)
+          .removeAttr('_target')
+          .attr('href', '/read/' + post.journal + '/' + post.postId);
       } 
     }
   });
