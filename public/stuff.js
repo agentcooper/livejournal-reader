@@ -118,7 +118,7 @@ $(function() {
 
       if (post) {
         $(this)
-          .removeAttr('_target')
+          .removeAttr('target')
           .attr('href', '/read/' + post.journal + '/' + post.postId);
       } 
     }

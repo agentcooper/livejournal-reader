@@ -31,6 +31,8 @@ module.exports = function(grunt) {
           'public/bower_components/angular/angular.min.js',
           'public/bower_components/angular-route/angular-route.min.js',
 
+          'public/bower_components/angular-bindonce/bindonce.min.js',
+
           'public/bower_components/momentjs/min/moment.min.js',
 
           'public/bower_components/ngprogress/build/ngProgress.min.js',
