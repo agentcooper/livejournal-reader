@@ -77,7 +77,9 @@ function getTwitter(entries, callback) {
   async.eachLimit(entries, 5, function(entry, callback) {
 
     getTwitterCount(entry.post_url, function(err, res) {
-      entry.twitter_count = res.count || 0;
+      if (err) { console.log(err); }
+
+      entry.twitter_count = (res && res.count) || 0;
 
       callback(null, entry);
     });
@@ -100,17 +102,19 @@ function getVK(entries, callback) {
 getRating(function(err, rating) {
   var entries = rating.slice();
 
+  console.log('Got rating: %s entries', rating.length);
+
   async.parallel([
     function(callback) {
-      getFacebook(entries, callback);
+      getFacebook(entries, function() { console.log('FB done'); callback.apply(this, arguments); });
     },
 
     function(callback) {
-      getTwitter(entries, callback);
+      getTwitter(entries, function() { console.log('TW done'); callback.apply(this, arguments); });
     },
 
     function(callback) {
-      getVK(entries, callback);
+      getVK(entries, function() { console.log('VK done'); callback.apply(this, arguments); });
     }
   ], function() {
     var top = entries.map(function(entry) {
