@@ -1,9 +1,9 @@
-<article class="b-post" ng-show="body">
+<article bindonce="post" class="b-post" bo-show="post.body">
   <header class="b-post__header">
-    <h1 class="b-post__title">{{title}}</h1>
-    <a href="/read/{{user}}" class="b-lj_user" lj-text="user">{{user}}</a>
+    <h1 class="b-post__title" bo-text="post.subject"></h1>
+    <a bo-href="'/read/' + post.user" class="b-lj_user" bo-text="post.user"></a>
   </header>
-  <p lj-html-live="body" class="b-post__body"></p>
+  <p bo-html="post.body" class="b-post__body"></p>
 
-  <div lj-comments post-id="post_id" user="user"></div>
+  <div lj-comments post-id="post.post_id" user="post.user"></div>
 </article>

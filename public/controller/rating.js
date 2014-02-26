@@ -1,8 +1,6 @@
 angular.module('LJ').
 controller('Rating', ['$scope', '$http', '$route', '$timeout', '$location', 'ratingFactory',
-             function( $scope,   $http,   $route,   $timeout,   $location,   ratingFactory  ) {
-
-  $scope.loading = true;
+             function( $scope,   $http,   $route,   $timeout,   $location,   ratingFactory ) {
 
   ratingFactory.get(function(data) {
     $scope.rating = data;

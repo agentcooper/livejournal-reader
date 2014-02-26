@@ -81,7 +81,7 @@ angular.module('LJ')
         return comment.postername === scope.user;
       };
 
-      scope.$watch('postId', function() {
+      var unwatch = scope.$watch('postId', function() {
 
         if (!scope.user || !scope.postId) {
           return;
@@ -89,9 +89,9 @@ angular.module('LJ')
 
         scope.loading = true;
 
-        console.log('LOADING');
-
         scope.load();
+
+        unwatch();
       });
     }
   };

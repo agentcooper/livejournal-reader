@@ -11,17 +11,17 @@
   <a href="" class="b-pseudo" ng-class="isSelected('reply_count');" ng-click="use('reply_count');">комментариям</a>. <span ng-show="top">Рейтинг сгенерирован {{ top.built_at | timeAgo2 }}.</span>
 </div>
 
-<ol class="b-social"><li ng-repeat="post in top.top | orderBy:predicate:reverse" class="b-social-item">
+<ol class="b-social"><li bindonce ng-repeat="post in top.top | orderBy:predicate:reverse" class="b-social-item">
 
-    <a class="b-social-link" href="/read/{{post.journal}}/{{post.postId}}">
+    <a class="b-social-link" bo-href="'/read/' + post.journal + '/' + post.postId">
 
-      <span class="b-social-header" lj-text="post.title"></span>
-      <span class="b-social-details"><span class="user" lj-text="post.journal"></span></span>
+      <span class="b-social-header" bo-text="post.title"></span>
+      <span class="b-social-details"><span class="user" bo-text="post.journal"></span></span>
 
-      <div class="b-social-body" lj-html="post.body"></div>
+      <div class="b-social-body" bo-html="post.body"></div>
 
       <div class="b-social-stats">
-        <span class="b-entry__twitter"><span class="b-entry__tweets" ng-click="toggleTweets($event, post);"><ng-pluralize count="post.tw_count" when="{'one': '1 tweet','other': '{} tweets'}"></ng-pluralize></span></span></span><span class="b-entry__fb"><span lj-text="post.fb_count"></span> shares</span><span class="b-entry__livejournal"><span lj-text="post.reply_count"></span> comments</span><span class="b-entry__vk"><span lj-text="post.vk_count"></span> shares</span>
+        <span class="b-entry__twitter"><span class="b-entry__tweets" ng-click="toggleTweets($event, post);"><ng-pluralize count="post.tw_count" when="{'one': '1 tweet','other': '{} tweets'}"></ng-pluralize></span></span></span><span class="b-entry__fb"><span bo-text="post.fb_count"></span> shares</span><span class="b-entry__livejournal"><span bo-text="post.reply_count"></span> comments</span><span class="b-entry__vk"><span bo-text="post.vk_count"></span> shares</span>
       </div>
     </a>
 

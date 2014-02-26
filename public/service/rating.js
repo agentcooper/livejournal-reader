@@ -6,8 +6,7 @@ angular.module('LJ')
 
   factory.get = function(callback) {
     if (cached) {
-      callback(cached);
-      return;
+      return callback(cached);
     }
 
     var str = 'http://l-api.livejournal.com/__api/?request=';
