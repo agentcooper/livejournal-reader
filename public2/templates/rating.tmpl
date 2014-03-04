@@ -1,0 +1,35 @@
+<div class="b-rating">
+  <h1 class="b-header">Топ ЖЖ</h1>
+
+  <div class="b-top__controls">
+    Сортировать по
+    <a href="javascript:void(0);" class="b-pseudo" data-sort="position">позиции</a>,
+    <a href="javascript:void(0);" class="b-pseudo" data-sort="-tw_count">твитам</a>,
+    <a href="javascript:void(0);" class="b-pseudo" data-sort="-fb_count">фейсбуку</a>,
+    <a href="javascript:void(0);" class="b-pseudo" data-sort="-vk_count">вконтакте</a>,
+    <a href="javascript:void(0);" class="b-pseudo" data-sort="-reply_count">комментариям</a>.</span>
+  </div>
+
+
+  <ol class="b-social">
+  <% _.each(rating.top, function(post){ %>
+
+  <li class="b-social-item">
+
+      <a class="b-social-link" href="{{ '/read/' + post.journal + '/' + post.postId }}">
+
+        <span class="b-social-header">{{ post.title }}</span>
+        <span class="b-social-details"><span class="user">{{ post.journal }}</span></span>
+
+        <div class="b-social-body">{{ post.body }}</div>
+
+        <div class="b-social-stats">
+          <span class="b-entry__twitter"><span class="b-entry__tweets">{{post.tw_count}}</span></span></span><span class="b-entry__fb"><span>{{ post.fb_count }}</span> shares</span><span class="b-entry__livejournal"><span>{{post.reply_count}}</span> comments</span><span class="b-entry__vk"><span>{{ post.vk_count }}</span> shares</span>
+        </div>
+      </a>
+
+  </li>
+  <% }); %>
+  </ol>
+
+  </div>

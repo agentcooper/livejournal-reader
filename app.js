@@ -43,7 +43,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public2')));
 
 // development only
 if ('development' == app.get('env')) {
