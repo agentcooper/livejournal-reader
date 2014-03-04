@@ -1,4 +1,4 @@
-var AboutView = Backbone.View.extend({
+App.AboutView = Backbone.View.extend({
   initialize: function() {
     console.log('about init');
   },
@@ -7,7 +7,7 @@ var AboutView = Backbone.View.extend({
     console.log('about render');
 
     this.$el.html(
-      tmpl('about-tmpl')()
+      App.tmpl('about-tmpl')()
     );
 
     $(document).scrollTop(0);

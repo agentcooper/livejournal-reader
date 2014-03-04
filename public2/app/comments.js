@@ -1,7 +1,8 @@
-var Comments = Backbone.Model.extend({
+App.Comments = Backbone.Model.extend({
 
   process: function(comments) {
     var level = {};
+    var that = this;
 
     comments.forEach(function(comment) {
       if (!comment.parentdtalkid) {
@@ -16,7 +17,8 @@ var Comments = Backbone.Model.extend({
         level[comment.dtalkid] = comment.level;
       }
 
-      comment.body = Text.clean(comment.body);
+      comment.body = App.Text.clean(comment.body);
+      comment.isAuthor = comment.postername === that.get('journal');
     });
   },
 
@@ -62,7 +64,7 @@ var Comments = Backbone.Model.extend({
   }
 });
 
-var CommentsView = Backbone.View.extend({
+App.CommentsView = Backbone.View.extend({
   events: {
     'click .b-comments__more': 'more'
   },
@@ -93,7 +95,7 @@ var CommentsView = Backbone.View.extend({
 
     this.$el.find('.b-thread').append(
       comments.map(function(comment) {
-        return tmpl('comment-tmpl')({ comment: comment });
+        return App.tmpl('comment-tmpl')({ comment: comment });
       }).join('')
     );
   },
@@ -103,8 +105,10 @@ var CommentsView = Backbone.View.extend({
 
     console.log('comments render', comments);
 
-    this.$el.html(tmpl('comments-tmpl')());
+    this.$el.html(
+      App.tmpl('comments-tmpl')()
+    );
     
-    applyBindings(this);
+    App.applyBindings(this);
   }
 });

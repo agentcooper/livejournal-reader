@@ -1,10 +1,10 @@
-var Post = Backbone.Model.extend({
+App.Post = Backbone.Model.extend({
   initialize: function() {
     console.log('Post init');
 
     var that = this;
 
-    App.getPost({
+    LJ.getPost({
       journal: this.get('journal'),
       postId:  this.get('postId')
     }, function(result) {
@@ -15,7 +15,7 @@ var Post = Backbone.Model.extend({
 
     this.set(
       'comments',
-      new Comments({
+      new App.Comments({
         journal: this.get('journal'),
         postId:  this.get('postId')
       })
@@ -23,7 +23,7 @@ var Post = Backbone.Model.extend({
   }
 });
 
-var PostView = Backbone.View.extend({
+App.PostView = Backbone.View.extend({
   initialize: function() {
     var that = this;
 
@@ -43,10 +43,10 @@ var PostView = Backbone.View.extend({
     }
 
     this.$el.html(
-      tmpl('post-tmpl')({ post: post })
+      App.tmpl('post-tmpl')({ post: post })
     );
 
-    new CommentsView({
+    new App.CommentsView({
       model: this.model.get('comments'),
       el: '.b-post-comments'
     });

@@ -1,4 +1,4 @@
-var Rating = Backbone.Model.extend({
+App.Rating = Backbone.Model.extend({
   
   defaults: {
     rating: { top: [] }
@@ -48,17 +48,9 @@ var Rating = Backbone.Model.extend({
   }
 });
 
-Rating.getInstance = function() {
+App.Rating = singleton(App.Rating);
 
-  if (!Rating.instance) {
-    Rating.instance = new Rating();
-  }
-
-  return Rating.instance;
-};
-
-var RatingView = singleton(
-Backbone.View.extend({
+App.RatingView = Backbone.View.extend({
   events: {
     'click [data-sort]': 'sort'
   },
@@ -82,21 +74,14 @@ Backbone.View.extend({
   render: function() {
     console.log('render RatingView');
 
-    var rating = this.model.get('rating');
-
-    // if (!rating) {
-    //   return this.$el.empty();
-    // }
-
-    this.$el.empty();
-
     this.$el.html(
-      tmpl('rating-tmpl')({ rating: rating })
+      App.tmpl('rating-tmpl')({ rating: this.model.get('rating') })
     );
 
     this.postRender();
   }
-})
-);
+});
 
-_.extend(RatingView.prototype, postRender);
+App.RatingView = singleton(App.RatingView);
+
+_.extend(App.RatingView.prototype, postRender);

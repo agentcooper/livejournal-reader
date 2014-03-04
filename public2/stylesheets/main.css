@@ -161,7 +161,7 @@
 }
 
 
-.b-social, .b-post, .b-feed {
+.b-rating, .b-post, .b-feed {
     /*-webkit-perspective: 1000;*/
     -webkit-backface-visibility: hidden;
     -webkit-animation: fadein 0.4s; /* Safari and Chrome */

@@ -5,19 +5,13 @@ var FeedS = {
   fetch: function(options, callback) {
     var that = this;
 
-    // if (that.feed) {
-    //   return callback(that.feed);
-    // };
-
     $.get('/api/feed', {
       skip: options.skip || 0,
       itemshow: options.itemshow || 7
     }, function(feed) {
 
-      // that.feed = feed;
-
       feed.entries.forEach(function(entry) {
-        entry.body = Text.prettify(entry.body);
+        entry.body = App.Text.prettify(entry.body);
       });
 
       callback(feed);
@@ -26,31 +20,31 @@ var FeedS = {
 
 };
 
-var Feed = singleton(
-  Backbone.Model.extend({
-    initialize: function() {
-      this.getFeed({}, function() {});
-    },
+App.Feed = Backbone.Model.extend({
+  initialize: function() {
+    this.getFeed({}, function() {});
+  },
 
-    getFeed: function(options, callback) {
-      console.log('fetching feed');
+  getFeed: function(options, callback) {
+    console.log('fetching feed');
 
-      var that = this;
+    var that = this;
 
-      App.progress.start();
-      that.set('loading', true);
+    App.progress.start();
+    that.set('loading', true);
 
-      FeedS.fetch(options, function(feed) {      
-        that.set('loading', false);
+    FeedS.fetch(options, function(feed) {      
+      that.set('loading', false);
 
-        that.set('feed', feed);
-        App.progress.complete();
-      });
-    }
-  })
-);
+      that.set('feed', feed);
+      App.progress.complete();
+    });
+  }
+});
 
-var FeedView = Backbone.View.extend({
+App.Feed = singleton(App.Feed);
+
+App.FeedView = Backbone.View.extend({
   checkScroll: function() {
     var that = this;
     var triggerPoint = 100;
@@ -89,7 +83,7 @@ var FeedView = Backbone.View.extend({
     console.log('render feed');
 
     this.$el.html(
-      tmpl('feed-tmpl')({ feed: feed })
+      App.tmpl('feed-tmpl')({ feed: feed })
     );
 
     setTimeout(function() {
@@ -101,4 +95,4 @@ var FeedView = Backbone.View.extend({
 });
 
 // console.log('extedin', postRender);
-_.extend(FeedView.prototype, postRender);
+_.extend(App.FeedView.prototype, postRender);

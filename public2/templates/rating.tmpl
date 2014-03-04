@@ -1,5 +1,7 @@
+<% if (rating.top.length === 0) { return; } %>
+
 <div class="b-rating">
-  <h1 class="b-header">Топ ЖЖ</h1>
+  <h1 class="b-header">LiveJournal reader</h1>
 
   <div class="b-top__controls">
     Сортировать по
@@ -7,9 +9,8 @@
     <a href="javascript:void(0);" class="b-pseudo" data-sort="-tw_count">твитам</a>,
     <a href="javascript:void(0);" class="b-pseudo" data-sort="-fb_count">фейсбуку</a>,
     <a href="javascript:void(0);" class="b-pseudo" data-sort="-vk_count">вконтакте</a>,
-    <a href="javascript:void(0);" class="b-pseudo" data-sort="-reply_count">комментариям</a>.</span>
+    <a href="javascript:void(0);" class="b-pseudo" data-sort="-reply_count">комментариям</a>. <span>Рейтинг сгенерирован {{ moment(rating.built_at).fromNow() }}.</span>
   </div>
-
 
   <ol class="b-social">
   <% _.each(rating.top, function(post){ %>
@@ -29,7 +30,8 @@
       </a>
 
   </li>
+
   <% }); %>
   </ol>
 
-  </div>
+</div>

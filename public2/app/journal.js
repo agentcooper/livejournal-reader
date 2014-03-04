@@ -1,8 +1,8 @@
-var Journal = Backbone.Model.extend({
+App.Journal = Backbone.Model.extend({
   initialize: function() {
     var that = this;
 
-    App.getJournal({
+    LJ.getJournal({
       journal: this.get('name')
     }, function(journal) {
       that.set('journal', journal);
@@ -12,8 +12,7 @@ var Journal = Backbone.Model.extend({
   }
 });
 
-var JournalView = cached(function(args) { return args.model.get('name'); },
-Backbone.View.extend({
+App.JournalView = Backbone.View.extend({
   initialize: function() {
     var that = this;
 
@@ -28,12 +27,15 @@ Backbone.View.extend({
     }
 
     this.$el.html(
-      tmpl('journal-tmpl')({ journal: journal })
+      App.tmpl('journal-tmpl')({ journal: journal })
     );
 
     this.postRender();
   }
-})
-);
+});
 
-_.extend(JournalView.prototype, postRender);
+App.JournalView = cached(App.JournalView, function(args) {
+  return args.model.get('name');
+});
+
+_.extend(App.JournalView.prototype, postRender);

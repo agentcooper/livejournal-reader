@@ -25,6 +25,8 @@ module.exports = function(grunt) {
           'public2/bower_components/underscore/underscore.js',
           'public2/bower_components/backbone/backbone.js',
           'public2/bower_components/nprogress/nprogress.js',
+          'public2/bower_components/momentjs/moment.js',
+          
           'public2/build/templates.js',
           'public2/app/main.js',
           'public2/app/**/*.js'

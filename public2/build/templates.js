@@ -16,7 +16,9 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<li class="' +
 ((__t = ( 'b-comment-level-' + (comment.level > 15 ? 'over-15' : comment.level) )) == null ? '' : __t) +
-'">\n      \n  <div class="b-thread__comment" bo-class="{ \'b-thread__comment_author\': isAuthor(comment) }">\n    <div class="b-thread__userpic" style="' +
+'">\n      \n  <div class="b-thread__comment ' +
+((__t = (comment.isAuthor ? 'b-thread__comment_author' : '' )) == null ? '' : __t) +
+'">\n    <div class="b-thread__userpic" style="' +
 ((__t = ( 'background-image: url(' + comment.userpic + ')' )) == null ? '' : __t) +
 '"></div>\n\n    <a class="b-thread__username" href="' +
 ((__t = ( '/read/' + comment.postername )) == null ? '' : __t) +
@@ -138,7 +140,11 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class="b-rating">\n  <h1 class="b-header">Топ ЖЖ</h1>\n\n  <div class="b-top__controls">\n    Сортировать по\n    <a href="javascript:void(0);" class="b-pseudo" data-sort="position">позиции</a>,\n    <a href="javascript:void(0);" class="b-pseudo" data-sort="-tw_count">твитам</a>,\n    <a href="javascript:void(0);" class="b-pseudo" data-sort="-fb_count">фейсбуку</a>,\n    <a href="javascript:void(0);" class="b-pseudo" data-sort="-vk_count">вконтакте</a>,\n    <a href="javascript:void(0);" class="b-pseudo" data-sort="-reply_count">комментариям</a>.</span>\n  </div>\n\n\n  <ol class="b-social">\n  ';
+
+ if (rating.top.length === 0) { return; } ;
+__p += '\n\n<div class="b-rating">\n  <h1 class="b-header">LiveJournal reader</h1>\n\n  <div class="b-top__controls">\n    Сортировать по\n    <a href="javascript:void(0);" class="b-pseudo" data-sort="position">позиции</a>,\n    <a href="javascript:void(0);" class="b-pseudo" data-sort="-tw_count">твитам</a>,\n    <a href="javascript:void(0);" class="b-pseudo" data-sort="-fb_count">фейсбуку</a>,\n    <a href="javascript:void(0);" class="b-pseudo" data-sort="-vk_count">вконтакте</a>,\n    <a href="javascript:void(0);" class="b-pseudo" data-sort="-reply_count">комментариям</a>. <span>Рейтинг сгенерирован ' +
+((__t = ( moment(rating.built_at).fromNow() )) == null ? '' : __t) +
+'.</span>\n  </div>\n\n  <ol class="b-social">\n  ';
  _.each(rating.top, function(post){ ;
 __p += '\n\n  <li class="b-social-item">\n\n      <a class="b-social-link" href="' +
 ((__t = ( '/read/' + post.journal + '/' + post.postId )) == null ? '' : __t) +
@@ -156,9 +162,9 @@ __p += '\n\n  <li class="b-social-item">\n\n      <a class="b-social-link" href=
 ((__t = (post.reply_count)) == null ? '' : __t) +
 '</span> comments</span><span class="b-entry__vk"><span>' +
 ((__t = ( post.vk_count )) == null ? '' : __t) +
-'</span> shares</span>\n        </div>\n      </a>\n\n  </li>\n  ';
+'</span> shares</span>\n        </div>\n      </a>\n\n  </li>\n\n  ';
  }); ;
-__p += '\n  </ol>\n\n  </div>\n';
+__p += '\n  </ol>\n\n</div>\n';
 
 }
 return __p
