@@ -48,6 +48,8 @@ var postRender = {
 };
 
 var App = {
+  lang: /en\./.test(location.hostname) ? 'en' : 'ru',
+
   tmpl: function(name) {
     return window.JST[name];
   },

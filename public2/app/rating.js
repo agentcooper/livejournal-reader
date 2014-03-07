@@ -1,7 +1,12 @@
 App.Rating = Backbone.Model.extend({
-  
+
   defaults: {
     rating: { top: [] }
+  },
+
+  api: {
+    en: 'en_US',
+    ru: 'ru_RU'
   },
 
   getData: function() {
@@ -11,7 +16,7 @@ App.Rating = Backbone.Model.extend({
 
     App.progress.start();
 
-    $.get('top.json', function(result) {
+    $.get('top_' + this.api[App.lang] + '.json', function(result) {
       result.top.splice(100);
 
       that.set('rating', result);
