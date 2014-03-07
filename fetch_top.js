@@ -1,9 +1,16 @@
-var fs = require('fs');
-
+var fs      = require('fs');
 var request = require('request');
 var async   = require('async');
 
 var LiveJournal = require('livejournal');
+
+var argv = require('optimist')
+  .usage('Fetch top from livejournal.com and build new one with social stats.')
+  .demand('lang')
+  .describe('lang', 'ru_RU or en_US')
+  .default('path', 'public')
+  .describe('path', 'path for output (relative to bin)')
+  .argv;
 
 function get(prop) {
   return function(obj) { return obj[prop]; }
@@ -17,8 +24,8 @@ function getRating(callback) {
       "homepage":1,
       "sort": "visitors",
       "page": 0,
-      "country": "cyr",
-      "locale": "ru_RU",
+      "country": (argv.lang === 'ru_RU' ? "cyr" : "noncyr"),
+      "locale": argv.lang,
       "category_id":0
     },
     "id": Date.now()
@@ -102,7 +109,11 @@ function getVK(entries, callback) {
 getRating(function(err, rating) {
   var entries = rating.slice();
 
-  console.log('Got rating: %s entries', rating.length);
+  console.log('Got rating: %s entries', rating.length, argv.lang);
+
+  if (!rating || rating.length === 0) {
+    throw new Error('Bad data!');
+  }
 
   async.parallel([
     function(callback) {
@@ -143,7 +154,10 @@ getRating(function(err, rating) {
         built_at: Date.now()
       });
 
-      fs.writeFileSync(__dirname + '/public/top.json', output);
+      fs.writeFileSync(
+        __dirname + '/' + argv.path + '/top_' + argv.lang + '.json',
+        output
+      );
     } else {
       console.error('Bad data', top);
     }
