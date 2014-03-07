@@ -9,7 +9,7 @@
     <a href="javascript:void(0);" class="b-pseudo" data-sort="-tw_count">твитам</a>,
     <a href="javascript:void(0);" class="b-pseudo" data-sort="-fb_count">фейсбуку</a>,
     <a href="javascript:void(0);" class="b-pseudo" data-sort="-vk_count">вконтакте</a>,
-    <a href="javascript:void(0);" class="b-pseudo" data-sort="-reply_count">комментариям</a>. <span>Рейтинг обновлен {{ moment(rating.built_at).fromNow() }}.</span>
+    <a href="javascript:void(0);" class="b-pseudo" data-sort="-reply_count">комментариям</a> or <span class="b-top__lang"><% if (App.lang === 'ru') { %>switch to <a href="http://en.ljreader.com">english</a><% } else { %>switch to <a href="http://ljreader.com">russian</a><% } %></span>. <p>Рейтинг обновлен {{ moment(rating.built_at).fromNow() }}.</p> 
   </div>
 
   <ol class="b-social">

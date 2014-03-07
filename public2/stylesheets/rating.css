@@ -123,3 +123,21 @@
         vertical-align: middle;
         padding-right: 3px;
       }
+
+.b-top__lang a {
+  text-decoration: none;
+  border-bottom: 1px solid;
+}
+
+.b-top__controls {
+  line-height: 1.5em;
+  width: 400px;
+  text-align: right;
+  float: right;
+  padding-top: 5px;
+}
+
+.b-rating .b-header {
+  float: left;
+  margin-top: 0;
+}
