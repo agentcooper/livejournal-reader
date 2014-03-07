@@ -11,7 +11,8 @@
 .b-social-link {
   text-decoration: none;
   display: block;
-  padding: 10px;
+  padding: 1.5em 10px 70px 10px;
+  clear: both;
 }
 
 .b-social-image {
@@ -53,12 +54,17 @@
   color: #000;
   display: block;
   padding-top: 0.5em;
-  font-size: 1.2em;
+  font-size: 1.0em;
+  /*display: inline;*/
+  float: right;
 }
 
 .b-social-stats {
-  padding-top: 1em;
+  padding-top: 0.5em;
   color: black;
+  float: right;
+  clear: both;
+  font-size: 0.9em;
 }
 
 .b-selected {
@@ -76,6 +82,7 @@
   .b-entry__tweets {
     text-decoration: none;
     /*border-bottom: 1px dotted;*/
+
     }
 
   .b-entry__twitter {
@@ -83,35 +90,36 @@
 
     .b-entry__twitter:before {
       content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAACK0lEQVQ4y6VSS08TYRQ903l0+oD5pg2VgGZaYiVNNLSEhI2mdmN0ZxCNG6MYWBrAH2DFxK2gLtwh6tZoghrixrbRTROQ+kgIaWNniI+mCJ3RUlraYVxIlTatLji7m3vPzb3nHMowDOwFDPYIBgByxbIg8qzWaCBXLAs3YsvhROZHwE2s8rXgoeseYlUAIK0WJOrtN9U/9OzDTORCf7B+Sa5YFkKP4rF3htgD3gaUSxDUL9rQYdd0VF4LhUO+m1REWT8Zer0xJ60nladne08H2oVEdcFkPD1+NcXeAm/7u1WvAGoWrYTkB4TN54wkWL6CB5Q2n9T7cGHxUrdjpnqmCvMB8Jban2gGcHbgchf7YjLQOUG9ktdOzKr8yFSqNAgAULNAdgVuK5U2nJ2sYmnf30gb44zoBZBiRAtXmHqZHoSz43eHuADiglwueZop7yd0CkAKABi/y54Y6/c8/nNBFay5qXVBYXt+t4350S7mbitLFW4niwNaBfb/eT/Wbb1XkwPCUkuzH1f6NDjsoP+drYsSN+du4eLVmtqJMg3Af18unYt9rxx5oGydavZ75KjtPDHTC/VR1hczmi5nfjJRudQD1tGYfMw+TDhToibK4ejyxJ34pysqZRbR4gTEfTVEgUF+1Ms/GT9oniac6Q0AfXefMgxDym1t+6Krlb6Epnvfq7pH4Ki8ZDWt+gU6ebyNmRc50xKAz/Xkeg1EADYA9p3BTQAbAHKNiFX8AiViytZyfJ3jAAAAAElFTkSuQmCC);
-      vertical-align: text-top;
+      vertical-align: middle;
+      padding-right: 3px;
       }
 
   .b-entry__livejournal {
-    padding-left: 10px;
+    padding-left: 1em;
     }
 
     .b-entry__livejournal:before {
       content: url('../images/livejournal.png');
-      vertical-align: text-top;
-      padding-right: 2px;
+      vertical-align: middle;
+      padding-right: 3px;
       }
 
   .b-entry__fb {
-    padding-left: 10px;
+    padding-left: 1em;
     }
 
     .b-entry__fb:before {
       content: url('../images/facebook.png');
-      vertical-align: text-top;
-      padding-right: 2px;
+      vertical-align: middle;
+      padding-right: 3px;
       }
 
   .b-entry__vk {
-    padding-left: 10px;
+    padding-left: 1em;
     }
 
       .b-entry__vk:before {
         content: url('../images/vkontakte.ico');
-        vertical-align: text-top;
-        padding-right: 2px;
+        vertical-align: middle;
+        padding-right: 3px;
       }
