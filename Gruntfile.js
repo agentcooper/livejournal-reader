@@ -135,6 +135,16 @@ module.exports = function(grunt) {
           spawn: false,
         },
       },
+    },
+
+    imageEmbed: {
+      dist: {
+        src: ['public2/build/style.css'],
+        dest: 'public2/build/style.css',
+        options: {
+          deleteAfterEncoding: false
+        }
+      }
     }
 
     // concat2: {
@@ -167,8 +177,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks("grunt-image-embed");
 
-  grunt.registerTask('build2', ['jst', 'uglify:public2', 'csso', 'htmlmin:build2']);
+  grunt.registerTask('build2', ['jst', 'uglify:public2', 'csso', 'htmlmin:build2', 'imageEmbed']);
 
   grunt.registerTask('default', ['uglify', 'concat', 'htmlmin:dist', 'preprocess', 'csso', 'htmlmin:finalc']);
 };
