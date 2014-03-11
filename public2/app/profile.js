@@ -65,7 +65,8 @@ var ProfileView = Backbone.View.extend({
     console.log('Profile render');
 
     this.$el.html(
-      App.tmpl('profile-tmpl')(this.model.get('profile'))
+      App.tmpl('profile-tmpl')({ profile: this.model.get('profile') })
     );
+
   }
 });
