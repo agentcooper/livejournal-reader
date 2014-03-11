@@ -1,6 +1,14 @@
 var Profile = Backbone.Model.extend({
   initialize: function() {
+    var that = this;
+
     this.getData();
+
+    this.on('login', function() {
+      console.log('Profile login');
+
+      that.getData();
+    });
   },
 
   getData: function() {

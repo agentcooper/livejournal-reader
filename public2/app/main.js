@@ -118,14 +118,6 @@ var App = {
 $(function() {
   var router = new App.Router();
 
-  window.onmessage = function (e) {
-    console.log(e);
-
-    if (e.data === 'replace your location') {
-      // window.location.replace(...);
-    }
-  };
-
   Backbone.history.start({ pushState: true });
 
   $(document.body).on('click', 'a:not([data-click])', function(event) {
@@ -148,8 +140,18 @@ $(function() {
     }
   });
 
+  var profile = new Profile();
+
   new ProfileView({
-    model: new Profile(),
+    model: profile,
     el: '.b-menu-profile'
   });
+
+  window.onmessage = function (e) {
+    console.log(e);
+
+    if (e.data === 'login ok') {
+      profile.trigger('login');
+    }
+  };
 });
