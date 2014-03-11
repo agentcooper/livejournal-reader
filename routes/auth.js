@@ -53,10 +53,7 @@ exports.token = function(req, res) {
     res.cookie('oauth_token', oauth_token);
     res.cookie('oauth_token_secret', oauth_token_secret);
 
-    return res.json({
-      oauth_token: oauth_token,
-      oauth_token_secret: oauth_token_secret
-    });
+    return res.sendfile('public2/reciever.html');
   });
 }
 

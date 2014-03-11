@@ -48,6 +48,10 @@ var postRender = {
 };
 
 var App = {
+  login: function() {
+    window.open('/auth/run', '/auth/run', 'width=600,height=400');
+  },
+
   lang: /en\./.test(location.hostname) ? 'en' : 'ru',
 
   tmpl: function(name) {
