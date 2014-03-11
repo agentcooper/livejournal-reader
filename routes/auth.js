@@ -1,3 +1,5 @@
+console.log('auth.js');
+
 var OAuth = require('oauth');
 
 var xmlrpc = require('xmlrpc');
@@ -83,6 +85,8 @@ function buildHeader(req) {
 
   return oauth_header;
 }
+
+exports.buildHeader = buildHeader;
 
 exports.feed = function(req, res) {
   LiveJournal.RPC.setAuth(buildHeader(req));

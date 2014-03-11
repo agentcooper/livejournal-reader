@@ -13,6 +13,8 @@ var app = express();
 
 app.use(express.cookieParser());
 
+app.use(express.bodyParser());
+
 app.set('port', process.env.PORT || 4000);
 app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
 app.use(express.logger('dev'));
@@ -63,9 +65,9 @@ app.get( '/auth/run',   auth.run   );
 app.get( '/auth',      auth.token );
 app.get( '/auth/feed',  auth.feed  );
 
-app.get( '/api/comments/add', comments.add );
-
 app.get( '/api/login', auth.login );
+
+app.post( '/api/comments/add', comments.add );
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('App is running on port ' + app.get('port'));

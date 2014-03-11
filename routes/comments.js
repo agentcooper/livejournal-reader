@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 var OAuth = require('oauth');
 
 var oauth = new OAuth.OAuth(
@@ -9,6 +11,8 @@ var oauth = new OAuth.OAuth(
   null,
   'HMAC-SHA1'
 );
+
+var auth = require('./auth');
 
 var LiveJournal = require('livejournal');
 
@@ -32,30 +36,18 @@ exports.get = function(req, res) {
 };
 
 exports.add = function(req, res) {
+  LiveJournal.RPC.setAuth(auth.buildHeader(req));
 
-  if (!req.query.oauth_token) {
-    res.send('fuck');
-  }
-
-  var oauth_header = oauth.authHeader(
-    'http://www.livejournal.com/interface/xmlrpc',
-    req.query.oauth_token,
-    req.query.oauth_token_secret,
-    'POST'
-  );
-
-  // LiveJournal.RPC.setAuth(oauth_header);
-
-  LiveJournal.RPC.addcomment({
-    username: 'agentcooper',
-    password: 'peakstwin-L11',
-    ditemid: req.query.ditemid || '20327',
-    journal: req.query.journal || 'agentcooper',
-    body: req.query.body
-  }, function(err, result) {
+  LiveJournal.RPC.addcomment(_.extend(req.body, {
+    auth_method: 'oauth'
+  }), function(err, result) {
     console.log(err, result);
 
-    res.json(result);
+    if (err) {
+      return res.json({ error: err });
+    }
+
+    return res.json(result);
   });
 
 }

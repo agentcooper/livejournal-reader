@@ -2,6 +2,23 @@ App.Comments = Backbone.Model.extend({
 
   level: {},
 
+  addComment: function(comment, callback) {
+    console.log('Posting comment', comment);
+
+    var data = {
+      body: comment.body,
+      parent: comment.parentdtalkid,
+      journal: comment.journal,
+      ditemid: comment.ditemid
+    };
+
+    console.log(data);
+
+    $.post('/api/comments/add', data, function(result) {
+      callback(result);
+    });
+  },
+
   process: function(comments) {
     var that = this;
 
@@ -69,7 +86,8 @@ App.CommentsView = Backbone.View.extend({
   events: {
     'click .b-comments__more': 'more',
     'click .b-commentbox-submit': 'submit',
-    'click .b-reply': 'reply'
+    'click .b-reply': 'reply',
+    'click .b-replybutton': 'reply'
   },
 
   toggle: function(state) {
@@ -89,7 +107,8 @@ App.CommentsView = Backbone.View.extend({
   reply: function(event) {
     event.preventDefault();
 
-    var button = $(event.currentTarget);
+    var button = $(event.currentTarget),
+        id = button.data('id');
 
     button.parent().after(
       $('.b-commentbox')
@@ -97,7 +116,9 @@ App.CommentsView = Backbone.View.extend({
     
     this.toggle(false);
 
-    this.model.set('replyTo', button.data('id'));
+    if (id) {
+      this.model.set('replyTo', id);
+    }
   },
 
   submit: function(event) {
@@ -115,13 +136,27 @@ App.CommentsView = Backbone.View.extend({
     var comments = [{
       body: body,
       postername: 'agentcooper',
-      parentdtalkid: replyTo,
-      dtalkid: Math.floor(Math.random() * 100000)
+      dtalkid: Math.floor(Math.random() * 100000),
+      journal: 'agentcooper',
+      ditemid: this.model.get('postId'),
+      userpic: window.profile.get('profile').defaultpicurl
     }];
+
+    if (replyTo) {
+      comments[0].parentdtalkid = replyTo;
+    }
 
     this.model.process(comments);
 
     this.renderNext(comments, replyTo);
+
+    this.model.addComment(comments[0], function(result) {
+      if (result.error) {
+        return console.error(result);
+      }
+
+      result.dtalkid
+    });
 
     this.toggle(true);
   },
@@ -164,11 +199,15 @@ App.CommentsView = Backbone.View.extend({
   render: function() {
     var comments = this.model.get('comments');
 
-    console.log('comments render', comments);
+    console.log('Comments render', comments);
 
     this.$el.html(
       App.tmpl('comments-tmpl')()
     );
+
+    if (comments) {
+      this.renderNext(comments);
+    }
     
     App.applyBindings(this);
   }

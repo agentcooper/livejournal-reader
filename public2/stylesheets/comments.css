@@ -262,3 +262,11 @@
 .loggedIn .b-thread__comment:hover .b-reply {
   visibility: visible;
 }
+
+.b-replybutton {
+  display: none;
+}
+
+.loggedIn .b-replybutton {
+  display: block;
+}
