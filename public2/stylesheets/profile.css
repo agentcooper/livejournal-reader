@@ -3,7 +3,7 @@
   -webkit-backface-visibility: hidden;
   -webkit-animation: fadein 0.4s; /* Safari and Chrome */
 
-  margin-top: 1em;
+  margin: 0;
 }
 
 .b-profile-username {
@@ -17,4 +17,5 @@
 
 .b-profile-userpic {
   display: block;
+  padding-top: 1em;
 }
