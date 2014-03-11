@@ -44,7 +44,7 @@ App.Rating = Backbone.Model.extend({
       } : compare
     );
 
-    this.trigger('refresh');
+    this.trigger('refresh', { skipPostRender: true });
   },
 
   initialize: function() {
@@ -73,15 +73,23 @@ App.RatingView = Backbone.View.extend({
 
     var that = this;
 
-    this.model.on('change:rating refresh', this.render.bind(this));
+    this.model.on('change:rating', this.render.bind(this));
+    this.model.on('refresh', function() {
+      that.render.apply(that, arguments);
+    });
   },
 
-  render: function() {
+  render: function(options) {
     console.log('render RatingView');
 
     this.$el.html(
       App.tmpl('rating-tmpl')({ rating: this.model.get('rating') })
     );
+
+    // skip postRender in case of sorting
+    if (options && options.skipPostRender) {
+      return;
+    }
 
     this.postRender();
   }
