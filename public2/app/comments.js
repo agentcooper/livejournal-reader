@@ -45,8 +45,6 @@ App.Comments = Backbone.Model.extend({
     
     page: 1,
 
-    comments: [],
-
     hasMore: false
   },
 
@@ -67,7 +65,7 @@ App.Comments = Backbone.Model.extend({
 
       that.process(comments);
 
-      that.get('comments').push(comments);
+      Array.prototype.push.apply(that.get('comments'), comments);
       that.trigger('push:comments', comments);
 
       that.set('loading', false);
@@ -78,6 +76,8 @@ App.Comments = Backbone.Model.extend({
   },
 
   initialize: function() {
+    this.set('comments', []);
+
     this.loadMore();
   }
 });
@@ -164,7 +164,7 @@ App.CommentsView = Backbone.View.extend({
   more: function() {
     console.log('more');
 
-    this.model.set( 'page', this.model.get('page') + 1 );
+    this.model.set('page', this.model.get('page') + 1);
     this.model.loadMore();
   },
 
@@ -181,9 +181,11 @@ App.CommentsView = Backbone.View.extend({
   renderNext: function(comments, parent) {
     var that = this;
 
-    if (!comments) {
+    if (!comments || comments.length === 0) {
       return;
     }
+
+    console.log('comments renderNext')
 
     var comments = comments.map(function(comment) {
       return App.tmpl('comment-tmpl')({ comment: comment });
@@ -211,4 +213,8 @@ App.CommentsView = Backbone.View.extend({
     
     App.applyBindings(this);
   }
+});
+
+App.Comments = cached(App.Comments, function(args) {
+  return args.journal + args.postId;
 });

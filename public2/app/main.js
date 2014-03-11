@@ -13,18 +13,21 @@ function singleton(Constructor) {
 }
 
 function cached(Constructor, cacher) {
-  var _cache = {};
+  if (!Constructor._cache) {
+    Constructor._cache = {};
+  }
 
   cacher = cacher || function() { return 1; };
 
   var f = function(args) {
     var key = cacher(args);
 
-    if (!_cache[key]) {
-      _cache[key] = new Constructor(args);
+    if (!Constructor._cache[key]) {
+      Constructor._cache[key] = new Constructor(args);
+      console.log('Created new key', key);
     }
 
-    return _cache[key];
+    return Constructor._cache[key];
   }
 
   f.prototype = Constructor.prototype;

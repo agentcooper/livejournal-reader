@@ -13,13 +13,10 @@ App.Post = Backbone.Model.extend({
       that.set('post', result);
     });
 
-    this.set(
-      'comments',
-      new App.Comments({
-        journal: this.get('journal'),
-        postId:  this.get('postId')
-      })
-    );
+    this.comments = new App.Comments({
+      journal: this.get('journal'),
+      postId:  this.get('postId')
+    });
   }
 });
 
@@ -47,10 +44,14 @@ App.PostView = Backbone.View.extend({
     );
 
     new App.CommentsView({
-      model: this.model.get('comments'),
+      model: this.model.comments,
       el: '.b-post-comments'
     });
 
     $(document).scrollTop(0);
   }
+});
+
+App.Post = cached(App.Post, function(args) {
+  return args.journal + args.postId;
 });
