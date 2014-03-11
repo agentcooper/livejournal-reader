@@ -37,6 +37,19 @@ exports.run = function(req, res) {
   });
 }
 
+function buildCookie(token, secret) {
+  return (token + '|||' + secret).split('').reverse().join('');
+}
+
+function decodeCookie(str) {
+  var data = str.split('').reverse().join('').split('|||');
+
+  return {
+    oauth_token:        data[0],
+    oauth_token_secret: data[1]
+  };
+}
+
 exports.token = function(req, res) {
   oauth.getOAuthAccessToken(
     req.query.oauth_token.trim(),
@@ -50,24 +63,29 @@ exports.token = function(req, res) {
     oauth_token = oauth_token.trim();
     oauth_token_secret = oauth_token_secret.trim();
 
-    res.cookie('oauth_token', oauth_token);
-    res.cookie('oauth_token_secret', oauth_token_secret);
+    res.cookie('auth', buildCookie(oauth_token, oauth_token_secret));
 
     return res.sendfile('public2/reciever.html');
   });
 }
 
-exports.feed = function(req, res) {
-  console.log(req.query);
+function buildHeader(req) {
+  if (req.cookies.auth) {
+    var auth = decodeCookie(req.cookies.auth);
+  }
 
   var oauth_header = oauth.authHeader(
     'http://www.livejournal.com/interface/xmlrpc',
-    req.query.oauth_token,
-    req.query.oauth_token_secret,
+    req.query.oauth_token || auth.oauth_token,
+    req.query.oauth_token_secret || auth.oauth_token_secret,
     'POST'
   );
 
-  LiveJournal.RPC.setAuth(oauth_header);
+  return oauth_header;
+}
+
+exports.feed = function(req, res) {
+  LiveJournal.RPC.setAuth(buildHeader(req));
 
   LiveJournal.RPC.getfriendspage({
     auth_method: 'oauth',
@@ -86,14 +104,7 @@ exports.feed = function(req, res) {
 }
 
 exports.login = function(req, res) {
-  var oauth_header = oauth.authHeader(
-    'http://www.livejournal.com/interface/xmlrpc',
-    req.query.oauth_token || req.cookies.oauth_token,
-    req.query.oauth_token_secret || req.cookies.oauth_token_secret,
-    'POST'
-  );
-
-  LiveJournal.RPC.setAuth(oauth_header);
+  LiveJournal.RPC.setAuth(buildHeader(req));
 
   LiveJournal.RPC.login({
     getpickws: 1,
