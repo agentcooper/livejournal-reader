@@ -1,3 +1,9 @@
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
 var FeedS = {
 
   feed: null,
@@ -5,13 +11,20 @@ var FeedS = {
   fetch: function(options, callback) {
     var that = this;
 
-    $.get('/api/feed', {
-      skip: options.skip || 0,
-      itemshow: options.itemshow || 7
-    }, function(feed) {
+    $.get('/auth/feed', _.extend(
+      {
+        skip: options.skip || 0,
+        itemshow: options.itemshow || 7
+      },
+      getAuth()
+    ), function(feed) {
+
+      console.log(feed);
 
       feed.entries.forEach(function(entry) {
-        entry.body = App.Text.prettify(entry.body);
+        // entry.body = App.Text.prettify(entry.body);
+
+        LJ.makePost(entry);
       });
 
       callback(feed);
@@ -20,7 +33,18 @@ var FeedS = {
 
 };
 
+function getAuth() {
+  return {
+    oauth_token: getCookie('oauth_token'),
+    oauth_token_secret: getCookie('oauth_token_secret')
+  };
+}
+
 App.Feed = Backbone.Model.extend({
+  defaults: {
+    entries: []
+  },
+
   initialize: function() {
     this.getFeed({}, function() {});
   },
@@ -31,12 +55,14 @@ App.Feed = Backbone.Model.extend({
     var that = this;
 
     App.progress.start();
-    that.set('loading', true);
 
-    FeedS.fetch(options, function(feed) {      
-      that.set('loading', false);
+    FeedS.fetch(options, function(feed) {
 
-      that.set('feed', feed);
+      console.log('Got feed', feed);
+
+      Array.prototype.push.apply(that.get('entries'), feed.entries);
+      that.trigger('push:entries', feed.entries);
+
       App.progress.complete();
     });
   }
@@ -45,6 +71,20 @@ App.Feed = Backbone.Model.extend({
 App.Feed = singleton(App.Feed);
 
 App.FeedView = Backbone.View.extend({
+  events: {
+    'click .b-feed__loadMore': 'more'
+  },
+
+  more: function() {
+    console.log('more');
+
+    this.locked = true;
+
+    this.model.getFeed({
+      skip: this.model.get('entries').length
+    });
+  },
+
   checkScroll: function() {
     var that = this;
     var triggerPoint = 100;
@@ -66,33 +106,47 @@ App.FeedView = Backbone.View.extend({
   initialize: function() {
     console.log('FeedView init');
 
-    this.model.on('change:feed', this.render.bind(this));
+    this.model.on('push:entries', this.renderNext.bind(this));
 
     // $(document).on('scroll', this.checkScroll.bind(this));
+  },
+
+  renderNext: function(entries) {
+    var that = this;
+
+    if (!entries) {
+      return;
+    }
+
+    this.$el.find('.b-feed_entries').append(
+      entries.map(function(entry) {
+        return App.tmpl('entry-tmpl')({ entry: entry });
+      }).join('')
+    );
+
+    this.postRender();
   },
 
   render: function() {
     var that = this;
 
-    var feed = this.model.get('feed');
+    var entries = this.model.get('entries');
 
-    if (!feed) {
+    if (!entries) {
       return;
     }
 
     console.log('render feed');
 
     this.$el.html(
-      App.tmpl('feed-tmpl')({ feed: feed })
+      App.tmpl('feed-tmpl')()
     );
 
-    setTimeout(function() {
-      that.locked = false;
-    }, 100);
-
-    this.postRender();
+    this.renderNext(entries);
   }
 });
+
+App.FeedView = singleton(App.FeedView);
 
 // console.log('extedin', postRender);
 _.extend(App.FeedView.prototype, postRender);

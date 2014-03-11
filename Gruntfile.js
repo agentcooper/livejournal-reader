@@ -129,7 +129,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['public2/app/**/*.js'],
+        files: ['public2/app/**/*.js', 'public2/templates/**/*.tmpl', 'public2/stylesheets/**/*.css'],
         tasks: ['build2'],
         options: {
           spawn: false,

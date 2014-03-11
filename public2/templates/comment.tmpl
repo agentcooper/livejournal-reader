@@ -1,10 +1,15 @@
-<li class="{{ 'b-comment-level-' + (comment.level > 15 ? 'over-15' : comment.level) }}">
+<li class="b-comment {{ 'b-comment-level-' + (comment.level > 15 ? 'over-15' : comment.level) }}" id="{{ 'c' + comment.dtalkid }}">
       
   <div class="b-thread__comment {{comment.isAuthor ? 'b-thread__comment_author' : '' }}">
     <div class="b-thread__userpic" style="{{ 'background-image: url(' + comment.userpic + ')' }}"></div>
 
     <a class="b-thread__username" href="{{ '/read/' + comment.postername }}">{{ comment.identity_display || comment.postername }}</a>
+
+    <a href="#" class="b-reply b-pseudo" data-id="{{ comment.dtalkid }}">reply</a>
+
     <p class="b-thread__body">{{ comment.body }}</p>
+
+    
   </div>
 
 </li>

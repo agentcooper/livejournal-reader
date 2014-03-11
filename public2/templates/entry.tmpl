@@ -1,0 +1,13 @@
+<li class="b-entry">
+  <span class="b-boop__header"><a href="{{ entry.journalurl + '/' + entry.ditemid + '.html' }}">{{ entry.subject }}</a></span>
+
+  <div class="b-post_aside" ng-click="go(entry.username);">
+    <img class="b-post__userpic" src="{{ entry.poster_userpic_url }}">
+    <p class="b-post__username">{{ entry.username }}</p>
+    <p class="b-post__time">{{ entry.logtime }}</p>
+  </div>
+
+  <div class="b-entry__body">{{ entry.body }}</div>
+
+  <a href="{{ entry.journalurl + '/' + entry.ditemid + '.html' }}" class="b-boop__comments">{{ entry.reply_count }}</a>
+</li>

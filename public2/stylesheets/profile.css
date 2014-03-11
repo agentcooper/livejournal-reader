@@ -1,0 +1,19 @@
+.b-profile {
+  text-align: center;
+  -webkit-backface-visibility: hidden;
+  -webkit-animation: fadein 0.4s; /* Safari and Chrome */
+
+  margin-top: 1em;
+}
+
+.b-profile-username {
+  font-size: 0.7em;
+}
+
+.b-profile-link {
+  display: block;
+}
+
+.b-profile-userpic {
+  display: block;
+}

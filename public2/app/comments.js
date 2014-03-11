@@ -1,20 +1,21 @@
 App.Comments = Backbone.Model.extend({
 
+  level: {},
+
   process: function(comments) {
-    var level = {};
     var that = this;
 
     comments.forEach(function(comment) {
       if (!comment.parentdtalkid) {
         comment.level = 0;
       } else {
-        if (level[comment.parentdtalkid]) {
-          comment.level = level[comment.parentdtalkid] + 1;
+        if (that.level[comment.parentdtalkid]) {
+          comment.level = that.level[comment.parentdtalkid] + 1;
         } else {
           comment.level = 1;
         }
         
-        level[comment.dtalkid] = comment.level;
+        that.level[comment.dtalkid] = comment.level;
       }
 
       comment.body = App.Text.clean(comment.body);
@@ -66,7 +67,63 @@ App.Comments = Backbone.Model.extend({
 
 App.CommentsView = Backbone.View.extend({
   events: {
-    'click .b-comments__more': 'more'
+    'click .b-comments__more': 'more',
+    'click .b-commentbox-submit': 'submit',
+    'click .b-reply': 'reply'
+  },
+
+  toggle: function(state) {
+    var node = $('#comment_text');
+
+    this.$el.find('.b-comments').toggleClass('b-commentbox-hidden', state);
+
+    if (state) {
+      node.val('');
+    } else {
+      setTimeout(function() {
+        node.focus();
+      }, 0);
+    }
+  },
+
+  reply: function(event) {
+    event.preventDefault();
+
+    var button = $(event.currentTarget);
+
+    button.parent().after(
+      $('.b-commentbox')
+    );
+    
+    this.toggle(false);
+
+    this.model.set('replyTo', button.data('id'));
+  },
+
+  submit: function(event) {
+    event.preventDefault();
+
+    var node = $('#comment_text'),
+        body = node.val().trim();
+
+    if (!body) {
+      return;
+    }
+
+    var replyTo = this.model.get('replyTo');
+
+    var comments = [{
+      body: body,
+      postername: 'agentcooper',
+      parentdtalkid: replyTo,
+      dtalkid: Math.floor(Math.random() * 100000)
+    }];
+
+    this.model.process(comments);
+
+    this.renderNext(comments, replyTo);
+
+    this.toggle(true);
   },
 
   more: function() {
@@ -86,18 +143,22 @@ App.CommentsView = Backbone.View.extend({
     });
   },
 
-  renderNext: function(comments) {
+  renderNext: function(comments, parent) {
     var that = this;
 
     if (!comments) {
       return;
     }
 
-    this.$el.find('.b-thread').append(
-      comments.map(function(comment) {
-        return App.tmpl('comment-tmpl')({ comment: comment });
-      }).join('')
-    );
+    var comments = comments.map(function(comment) {
+      return App.tmpl('comment-tmpl')({ comment: comment });
+    }).join('');
+
+    if (parent) {
+      this.$el.find('#c' + parent).after(comments);
+    } else {
+      this.$el.find('.b-thread').append(comments);
+    }
   },
 
   render: function() {

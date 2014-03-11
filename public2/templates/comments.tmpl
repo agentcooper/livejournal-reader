@@ -1,4 +1,4 @@
-<div class="b-comments" data-bind-class="{
+<div class="b-comments b-commentbox-hidden" data-bind-class="{
   'b-comments-loading': 'loading',
   'b-comments-more': 'hasMore'
 }">
@@ -12,6 +12,11 @@
     <div class="spinner">
       <div class="rect1"></div>&nbsp;<div class="rect2"></div>&nbsp;<div class="rect3"></div>&nbsp;<div class="rect4"></div>&nbsp;<div class="rect5"></div>
     </div>
+  </div>
+
+  <div class="b-commentbox">
+    <p><textarea class="b-commentbox-area" id="comment_text" placeholder="Leave a comment"></textarea><p>
+    <p><button class="b-commentbox-submit">Submit comment</button></p>
   </div>
 
 </div>

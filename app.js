@@ -5,9 +5,13 @@ var express = require('express'),
     comments = require('./routes/comments'),
     post     = require('./routes/post'),
     feed     = require('./routes/feed'),
-    journal  = require('./routes/journal');
+    journal  = require('./routes/journal'),
+
+    auth     = require('./routes/auth');
 
 var app = express();
+
+app.use(express.cookieParser());
 
 app.set('port', process.env.PORT || 4000);
 app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
@@ -54,6 +58,14 @@ app.get( '/api/post',     post.get     );
 app.get( '/api/comments', comments.get );
 app.get( '/api/feed',     feed.get     );
 app.get( '/api/journal',  journal.get  );
+
+app.get( '/auth/run',   auth.run   );
+app.get( '/auth/',      auth.token );
+app.get( '/auth/feed',  auth.feed  );
+
+app.get( '/api/comments/add', comments.add );
+
+app.get( '/api/login', auth.login );
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('App is running on port ' + app.get('port'));

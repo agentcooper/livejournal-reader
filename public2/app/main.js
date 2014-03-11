@@ -135,4 +135,9 @@ $(function() {
       }
     }
   });
+
+  new ProfileView({
+    model: new Profile(),
+    el: '.b-menu-profile'
+  });
 });

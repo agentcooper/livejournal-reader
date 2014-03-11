@@ -4,16 +4,21 @@ var LJ = {
   
   journal: {},
 
+  /*
+   * Normalize and cache post data from any source (post, journal, feed)
+   */
   makePost: function(data, options) {
     if (!data) {
       return;
     }
 
-    data.body    = App.Text.prettify(data.event);
+    data.body    = App.Text.prettify(data.event || data.body);
+
+    data.subject = data.subject_raw || data.subject;
 
     data.post_id = data.ditemid;
 
-    data.journal = options.journal;
+    data.journal = data.journalname || options.journal;
     data.visited = Date.now();
 
     if (data.props && data.props.taglist) {
@@ -28,7 +33,7 @@ var LJ = {
       }).join(', ');
     }
 
-    this.post[options.journal + (data.ditemid || options.postId)] = data;
+    this.post[data.journal + (data.ditemid || options.postId)] = data;
   },
 
   getPost: function(options, callback) {

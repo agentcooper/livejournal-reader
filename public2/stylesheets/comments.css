@@ -233,3 +233,32 @@
       .b-comments-loading .b-comments__more {
         display: none;
       }
+
+
+
+
+
+
+.b-commentbox-area {
+  width: 100%;
+  height: 70px;
+  font-size: 1.0em;
+  font-family: inherit;
+  padding: 0.5em;
+  outline: none;
+  border: 1px solid #D8D8D8;
+}
+
+.b-commentbox-hidden .b-commentbox {
+  display: none;
+}
+
+.b-reply {
+  visibility: hidden;
+  font-size: 0.9em;
+  margin-left: 0.5em;
+}
+
+.loggedIn .b-thread__comment:hover .b-reply {
+  visibility: visible;
+}
