@@ -2,7 +2,11 @@ var Profile = Backbone.Model.extend({
   initialize: function() {
     var that = this;
 
-    this.getData();
+    if (getCookie('auth')) {
+      this.getData();
+    } else {
+      this.set('profile', null); 
+    }
 
     this.on('login', function() {
       console.log('Profile login');
@@ -25,10 +29,24 @@ var Profile = Backbone.Model.extend({
 });
 
 var ProfileView = Backbone.View.extend({
+  events: {
+    'click .b-menu-login': 'login',
+  },
+
+  login: function(event) {
+    event.preventDefault();
+
+    App.login();
+  },
+
   initialize: function() {
     var that = this;
 
-    this.model.on('change:profile', function() {
+    this.model.on('change:profile', function(model, profile) {
+      if (!profile) {
+        return this.render();
+      }
+
       $('.b-main').addClass('loggedIn');
 
       var userpic = new Image();
@@ -39,9 +57,13 @@ var ProfileView = Backbone.View.extend({
 
       userpic.src = that.model.get('profile').defaultpicurl;
     });
+
+    this.render();
   },
 
   render: function() {
+    console.log('Profile render');
+
     this.$el.html(
       App.tmpl('profile-tmpl')(this.model.get('profile'))
     );

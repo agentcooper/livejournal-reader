@@ -1,3 +1,7 @@
 <div class="b-profile">
+  <% if (username) { %>
   <a href="http://{{ username }}.livejournal.com" class="b-profile-link"><span class="b-profile-userpic"><img src="{{ defaultpicurl }}"><span><span class="b-profile-username">{{ username }}</span></a>
+  <% } else { %>
+  <a href="javascript:void(0);" class="b-menu-login">Login</a>
+  <% } %>
 </div>

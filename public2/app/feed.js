@@ -11,13 +11,10 @@ var FeedS = {
   fetch: function(options, callback) {
     var that = this;
 
-    $.get('/auth/feed', _.extend(
-      {
-        skip: options.skip || 0,
-        itemshow: options.itemshow || 7
-      },
-      getAuth()
-    ), function(feed) {
+    $.get('/auth/feed', {
+      skip: options.skip || 0,
+      itemshow: options.itemshow || 7
+    }, function(feed) {
 
       console.log(feed);
 
