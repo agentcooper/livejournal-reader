@@ -1,4 +1,4 @@
-console.log('auth.js');
+// @TODO: move auth data into separate file
 
 var OAuth = require('oauth');
 
@@ -22,6 +22,7 @@ oauth.setClientOptions({
   followRedirects: false
 });
 
+// @TODO: move to session or cookie
 var secret;
 
 exports.run = function(req, res) {
@@ -65,7 +66,9 @@ exports.token = function(req, res) {
     oauth_token = oauth_token.trim();
     oauth_token_secret = oauth_token_secret.trim();
 
-    res.cookie('auth', buildCookie(oauth_token, oauth_token_secret));
+    res.cookie('auth', buildCookie(oauth_token, oauth_token_secret), {
+      domain: '.ljreader.com'
+    });
 
     return res.sendfile('public2/reciever.html');
   });
