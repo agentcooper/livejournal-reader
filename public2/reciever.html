@@ -1,3 +1,7 @@
 <script>
-  alert('fuck');
+  if (window.opener) {
+    window.opener.postMessage('login ok', '*');
+  }
+
+  window.close();
 </script>
