@@ -1,5 +1,11 @@
 // @TODO: move auth data into separate file
 
+var analytics = require('analytics-node');
+
+analytics.init({
+  secret: 'd1do0wl1lr'
+});
+
 var OAuth = require('oauth');
 
 var xmlrpc = require('xmlrpc');
@@ -119,6 +125,9 @@ exports.login = function(req, res) {
     auth_method: 'oauth'
   }, function(err, profile) {
     console.log(arguments);
+
+    analytics.identify({ userId: profile.username });
+    analytics.track({ userId: profile.username, event: 'Login' });
 
     res.json(profile);
   });
