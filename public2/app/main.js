@@ -135,7 +135,18 @@ $(function() {
           event.preventDefault();
           App.scroll.save();
           router.navigate('/read/' + post.journal + '/' + post.postId, true);
-        } 
+        } else {
+
+          var match = href.match(/([a-zA-Z0-9-_]+)\.livejournal\.com/);
+
+          if (match && match.length > 1) {
+            event.preventDefault();
+            App.scroll.save();
+            router.navigate('/read/' + match[1], true);
+          }
+
+        }
+
       }
     }
   });

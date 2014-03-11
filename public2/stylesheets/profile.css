@@ -12,6 +12,7 @@
 
 .b-profile-link {
   display: block;
+  padding: 0 !important;
 }
 
 .b-profile-userpic {

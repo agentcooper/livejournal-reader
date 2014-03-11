@@ -43,10 +43,6 @@ var ProfileView = Backbone.View.extend({
     var that = this;
 
     this.model.on('change:profile', function(model, profile) {
-      if (!profile) {
-        return this.render();
-      }
-
       $('.b-main').addClass('loggedIn');
 
       var userpic = new Image();
@@ -58,7 +54,9 @@ var ProfileView = Backbone.View.extend({
       userpic.src = that.model.get('profile').defaultpicurl;
     });
 
-    this.render();
+    if (this.model.get('profile') === null) {
+      this.render();
+    }
   },
 
   render: function() {
