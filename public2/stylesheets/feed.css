@@ -36,3 +36,8 @@ blockquote {
   display: block;
   text-align: center;
 }
+
+.b-feed pre {
+  max-width: 100%;
+  overflow: scroll;
+}
