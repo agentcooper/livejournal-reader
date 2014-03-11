@@ -1,4 +1,4 @@
-var Profile = Backbone.Model.extend({
+App.Profile = Backbone.Model.extend({
   initialize: function() {
     var that = this;
 
@@ -28,7 +28,7 @@ var Profile = Backbone.Model.extend({
   }
 });
 
-var ProfileView = Backbone.View.extend({
+App.ProfileView = Backbone.View.extend({
   events: {
     'click .b-menu-login': 'login',
   },

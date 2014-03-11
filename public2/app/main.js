@@ -151,9 +151,9 @@ $(function() {
     }
   });
 
-  var profile = new Profile();
+  window.profile = new App.Profile();
 
-  new ProfileView({
+  new App.ProfileView({
     model: profile,
     el: '.b-menu-profile'
   });
