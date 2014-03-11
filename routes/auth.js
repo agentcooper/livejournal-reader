@@ -1,4 +1,4 @@
-var OAuth = require('OAuth');
+var OAuth = require('oauth');
 
 var xmlrpc = require('xmlrpc');
 
