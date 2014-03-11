@@ -11,7 +11,9 @@
     "lru-cache": "~2.5.0",
     "request": "~2.33.0",
     "async": "~0.2.10",
-    "grunt-contrib-jst": "~0.6.0"
+    "grunt-contrib-jst": "~0.6.0",
+    "oauth": "~0.9.11",
+    "xmlrpc": "~1.2.0"
   },
   "devDependencies": {
     "grunt-preprocess": "~2.3.0",

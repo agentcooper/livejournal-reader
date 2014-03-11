@@ -60,7 +60,7 @@ app.get( '/api/feed',     feed.get     );
 app.get( '/api/journal',  journal.get  );
 
 app.get( '/auth/run',   auth.run   );
-app.get( '/auth/',      auth.token );
+app.get( '/auth',      auth.token );
 app.get( '/auth/feed',  auth.feed  );
 
 app.get( '/api/comments/add', comments.add );
