@@ -123,6 +123,17 @@ $(function() {
 
   Backbone.history.start({ pushState: true });
 
+  // handle feed link
+  $('a[href="/feed"]').on('click', function(event) {
+    if (!profile.get('profile')) {
+
+      event.stopPropagation();
+      event.preventDefault();
+
+      App.login();
+    }
+  });
+
   $(document.body).on('click', 'a:not([data-click])', function(event) {
     var href = $(this).attr('href');
 
@@ -154,7 +165,7 @@ $(function() {
     }
   });
 
-  window.profile = new App.Profile();
+  var profile = window.profile = new App.Profile();
 
   new App.ProfileView({
     model: profile,
