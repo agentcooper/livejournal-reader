@@ -66,5 +66,10 @@ App.ProfileView = Backbone.View.extend({
       App.tmpl('profile-tmpl')({ profile: this.model.get('profile') })
     );
 
+    var done = this.model.get('doneCallback');
+    if (typeof done === 'function') {
+      done();
+      this.model.set('doneCallback', null);
+    }
   }
 });

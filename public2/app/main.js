@@ -51,7 +51,11 @@ var postRender = {
 };
 
 var App = {
-  login: function() {
+  login: function(params) {
+    if (params && params.done) {
+      App.profile.set('doneCallback', params.done);
+    }
+
     window.open('/auth/run', '/auth/run', 'width=600,height=400');
   },
 
@@ -123,14 +127,19 @@ $(function() {
 
   Backbone.history.start({ pushState: true });
 
-  // handle feed link
   $('a[href="/feed"]').on('click', function(event) {
-    if (!profile.get('profile')) {
+
+    // login first if no profile present
+    if (!App.profile.get('profile')) {
 
       event.stopPropagation();
       event.preventDefault();
 
-      App.login();
+      App.login({
+        done: function() {
+          router.navigate('/feed', true);
+        }
+      });
     }
   });
 
@@ -165,10 +174,10 @@ $(function() {
     }
   });
 
-  var profile = window.profile = new App.Profile();
+  App.profile = new App.Profile();
 
   new App.ProfileView({
-    model: profile,
+    model: App.profile,
     el: '.b-menu-profile'
   });
 
@@ -176,7 +185,7 @@ $(function() {
     console.log(e);
 
     if (e.data === 'login ok') {
-      profile.trigger('login');
+      App.profile.trigger('login');
     }
   };
 });
