@@ -1,13 +1,5 @@
 var LiveJournal = require('livejournal');
 
-try {
-  var config = require('../config.js');
-} catch (e) {
-  console.log('Please provide config.js in app root with username and password (required for feed to work)\n');
-  console.log("module.exports = {\n  username: 'username',\n  password: 'password'\n};");
-  process.exit(1);
-}
-
 var cache = null;
 
 exports.get = function(req, res) {
