@@ -4,18 +4,11 @@ App.Router = Backbone.Router.extend({
     'read/:journal/:postId': 'post',
     'read/:journal(/)': 'journal',
     'feed(/)': 'feed',
-    'about(/)': 'about',
     'history(/)': 'history'
   },
 
   history: function() {
     new App.HistoryView({
-      el: '.b-main'
-    }).render();
-  },
-
-  about: function() {
-    new App.AboutView({
       el: '.b-main'
     }).render();
   },
