@@ -139,7 +139,7 @@ App.CommentsView = Backbone.View.extend({
       dtalkid: Math.floor(Math.random() * 100000),
       journal: 'agentcooper',
       ditemid: this.model.get('postId'),
-      userpic: window.profile.get('profile').defaultpicurl
+      userpic: App.profile.get('profile').defaultpicurl
     }];
 
     if (replyTo) {
