@@ -15,7 +15,8 @@
     "oauth": "~0.9.11",
     "xmlrpc": "~1.2.0",
     "underscore": "~1.6.0",
-    "grunt-image-embed": "~0.3.1"
+    "grunt-image-embed": "~0.3.1",
+    "analytics-node": "~0.6.0"
   },
   "devDependencies": {
     "grunt-preprocess": "~2.3.0",
