@@ -41,3 +41,11 @@ blockquote {
   max-width: 100%;
   overflow: scroll;
 }
+
+.b-feed__empty-message {
+  display: none;
+}
+
+.b-feed--empty .b-feed__empty-message {
+  display: block;
+}

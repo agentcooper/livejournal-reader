@@ -1,4 +1,7 @@
-<ol class="b-feed">
+<ol class="b-feed {{ journal.events.length === 0 ? 'b-feed--empty' : '' }}">
+
+  <li class="b-feed__empty-message">This journal is empty.</li>
+
   <% _.each(journal.events, function(entry) { %>
   <li class="b-entry">
     <span class="b-boop__header"><a href="{{ entry.url }}">{{ entry.subject || '(no subject)' }}</a></span>
