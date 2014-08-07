@@ -22,7 +22,7 @@ var LJ = {
     data.visited = Date.now();
 
     if (data.props && data.props.taglist) {
-      data.props.tags = data.props.taglist.split(/[,\s]+/).map(function(tag) {
+      data.props.tags = String(data.props.taglist).split(/[,\s]+/).map(function(tag) {
         var blogSearchLink = [
           'http://blogs.yandex.ru/search.xml',
           '?text=&ft=blog%2Ccomments%2Cmicro&server=livejournal.com',
