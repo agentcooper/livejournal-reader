@@ -1,4 +1,4 @@
-<li class="b-comment {{ 'b-comment-level-' + (comment.level > 15 ? 'over-15' : comment.level) }}" id="{{ 'c' + comment.dtalkid }}">
+<li class="b-comment {{ 'b-comment-level-' + (comment.level > 15 ? 'over-15' : comment.level) }} {{ comment.isAnonymous ? 'b-comment--anonymous' : '' }}" id="{{ 'c' + comment.dtalkid }}">
       
   <div class="b-thread__comment {{comment.isAuthor ? 'b-thread__comment_author' : '' }}">
     <div class="b-thread__userpic" style="{{ 'background-image: url(' + comment.userpic + ')' }}"></div>

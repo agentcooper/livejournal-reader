@@ -270,3 +270,8 @@
 .loggedIn .b-replybutton {
   display: block;
 }
+
+.b-comment--anonymous {
+  pointer-events: none;
+  cursor: default;
+}

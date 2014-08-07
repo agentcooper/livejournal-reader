@@ -1,3 +1,8 @@
+var USERPIC = {
+  DEFAULT: 'http://stat.livejournal.com/img/userpics/userpic-user.png',
+  ANONYMOUS: 'http://stat.livejournal.com/img/userpics/userpic-anonymous.png'
+};
+
 App.Comments = Backbone.Model.extend({
 
   level: {},
@@ -35,8 +40,17 @@ App.Comments = Backbone.Model.extend({
         that.level[comment.dtalkid] = comment.level;
       }
 
+
       comment.body = App.Text.clean(comment.body);
       comment.isAuthor = comment.postername === that.get('journal');
+
+      comment.isAnonymous = comment.posterid === 0;
+      if (comment.isAnonymous) {
+        comment.userpic = USERPIC.ANONYMOUS;
+        comment.postername = 'Anonymous';
+      }
+
+      comment.userpic = comment.userpic || USERPIC.DEFAULT;
     });
   },
 
