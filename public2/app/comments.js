@@ -149,9 +149,9 @@ App.CommentsView = Backbone.View.extend({
 
     var comments = [{
       body: body,
-      postername: 'agentcooper',
+      postername: App.profile.get('profile').username,
       dtalkid: Math.floor(Math.random() * 100000),
-      journal: 'agentcooper',
+      journal: this.model.get('journal'),
       ditemid: this.model.get('postId'),
       userpic: App.profile.get('profile').defaultpicurl
     }];
