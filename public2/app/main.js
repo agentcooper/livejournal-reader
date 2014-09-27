@@ -61,6 +61,17 @@ var App = {
 
   lang: /en\./.test(location.hostname) ? 'en' : 'ru',
 
+  setupLanguage: function() {
+    var style = $('<style/>', {
+      html: [
+        'div[data-ljreader-language] { display: none; }',
+        'div[data-ljreader-language=' + this.lang + '] { display: block; }'
+      ].join('\n')
+    })
+
+    $(document.body).append(style);
+  },
+
   tmpl: function(name) {
     return window.JST[name];
   },
@@ -123,6 +134,8 @@ var App = {
 }
 
 $(function() {
+  App.setupLanguage();
+
   var router = new App.Router();
 
   Backbone.history.start({ pushState: true });
