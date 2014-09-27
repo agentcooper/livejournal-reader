@@ -120,6 +120,10 @@ App.Text = (function() {
       return match + '</lj>';
     });
 
+    if (!/<p/.test(text)) {
+      text = '<p>' + text + '</p>';
+    }
+
     return process( p(text) );
   }
 
