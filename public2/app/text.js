@@ -10,6 +10,9 @@ App.Text = (function() {
 
   var rx_src = /src="(.*?)"/;
 
+  var rx_lj_tag_start = /<lj[^>]*>/g;
+  var rx_lj_tag_end = /<\/lj>/g;
+
   function process(body) {
     body = body.replace('<a name="Read more..."></a>', '');
 
@@ -74,6 +77,18 @@ App.Text = (function() {
     //   });
     // }
 
+    // transform <lj user="someuser"> into actual links
+
+    $body.find('lj[user]').replaceWith(function() {
+      var user = $(this).attr('user');
+
+      return [
+        '<a href="/read/' + user + '" class="b-lj_user">',
+          user,
+        '</a>'
+      ].join('');
+    });
+
     return $body.html();
   }
 
@@ -99,6 +114,10 @@ App.Text = (function() {
     })
     .replace(rx_lj_embed, function(_, embed) {
       return '<span lj-embed>[lj-embed:' + embed + ']</span>';
+    })
+    .replace(rx_lj_tag_end, '')
+    .replace(rx_lj_tag_start, function(match) {
+      return match + '</lj>';
     });
 
     return process( p(text) );

@@ -18,13 +18,16 @@
 
       .b-lj_user {
         text-decoration: none;
-        font-size: 1.4em;
       }
 
         .b-lj_user:before {
           content: url('../images/userhead.png');
           vertical-align: text-top;
           padding-right: 1px;
+        }
+
+        .b-lj_user--big {
+          font-size: 1.4em;
         }
 
       .b-boop__header {
