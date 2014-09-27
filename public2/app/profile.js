@@ -2,7 +2,7 @@ App.Profile = Backbone.Model.extend({
   initialize: function() {
     var that = this;
 
-    if (getCookie('auth')) {
+    if (App.getCookie('auth')) {
       this.getData();
     } else {
       this.set('profile', null); 

@@ -1,9 +1,3 @@
-function getCookie(name) {
-  var value = "; " + document.cookie;
-  var parts = value.split("; " + name + "=");
-  if (parts.length == 2) return parts.pop().split(";").shift();
-}
-
 var FeedS = {
 
   feed: null,
@@ -29,13 +23,6 @@ var FeedS = {
   },
 
 };
-
-function getAuth() {
-  return {
-    oauth_token: getCookie('oauth_token'),
-    oauth_token_secret: getCookie('oauth_token_secret')
-  };
-}
 
 App.Feed = Backbone.Model.extend({
   defaults: {

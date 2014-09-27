@@ -130,6 +130,12 @@ var App = {
     context.model.on('change:' + property + ' init', function() {
       context.$el.toggleClass(className, context.model.get(property));
     }).trigger('init');
+  },
+
+  getCookie: function(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
   }
 }
 
