@@ -25,6 +25,10 @@ App.Profile = Backbone.Model.extend({
 
       that.set('profile', profile);
     });
+  },
+
+  isLoggedIn: function() {
+    return Boolean(this.get('profile') && this.get('profile').username);
   }
 });
 
@@ -66,6 +70,10 @@ App.ProfileView = Backbone.View.extend({
       App.tmpl('profile-tmpl')({ profile: this.model.get('profile') })
     );
 
+    if (!this.model.isLoggedIn()) {
+      return;
+    }
+
     var done = this.model.get('doneCallback');
     if (typeof done === 'function') {
       done();
@@ -73,3 +81,5 @@ App.ProfileView = Backbone.View.extend({
     }
   }
 });
+
+App.profile = new App.Profile();

@@ -124,15 +124,21 @@ App.CommentsView = Backbone.View.extend({
     var button = $(event.currentTarget),
         id = button.data('id');
 
-    button.parent().after(
-      $('.b-commentbox')
-    );
-    
-    this.toggle(false);
+    App.login({
+      done: function() {
+        button.parent().after(
+          $('.b-commentbox')
+        );
 
-    if (id) {
-      this.model.set('replyTo', id);
-    }
+        this.toggle(false);
+
+        if (!id) {
+          return;
+        }
+
+        this.model.set('replyTo', id);
+      }
+    });
   },
 
   submit: function(event) {

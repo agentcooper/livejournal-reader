@@ -29,6 +29,7 @@ module.exports = function(grunt) {
           
           'public2/build/templates.js',
           'public2/app/main.js',
+          'public2/app/profile.js',
           'public2/app/**/*.js'
         ],
         dest: 'public2/build/script.js'

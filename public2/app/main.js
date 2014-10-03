@@ -53,10 +53,14 @@ var postRender = {
 var App = {
   login: function(params) {
     if (params && params.done) {
+      if (App.profile.isLoggedIn()) {
+        return params.done();
+      }
+
       App.profile.set('doneCallback', params.done);
     }
 
-    window.open('/auth/run', '/auth/run', 'width=600,height=400');
+    window.open('/auth/run', '/auth/run', 'width=670,height=575');
   },
 
   lang: /en\./.test(location.hostname) ? 'en' : 'ru',
@@ -146,22 +150,6 @@ $(function() {
 
   Backbone.history.start({ pushState: true });
 
-  $('a[href="/feed"]').on('click', function(event) {
-
-    // login first if no profile present
-    if (!App.profile.get('profile')) {
-
-      event.stopPropagation();
-      event.preventDefault();
-
-      App.login({
-        done: function() {
-          router.navigate('/feed', true);
-        }
-      });
-    }
-  });
-
   $(document.body).on('click', 'a:not([data-click])', function(event) {
     var href = $(this).attr('href');
 
@@ -192,8 +180,6 @@ $(function() {
       }
     }
   });
-
-  App.profile = new App.Profile();
 
   new App.ProfileView({
     model: App.profile,

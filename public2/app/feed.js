@@ -30,7 +30,13 @@ App.Feed = Backbone.Model.extend({
   },
 
   initialize: function() {
-    this.getFeed({}, function() {});
+    var that = this;
+
+    App.login({
+      done: function() {
+        that.getFeed({}, function() {});
+      }
+    });
   },
 
   getFeed: function(options, callback) {
