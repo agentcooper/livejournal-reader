@@ -119,6 +119,8 @@ App.CommentsView = Backbone.View.extend({
   },
 
   reply: function(event) {
+    var that = this;
+
     event.preventDefault();
 
     var button = $(event.currentTarget),
@@ -130,13 +132,13 @@ App.CommentsView = Backbone.View.extend({
           $('.b-commentbox')
         );
 
-        this.toggle(false);
+        that.toggle(false);
 
         if (!id) {
           return;
         }
 
-        this.model.set('replyTo', id);
+        that.model.set('replyTo', id);
       }
     });
   },
