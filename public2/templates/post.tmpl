@@ -7,5 +7,16 @@
     {{ post.body }}
   </div>
 
+  <div
+    class="b-share-options"
+    data-journal="{{ post.journal }}"
+    data-post-id="{{ post.post_id }}"
+    >
+
+    <a href="#" class="b-share__network" data-network="twitter">Twitter</a>
+
+    <a href="#" class="b-share__network" data-network="facebook">Facebook</a>
+  </div>
+
   <div class="b-post-comments"></div>
 </article>

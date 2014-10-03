@@ -229,6 +229,14 @@ App.CommentsView = Backbone.View.extend({
       App.tmpl('comments-tmpl')()
     );
 
+    App.drop = new Drop({
+      target: $('.b-share').get(0),
+      content: $('.b-share-options').get(0),
+      classes: 'drop-theme-arrows-bounce-dark',
+      position: 'bottom center',
+      openOn: 'click'
+    });
+
     if (comments) {
       this.renderNext(comments);
     }
