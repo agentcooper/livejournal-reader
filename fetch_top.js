@@ -122,11 +122,11 @@ getRating(function(err, rating) {
 
     function(callback) {
       getTwitter(entries, function() { console.log('TW done'); callback.apply(this, arguments); });
-    },
+    }/*,
 
     function(callback) {
       getVK(entries, function() { console.log('VK done'); callback.apply(this, arguments); });
-    }
+    }*/
   ], function() {
     var top = entries.map(function(entry) {
       return {
