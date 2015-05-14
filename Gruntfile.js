@@ -4,21 +4,21 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     uglify: {
-      public2: {
+      public: {
         src: [
-          'public2/bower_components/jquery/dist/jquery.js',
-          'public2/bower_components/underscore/underscore.js',
-          'public2/bower_components/backbone/backbone.js',
-          'public2/bower_components/nprogress/nprogress.js',
-          'public2/bower_components/momentjs/moment.js',
-          'public2/bower_components/drop/drop.js',
+          'public/bower_components/jquery/dist/jquery.js',
+          'public/bower_components/underscore/underscore.js',
+          'public/bower_components/backbone/backbone.js',
+          'public/bower_components/nprogress/nprogress.js',
+          'public/bower_components/momentjs/moment.js',
+          'public/bower_components/drop/drop.js',
           
-          'public2/build/templates.js',
-          'public2/app/main.js',
-          'public2/app/profile.js',
-          'public2/app/**/*.js'
+          'public/build/templates.js',
+          'public/app/main.js',
+          'public/app/profile.js',
+          'public/app/**/*.js'
         ],
-        dest: 'public2/build/script.js'
+        dest: 'public/build/script.js'
       }
     },
 
@@ -30,8 +30,8 @@ module.exports = function(grunt) {
       },
 
       html : {
-        src : 'public2/index.grunt.html',
-        dest : 'public2/index.html'
+        src : 'public/index.grunt.html',
+        dest : 'public/index.html'
       },
     },
 
@@ -40,9 +40,9 @@ module.exports = function(grunt) {
         collapseWhitespace: true
       },
 
-      build2: {
+      build: {
         files: {
-          'public2/index.html': 'public2/index.grunt.html'
+          'public/index.html': 'public/index.grunt.html'
         }
       }
     },
@@ -50,8 +50,8 @@ module.exports = function(grunt) {
     csso: {
       dist: {
         files: {
-          'public2/build/style.css': [
-            'public2/stylesheets/*.css'
+          'public/build/style.css': [
+            'public/stylesheets/*.css'
           ]
         }
       }
@@ -69,15 +69,19 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'public2/build/templates.js': ['public2/templates/**/*.tmpl']
+          'public/build/templates.js': ['public/templates/**/*.tmpl']
         }
       }
     },
 
     watch: {
       scripts: {
-        files: ['public2/app/**/*.js', 'public2/templates/**/*.tmpl', 'public2/stylesheets/**/*.css'],
-        tasks: ['build2'],
+        files: [
+          'public/app/**/*.js',
+          'public/templates/**/*.tmpl',
+          'public/stylesheets/**/*.css'
+        ],
+        tasks: ['default'],
         options: {
           spawn: false,
         },
@@ -86,8 +90,8 @@ module.exports = function(grunt) {
 
     imageEmbed: {
       dist: {
-        src: ['public2/build/style.css'],
-        dest: 'public2/build/style.css',
+        src: ['public/build/style.css'],
+        dest: 'public/build/style.css',
         options: {
           deleteAfterEncoding: false
         }
@@ -97,12 +101,17 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-preprocess');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-csso');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks("grunt-image-embed");
 
-  grunt.registerTask('default', ['jst', 'uglify:public2', 'csso', 'htmlmin:build2', 'imageEmbed']);
+  grunt.registerTask('default', [
+    'jst',
+    'uglify:public',
+    'csso',
+    'htmlmin:build',
+    'imageEmbed'
+  ]);
 };

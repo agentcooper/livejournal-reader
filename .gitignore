@@ -1,5 +1,5 @@
 config.js
-public2/build
-public2/bower_components
-public2/top.json
-public2/index.html
+public/build
+public/bower_components
+public/top.json
+public/index.html

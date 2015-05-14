@@ -76,7 +76,7 @@ exports.token = function(req, res) {
       domain: '.ljreader.com'
     });
 
-    return res.sendfile('public2/reciever.html');
+    return res.sendfile('public/reciever.html');
   });
 }
 
