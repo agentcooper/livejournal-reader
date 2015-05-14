@@ -1,11 +1,15 @@
-LiveJournal Reader
+#### LiveJournal Reader
+
+Lightweight reader for LiveJournal.
 
 ```bash
 git clone git@github.com:agentcooper/livejournal-reader.git
 cd livejournal-reader
 
 npm install
+cd public
 bower install
+cd ..
 grunt
 
 node app.js
