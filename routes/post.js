@@ -11,7 +11,6 @@ exports.get = function(req, res) {
   var key = req.query.user + '-' + req.query.post_id;
 
   if (cache.has(key)) {
-    console.log('cached post');
     return res.json(cache.get(key));
   }
 
@@ -24,6 +23,10 @@ exports.get = function(req, res) {
 
     get_video_ids: true
   }, function(err, rpc) {
+    if (err) {
+      console.error(err);
+    }
+
     var post = rpc.events[0];
 
     cache.set(key, post);

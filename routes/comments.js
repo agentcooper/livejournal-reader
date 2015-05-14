@@ -41,9 +41,9 @@ exports.add = function(req, res) {
   LiveJournal.RPC.addcomment(_.extend(req.body, {
     auth_method: 'oauth'
   }), function(err, result) {
-    console.log(err, result);
-
     if (err) {
+      console.error(err);
+
       return res.json({ error: err });
     }
 

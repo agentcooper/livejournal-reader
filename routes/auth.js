@@ -66,7 +66,7 @@ exports.token = function(req, res) {
     req.query.oauth_verifier.trim(),
   function(err, oauth_token, oauth_token_secret) {
     if (err) {
-      console.log(err);
+      console.error(err);
     }
 
     oauth_token = oauth_token.trim();
@@ -124,8 +124,6 @@ exports.login = function(req, res) {
     getpickwurls: 1,
     auth_method: 'oauth'
   }, function(err, profile) {
-    console.log(arguments);
-
     analytics.identify({ userId: profile.username });
     analytics.track({ userId: profile.username, event: 'Login' });
 

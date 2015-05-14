@@ -3,9 +3,7 @@ var LiveJournal = require('livejournal');
 var cache = null;
 
 exports.get = function(req, res) {
-
   if (cache) {
-    console.log('cached');
     res.json(cache);
   } else {
 
