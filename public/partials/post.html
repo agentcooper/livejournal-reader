@@ -1,9 +1,0 @@
-<article bindonce="post" class="b-post" bo-show="post.body">
-  <header class="b-post__header">
-    <h1 class="b-post__title" bo-text="post.subject"></h1>
-    <a bo-href="'/read/' + post.user" class="b-lj_user" bo-text="post.user"></a>
-  </header>
-  <p bo-html="post.body" class="b-post__body"></p>
-
-  <div lj-comments post-id="post.post_id" user="post.user"></div>
-</article>

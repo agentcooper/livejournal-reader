@@ -4,21 +4,6 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     uglify: {
-      my_target: {
-        src: [
-          'public/stuff.js',
-
-          'public/controller/**/*.js',
-          'public/directive/**/*.js',
-          'public/service/**/*.js',
-
-          'public/router.js',
-
-          'public/bower_components/ngInfiniteScroll/ng-infinite-scroll.js'
-        ],
-        dest: 'public/build/script.js'
-      },
-
       public2: {
         src: [
           'public2/bower_components/jquery/dist/jquery.js',
@@ -34,29 +19,6 @@ module.exports = function(grunt) {
           'public2/app/**/*.js'
         ],
         dest: 'public2/build/script.js'
-      }
-    },
-
-    concat: {
-      dist: {
-        options: {
-          separator: ';'
-        },
-        src: [
-          'public/bower_components/jquery/jquery.min.js',
-
-          'public/bower_components/angular/angular.min.js',
-          'public/bower_components/angular-route/angular-route.min.js',
-
-          'public/bower_components/angular-bindonce/bindonce.min.js',
-
-          'public/bower_components/momentjs/min/moment.min.js',
-
-          'public/bower_components/ngprogress/build/ngProgress.min.js',
-
-          'public/build/script.js'
-        ],
-        dest: 'public/build/script.js'
       }
     },
 
@@ -78,19 +40,6 @@ module.exports = function(grunt) {
         collapseWhitespace: true
       },
 
-      dist: {
-        expand: true,
-        flatten: true,
-        src: ['public/partials/**/*.html'],
-        dest: 'public/build/partials/'
-      },
-
-      finalc: {
-        files: {
-          'public/index.html': 'public/index.html'
-        }
-      },
-
       build2: {
         files: {
           'public2/index.html': 'public2/index.grunt.html'
@@ -101,10 +50,6 @@ module.exports = function(grunt) {
     csso: {
       dist: {
         files: {
-          'public/build/style.css': [
-            'public/stylesheets/*.css'
-          ],
-
           'public2/build/style.css': [
             'public2/stylesheets/*.css'
           ]
@@ -148,28 +93,6 @@ module.exports = function(grunt) {
         }
       }
     }
-
-    // concat2: {
-    //   dist: {
-    //     options: {
-    //       separator: ';'
-    //     },
-    //     src: [
-    //       'public2/bower_components/underscore/underscore.js',
-
-    //       'public2/bower_components/backbone/backbone.js',
-
-    //       'public2/bower_components/angular-bindonce/bindonce.min.js',
-
-    //       'public2/bower_components/momentjs/min/moment.min.js',
-
-    //       'public2/bower_components/ngprogress/build/ngProgress.min.js',
-
-    //       'public2/build/script.js'
-    //     ],
-    //     dest: 'public/build/script.js'
-    //   }
-    // }
   });
 
   grunt.loadNpmTasks('grunt-preprocess');
@@ -181,7 +104,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks("grunt-image-embed");
 
-  grunt.registerTask('build2', ['jst', 'uglify:public2', 'csso', 'htmlmin:build2', 'imageEmbed']);
-
-  grunt.registerTask('default', ['uglify', 'concat', 'htmlmin:dist', 'preprocess', 'csso', 'htmlmin:finalc']);
+  grunt.registerTask('default', ['jst', 'uglify:public2', 'csso', 'htmlmin:build2', 'imageEmbed']);
 };
