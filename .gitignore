@@ -5,3 +5,6 @@ public/build
 public/bower_components
 public/top.json
 public/index.html
+
+public/top_ru_RU.json
+public/top_en_EN.json
