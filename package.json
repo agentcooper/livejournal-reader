@@ -3,29 +3,34 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "build": "browserify public/js/index.js -t babelify --outfile public/build/app.js",
+    "watch": "watchify -t babelify --outfile public/build/app.js -v -d public/js/"
   },
   "dependencies": {
     "analytics-node": "^0.6.0",
     "async": "~0.2.10",
+    "babel": "^5.4.3",
+    "classnames": "^2.1.1",
     "express": "3.2.0",
     "grunt-contrib-jst": "~0.6.0",
     "grunt-image-embed": "~0.3.1",
     "livejournal": ">=0.0.5",
     "lru-cache": "~2.5.0",
+    "nprogress": "^0.2.0",
     "oauth": "~0.9.11",
     "optimist": "~0.6.1",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
     "request": "~2.33.0",
+    "superagent": "^1.2.0",
     "underscore": "~1.6.0",
+    "whatwg-fetch": "^0.8.1",
     "xmlrpc": "~1.2.0"
   },
   "devDependencies": {
-    "grunt-preprocess": "~2.3.0",
-    "grunt-contrib-uglify": "~0.2.2",
-    "grunt-contrib-htmlmin": "~0.1.3",
+    "babelify": "^6.1.1",
     "grunt-csso": "~0.5.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-image-embed": "~0.3.1",
-    "grunt-contrib-jst": "~0.6.0"
+    "grunt-image-embed": "~0.3.1"
   }
 }
