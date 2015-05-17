@@ -16,7 +16,7 @@ var Post = React.createClass({
 
   getInitialState: function() {
     return {
-      post: {}
+      post: null
     }
   },
 
@@ -34,25 +34,31 @@ var Post = React.createClass({
   render: function() {
     var post = this.state.post;
 
-    return (
-      <article className="b-post">
-        <header className="b-post__header">
-          <h1 className="b-post__title">{ post.subject }</h1>
-          <Link className="b-lj_user b-lj_user--big" to="journal" params={{ journal: post.journal || '' }}>{ post.journal }</Link>
-        </header>
-        <div className="b-post__body">
-          { post.body }
-        </div>
+    var output = null;
 
-        <div className="b-share-options">
-          <a href="#" className="b-share__network" data-network="twitter">Twitter</a>
+    if (post) {
+      output = (
+        <article className="b-post">
+          <header className="b-post__header">
+            <h1 className="b-post__title">{ post.subject }</h1>
+            <Link className="b-lj_user b-lj_user--big" to="journal" params={{ journal: post.journal || '' }}>{ post.journal }</Link>
+          </header>
+          <div className="b-post__body">
+            { post.body }
+          </div>
 
-          <a href="#" className="b-share__network" data-network="facebook">Facebook</a>
-        </div>
+          <div className="b-share-options">
+            <a href="#" className="b-share__network" data-network="twitter">Twitter</a>
 
-        <Comments post={post} />
-      </article>
-    );
+            <a href="#" className="b-share__network" data-network="facebook">Facebook</a>
+          </div>
+
+          <Comments post={post} />
+        </article>
+      )
+    }
+
+    return output;
   }
 });
 

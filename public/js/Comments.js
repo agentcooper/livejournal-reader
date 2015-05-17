@@ -16,8 +16,8 @@ var Comment = require('./Comment');
 var Comments = React.createClass({
   getInitialState: function() {
     return {
-      journal: 'tema',
-      postId: '1956675',
+      journal: this.props.post.journal,
+      postId: this.props.post.postId,
       page_size: 5,
       page: 1,
       hasMore: false,
