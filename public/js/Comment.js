@@ -5,15 +5,25 @@ var { Link } = Router;
 
 var classNames = require('classnames');
 
+var CommentBox = require('./CommentBox');
+
 var Comment = React.createClass({
+  getInitialState: function() {
+    return {}
+  },
+
   reply: function(event) {
     event.preventDefault();
-
-    console.log('fuck');
   },
 
   render: function() {
     var comment = this.props.comment;
+
+    var commentBox;
+
+    if (this.props.commentBox) {
+      commentBox = <CommentBox onSubmit={this.props.onSubmit}/>
+    }
 
     return (
       <li className={classNames(
@@ -35,10 +45,17 @@ var Comment = React.createClass({
             { comment.identity_display || comment.postername }
           </Link>
 
-          <a href="#" onClick={this.reply} className="b-reply b-pseudo">reply</a>
+          <a
+            href="javascript:void(0);"
+            onClick={this.props.onReply.bind(null, comment)}
+            className="b-reply b-pseudo">
+            reply
+            </a>
 
           <p className="b-thread__body">{ comment.body }</p>
         </div>
+
+        {commentBox}
       </li>
     );
   }

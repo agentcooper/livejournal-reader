@@ -13,9 +13,15 @@ var classNames = require('classnames');
 
 var Comment = require('./Comment');
 
+var CommentBox = require('./CommentBox');
+
 var Comments = React.createClass({
   getInitialState: function() {
     return {
+      replyingTo: '',
+
+      poster: 'vasya',
+
       journal: this.props.post.journal,
       postId: this.props.post.postId,
       page_size: 5,
@@ -44,7 +50,6 @@ var Comments = React.createClass({
         
         that.level[comment.dtalkid] = comment.level;
       }
-
 
       // comment.body = App.Text.clean(comment.body);
       comment.isAuthor = comment.postername === that.state.journal;
@@ -93,30 +98,80 @@ var Comments = React.createClass({
     });
   },
 
+  reply: function(comment) {
+    this.setState({ replyingTo: comment.dtalkid });
+  },
+
+  submit: function(body) {
+    console.log(this.state.replyingTo, body);
+
+    var replyingTo = this.state.replyingTo;
+
+    var comments = [{
+      body: body,
+      postername: this.state.poster,
+      dtalkid: Math.floor(Math.random() * 100000),
+      journal: this.state.journal,
+      ditemid: this.state.postId,
+      userpic: ''
+    }];
+
+    if (replyingTo) {
+      comments[0].parentdtalkid = replyingTo;
+    }
+
+    this.process(comments);
+
+    var index = this.state.comments.findIndex((comment) => {
+      return String(comment.dtalkid) === String(this.state.replyingTo);
+    });
+
+    this.state.comments.splice(index + 1, 0, comments[0]);
+
+    this.setState({ comments: this.state.comments, replyingTo: '' });
+  },
+
+  newComment: function() {
+    this.setState({ replyingTo: 'new' });
+  },
+
   render: function():React {
+    const commentBox = this.state.replyingTo === 'new' ?
+      <CommentBox onSubmit={this.submit}/> :
+      null;
+
     return (
       <div className={classNames(
         'b-comments',
-        'b-commentbox-hidden',
         {
+          'b-commentbox-hidden': this.state.replyingTo === '',
           'b-comments-more': this.state.hasMore,
           'b-comments-loading': this.state.loading
         }
       )}>
 
         <p>
-          <a href="javascript:void(0);" className="b-replybutton">Leave a comment</a>
+          <a href="javascript:void(0);" className="b-replybutton" onClick={this.newComment}>Leave a comment</a>
           {" "}
           or
           {" "}
           <a href="#" className="b-share">share this post</a>
         </p>
 
+        <div>
+          {commentBox}
+        </div>
+
         <ul className="b-thread">
         {
           this.state.comments.map((comment) => {
             return (
-              <Comment comment={comment} key={comment.dtalkid}/>
+              <Comment
+                key={comment.dtalkid}
+                comment={comment}
+                commentBox={comment.dtalkid === this.state.replyingTo}
+                onReply={this.reply}
+                onSubmit={this.submit} />
             );
           })
         }
