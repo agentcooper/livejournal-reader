@@ -24,7 +24,7 @@ var JournalEntry = React.createClass({
           </Link>
         </span>
 
-        <div className="b-entry__body" dangerouslySetInnerHTML={{__html: post.body}}></div>
+        <div className="b-entry__body" dangerouslySetInnerHTML={{__html: entry.body}}></div>
 
         <p className="b-entry__tags">{ entry.props.tags }</p>
 
