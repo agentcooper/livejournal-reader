@@ -145,7 +145,7 @@ var Comments = React.createClass({
       userpic: ''
     }];
 
-    if (replyingTo) {
+    if (replyingTo !== 'new') {
       comments[0].parentdtalkid = replyingTo;
     }
 
