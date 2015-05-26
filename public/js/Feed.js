@@ -27,7 +27,7 @@ var FeedEntry = React.createClass({
           <p className="b-post__time">{ entry.logtime }</p>
         </div>
 
-        <div className="b-entry__body" dangerouslySetInnerHTML={{__html: post.body}}></div>
+        <div className="b-entry__body" dangerouslySetInnerHTML={{__html: entry.body}}></div>
 
         <Link to="post" className="b-boop__comments" params={
           { journal: entry.journal, postId: entry.postId }
