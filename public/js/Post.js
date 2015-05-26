@@ -45,8 +45,7 @@ var Post = React.createClass({
               { journal: post.journal || '' }
             }>{ post.journal }</Link>
           </header>
-          <div className="b-post__body">
-            { post.body }
+          <div className="b-post__body" dangerouslySetInnerHTML={{__html: post.body}}>
           </div>
 
           <Comments post={post} />

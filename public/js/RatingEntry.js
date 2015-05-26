@@ -14,7 +14,7 @@ var RatingEntry = React.createClass({
         }>
           <span className="b-social-header">{ post.title }</span>
           
-          <div className="b-social-body">{ post.body }</div>
+          <div className="b-social-body" dangerouslySetInnerHTML={{__html: post.body}}></div>
 
           <span className="b-social-details">
             <span className="user">{ post.journal }</span>

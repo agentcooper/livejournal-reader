@@ -4,6 +4,8 @@ var request = require('superagent');
 
 var NProgress = require('nprogress');
 
+var textUtils = require('./textUtils');
+
 module.exports = {
 
   post: {},
@@ -20,7 +22,7 @@ module.exports = {
       return;
     }
 
-    data.body    = data.event || data.body;
+    data.body    = textUtils.prettify(data.event || data.body);
 
     data.subject = data.subject_raw || data.subject;
 
