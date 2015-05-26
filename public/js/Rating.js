@@ -7,47 +7,9 @@ var request = require('superagent');
 
 var LJ = require('./LJ');
 
-var TopEntry = React.createClass({
-  render: function() {
-    var post = this.props.post;
+var RatingEntry = require('./RatingEntry');
 
-    return (
-      <li className="b-social-item">
-        <Link className="b-social-link" to="post" params={
-          { journal: post.journal, postId: post.postId }
-        }>
-          <span className="b-social-header">{ post.title }</span>
-          
-          <div className="b-social-body">{ post.body }</div>
-
-          <span className="b-social-details">
-            <span className="user">{ post.journal }</span>
-          </span>
-
-          <div className="b-social-stats">
-            <span className="b-entry__twitter">
-              <span className="b-entry__tweets">{post.tw_count}</span>
-            </span>
-
-            <span className="b-entry__fb">
-              <span>{ post.fb_count }</span>
-            </span>
-
-            <span className="b-entry__livejournal">
-              <span>{post.reply_count}</span>
-            </span>
-
-            <span className="b-entry__vk">
-              <span>{ post.vk_count }</span>
-            </span>
-          </div>
-        </Link>
-      </li>
-    );
-  }
-});
-
-var Top = React.createClass({
+var Rating = React.createClass({
   componentDidMount: function() {
     LJ.getRating().then((rating) => {
       this.setState({ rating: rating });
@@ -86,7 +48,7 @@ var Top = React.createClass({
 
   render: function () {
     var entries = this.state.rating && this.state.rating.top.map(function(post) {      
-      return <TopEntry post={post}/>
+      return <RatingEntry post={post} key={post.postId}/>
     });
 
     var rating = (
@@ -118,4 +80,4 @@ var Top = React.createClass({
   }
 });
 
-module.exports = Top;
+module.exports = Rating;
