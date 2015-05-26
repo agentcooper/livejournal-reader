@@ -7,6 +7,38 @@ var { Route, DefaultRoute, RouteHandler, Link } = Router;
 
 var LJ = require('./LJ');
 
+var FeedEntry = React.createClass({
+  render: function() {
+    var entry = this.props.entry;
+
+    return (
+      <li className="b-entry">
+        <span className="b-boop__header">
+          <Link to="post" params={
+            { journal: entry.journal, postId: entry.postId }
+          }>
+            { entry.subject || '(No suject)' }
+          </Link>
+        </span>
+
+        <div className="b-post_aside">
+          <img className="b-post__userpic" src={ entry.poster_userpic_url } />
+          <p className="b-post__username">{ entry.journal }</p>
+          <p className="b-post__time">{ entry.logtime }</p>
+        </div>
+
+        <div className="b-entry__body">{ entry.body }</div>
+
+        <Link to="post" className="b-boop__comments" params={
+          { journal: entry.journal, postId: entry.postId }
+        }>
+          { entry.reply_count }
+        </Link>
+      </li>
+    );
+  }
+});
+
 var Feed = React.createClass({
   getInitialState: function() {
     return {
@@ -39,40 +71,16 @@ var Feed = React.createClass({
   },
 
   render: function() {
-    var entries = this.state.posts.map((entry) => {
-      return (
-        <li className="b-entry">
-          <span className="b-boop__header">
-            <Link to="post" params={
-              { journal: entry.journal, postId: entry.postId }
-            }>
-              { entry.subject || '(No suject)' }
-            </Link>
-          </span>
-
-          <div className="b-post_aside">
-            <img className="b-post__userpic" src={ entry.poster_userpic_url } />
-            <p className="b-post__username">{ entry.journal }</p>
-            <p className="b-post__time">{ entry.logtime }</p>
-          </div>
-
-          <div className="b-entry__body">{ entry.body }</div>
-
-          <Link to="post" className="b-boop__comments" params={
-            { journal: entry.journal, postId: entry.postId }
-          }>
-            { entry.reply_count }
-          </Link>
-        </li>
-      );
-    });
-
     return (
       <ol className="b-feed">
         <h1 className="b-header">Френдлента</h1>
 
         <div className="b-feed_entries">
-          {entries}
+          {
+            this.state.posts.map((entry) => {
+              return <FeedEntry entry={entry} key={entry.postId} />
+            })
+          }
         </div>
 
         <button className="b-feed__loadMore" onClick={this.more}>More</button>
