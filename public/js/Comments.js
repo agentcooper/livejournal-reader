@@ -71,7 +71,7 @@ var Comments = React.createClass({
 
     this.setState({ loading: true });
 
-    request.get('/api/comments/').query({
+    this.request = request.get('/api/comments/').query({
       user:      this.state.journal,
       post_id:   this.state.postId,
       page_size: this.state.page_size,
@@ -88,6 +88,12 @@ var Comments = React.createClass({
         hasMore: that.state.page < res.body.pages
       });
     });
+  },
+
+  componentWillUnmount: function() {
+    if (this.request) {
+      this.request.abort();
+    }
   },
 
   componentDidMount: function() {
