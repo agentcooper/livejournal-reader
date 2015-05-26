@@ -41,16 +41,12 @@ var Post = React.createClass({
         <article className="b-post">
           <header className="b-post__header">
             <h1 className="b-post__title">{ post.subject }</h1>
-            <Link className="b-lj_user b-lj_user--big" to="journal" params={{ journal: post.journal || '' }}>{ post.journal }</Link>
+            <Link className="b-lj_user b-lj_user--big" to="journal" params={
+              { journal: post.journal || '' }
+            }>{ post.journal }</Link>
           </header>
           <div className="b-post__body">
             { post.body }
-          </div>
-
-          <div className="b-share-options">
-            <a href="#" className="b-share__network" data-network="twitter">Twitter</a>
-
-            <a href="#" className="b-share__network" data-network="facebook">Facebook</a>
           </div>
 
           <Comments post={post} />

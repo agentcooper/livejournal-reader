@@ -21,6 +21,7 @@
     "oauth": "~0.9.11",
     "optimist": "~0.6.1",
     "react": "^0.13.3",
+    "react-bootstrap": "^0.23.0",
     "react-router": "^0.13.3",
     "request": "~2.33.0",
     "superagent": "^1.2.0",

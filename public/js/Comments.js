@@ -15,6 +15,8 @@ var Comment = require('./Comment');
 
 var CommentBox = require('./CommentBox');
 
+var Share = require('./Share');
+
 var Comments = React.createClass({
   getInitialState: function() {
     return {
@@ -155,7 +157,7 @@ var Comments = React.createClass({
           {" "}
           or
           {" "}
-          <a href="#" className="b-share">share this post</a>
+          <Share journal={this.state.journal} postId={this.state.postId} />
         </p>
 
         <div>
