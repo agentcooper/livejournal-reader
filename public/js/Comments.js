@@ -17,6 +17,27 @@ var CommentBox = require('./CommentBox');
 
 var Share = require('./Share');
 
+var CommentsLoader = React.createClass({
+  render: function() {
+    return (
+      <div className="b-comments--loading">
+        Loading comments
+        <div className="spinner">
+          <div className="rect1"></div>
+          &nbsp;
+          <div className="rect2"></div>
+          &nbsp;
+          <div className="rect3"></div>
+          &nbsp;
+          <div className="rect4"></div>
+          &nbsp;
+          <div className="rect5"></div>
+        </div>
+      </div>
+    );
+  }
+});
+
 var Comments = React.createClass({
   getInitialState: function() {
     return {
@@ -159,7 +180,8 @@ var Comments = React.createClass({
       )}>
 
         <p>
-          <a href="javascript:void(0);" className="b-replybutton" onClick={this.newComment}>Leave a comment</a>
+          <a href="javascript:void(0);" className="b-replybutton"
+            onClick={this.newComment}>Leave a comment</a>
           {" "}
           or
           {" "}
@@ -187,20 +209,7 @@ var Comments = React.createClass({
 
         <span className="b-comments__more" onClick={this.more}>Load more</span>
 
-        <div className="b-comments--loading">
-          Loading comments
-          <div className="spinner">
-            <div className="rect1"></div>
-            &nbsp;
-            <div className="rect2"></div>
-            &nbsp;
-            <div className="rect3"></div>
-            &nbsp;
-            <div className="rect4"></div>
-            &nbsp;
-            <div className="rect5"></div>
-          </div>
-        </div>
+        <CommentsLoader />
       </div>
     );
   }
