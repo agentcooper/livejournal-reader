@@ -2,6 +2,8 @@ var React = require('react');
 
 var request = require('superagent');
 
+var LJ = require('./LJ');
+
 var Profile = React.createClass({
   getInitialState: function() {
     return {
@@ -12,7 +14,7 @@ var Profile = React.createClass({
   componentWillMount: function() {
     var that = this;
 
-    if (this.getCookie('auth')) {
+    if (LJ.getCookie('auth')) {
       this.getData();
     }
 
@@ -37,12 +39,6 @@ var Profile = React.createClass({
 
       that.setState({ profile: profile });
     });
-  },
-
-  getCookie: function(name) {
-    var value = "; " + document.cookie;
-    var parts = value.split("; " + name + "=");
-    if (parts.length == 2) return parts.pop().split(";").shift();
   },
 
   isLoggedIn: function() {

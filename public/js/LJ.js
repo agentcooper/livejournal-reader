@@ -110,13 +110,19 @@ module.exports = {
     });
   },
 
+  getCookie: function(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+  },
+
   getFeed: function(options):Promise {
     return new Promise((resolve, reject) => {
       NProgress.start();
 
       Object.assign(options, {
-        username: 'agentcooper',
-        password: 'peakstwin-L11',
+        username: this.getCookie('username'),
+        password: this.getCookie('password'),
       });
 
       request.get('/api/feed').query(options).end((err, res) => {
