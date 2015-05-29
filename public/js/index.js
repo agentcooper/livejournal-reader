@@ -11,6 +11,8 @@ var Post    = require('./Post');
 var Journal = require('./Journal');
 var Feed    = require('./Feed');
 
+var Profile = require('./Profile');
+
 var App = React.createClass({
   getInitialState: function () {
     return {};
@@ -36,7 +38,9 @@ var App = React.createClass({
               <Link to="journal" params={{ journal: 'ljreader-app' }}>About</Link>
             </li>
 
-            <li className="b-menu__item b-menu-profile"></li>
+            <li className="b-menu__item b-menu-profile">
+              <Profile />
+            </li>
           </ul>
 
         </div>
