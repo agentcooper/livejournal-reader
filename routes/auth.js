@@ -8,12 +8,18 @@ analytics.init({
 
 var OAuth = require('oauth');
 
-var xmlrpc = require('xmlrpc');
-
 var LiveJournal = require('livejournal');
 
+if (process.env.PRODUCTION) {
+  var COOKIE_DOMAIN = '.ljreader.com';
+  var DOMAIN_FULL = 'http://ljreader.com';
+} else {
+  var COOKIE_DOMAIN = 'localhost';
+  var DOMAIN_FULL = 'http://localhost:4000';
+}
+
 var oauth = new OAuth.OAuth(
-  'https://www.livejournal.com/oauth/request_token.bml?oauth_callback=http://ljreader.com/auth',
+  'https://www.livejournal.com/oauth/request_token.bml?oauth_callback=' + DOMAIN_FULL + '/auth',
   'https://www.livejournal.com/oauth/access_token.bml',
   'ad3cbab5f7748de3',
   '8c11db9d8629f41c3cdf9744d1bb',
@@ -72,9 +78,11 @@ exports.token = function(req, res) {
     oauth_token = oauth_token.trim();
     oauth_token_secret = oauth_token_secret.trim();
 
-    res.cookie('auth', buildCookie(oauth_token, oauth_token_secret), {
-      domain: '.ljreader.com'
+    var authCookie = buildCookie(oauth_token, oauth_token_secret, {
+      domain: COOKIE_DOMAIN
     });
+
+    res.cookie('auth', authCookie);
 
     return res.sendfile('public/reciever.html');
   });
@@ -124,9 +132,16 @@ exports.login = function(req, res) {
     getpickwurls: 1,
     auth_method: 'oauth'
   }, function(err, profile) {
-    analytics.identify({ userId: profile.username });
-    analytics.track({ userId: profile.username, event: 'Login' });
+    if (err) {
+      console.error(err);
+    }
 
-    res.json(profile);
+    if (profile) {
+      analytics.identify({ userId: profile.username });
+      analytics.track({ userId: profile.username, event: 'Login' });
+      return res.json(profile);
+    }
+
+    return res.json({ message: err });
   });
 }
