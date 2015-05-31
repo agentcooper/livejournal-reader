@@ -28,7 +28,8 @@
     "superagent": "^1.2.0",
     "underscore": "~1.6.0",
     "whatwg-fetch": "^0.8.1",
-    "xmlrpc": "~1.2.0"
+    "xmlrpc": "~1.2.0",
+    "jquery": "^2.1.4"
   },
   "devDependencies": {
     "babelify": "^6.1.1",
