@@ -1,5 +1,8 @@
 var React = require('react');
 
+var Router = require('react-router');
+var { Link } = Router;
+
 var request = require('superagent');
 
 var LJ = require('./LJ');
@@ -30,8 +33,8 @@ var Profile = React.createClass({
   getData: function() {
     var that = this;
 
-    request.get('/api/login').end((err, profile) => {
-      console.log(arguments);
+    request.get('/api/login').end((err, res) => {
+      var profile = res.body;
 
       if (!profile.username) {
         return console.error('Bad login', profile);
@@ -46,29 +49,25 @@ var Profile = React.createClass({
   },
 
   login: function() {
-    // if (params && params.done) {
-    //   if (App.profile.isLoggedIn()) {
-    //     return params.done();
-    //   }
-
-    //   App.profile.set('doneCallback', params.done);
-    // }
-
     window.open('/auth/run', '/auth/run', 'width=670,height=575');
   },
 
   render: function() {
+    var profile = this.state.profile;
+
     if (this.state.profile) {
       return (
         <div className="b-profile">
-          <a href="bla" className="b-profile-link">
+          <Link className="b-profile-link" to="journal" params={
+            { journal: profile.username || '' }
+          }>
             <span className="b-profile-userpic">
                 <img src={profile.defaultpicurl} />
             </span>
             <span className="b-profile-username">
                 { profile.username }
             </span>
-          </a>
+          </Link>
         </div>
       );
     }

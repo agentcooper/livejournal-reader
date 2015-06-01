@@ -132,6 +132,16 @@ exports.login = function(req, res) {
     getpickwurls: 1,
     auth_method: 'oauth'
   }, function(err, profile) {
+
+    if (process.env.LOCAL) {
+      console.warn('Doing fake login');
+
+      return res.json({
+        username: 'ljreader-app',
+        defaultpicurl: 'http://l-userpic.livejournal.com/124065093/71916408'
+      });
+    }
+
     if (err) {
       console.error(err);
     }
