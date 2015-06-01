@@ -267,3 +267,7 @@
   pointer-events: none;
   cursor: default;
 }
+
+.b-comment--deleted {
+  opacity: 0.7;
+}
