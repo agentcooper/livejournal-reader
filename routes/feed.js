@@ -8,8 +8,8 @@ exports.get = function(req, res) {
   } else {
 
     LiveJournal.RPC.getfriendspage({
-      username: req.query.username,
-      password: req.query.password,
+      username: 'ljreader-app',
+      password: 'Burn1ng-d0wn-th3-h0us3',
       get_video_ids: true,
 
       itemshow: req.query.itemshow || 10,
