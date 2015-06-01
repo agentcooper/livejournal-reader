@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js",
+    "start": "LOCAL=true node app.js",
     "build": "browserify public/js/index.js -t babelify --outfile public/build/app.js; grunt",
     "watch": "watchify -t babelify --outfile public/build/app.js -v -d public/js/",
     "production": "browserify public/js/index.js -t babelify | uglifyjs -c unused,dead_code,warnings > public/build/app.js; grunt"

@@ -8,6 +8,5 @@ cd livejournal-reader
 
 npm install
 npm run build
-
-LOCAL=true node app.js
+npm start
 ```
