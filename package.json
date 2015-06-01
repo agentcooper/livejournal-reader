@@ -14,14 +14,13 @@
     "babel": "^5.4.3",
     "classnames": "^2.1.1",
     "express": "3.2.0",
-    "grunt-contrib-jst": "~0.6.0",
+    "grunt-csso": "~0.5.0",
     "grunt-image-embed": "~0.3.1",
     "jquery": "^2.1.4",
     "livejournal": "0.0.6",
     "lru-cache": "~2.5.0",
     "nprogress": "^0.2.0",
     "oauth": "~0.9.11",
-    "optimist": "~0.6.1",
     "react": "^0.13.3",
     "react-bootstrap": "^0.23.0",
     "react-document-title": "^1.0.2",
@@ -29,13 +28,11 @@
     "request": "~2.33.0",
     "superagent": "^1.2.0",
     "underscore": "~1.6.0",
-    "whatwg-fetch": "^0.8.1",
     "xmlrpc": "~1.2.0"
   },
   "devDependencies": {
+    "optimist": "~0.6.1",
     "babelify": "^6.1.1",
-    "grunt-csso": "~0.5.0",
-    "grunt-image-embed": "~0.3.1",
     "watchify": "^3.2.1"
   }
 }
