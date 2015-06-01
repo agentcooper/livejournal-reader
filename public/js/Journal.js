@@ -7,6 +7,8 @@ var { Route, DefaultRoute, RouteHandler, Link } = Router;
 
 var DocumentTitle = require('react-document-title');
 
+var CommentsLink = require('./CommentsLink');
+
 var LJ = require('./LJ');
 
 var JournalEntry = React.createClass({
@@ -30,7 +32,12 @@ var JournalEntry = React.createClass({
 
         <p className="b-entry__tags">{ entry.props.tags }</p>
 
-        <span className="b-boop__comments">{ entry.reply_count }</span>
+        <span className="b-boop__comments">
+          <CommentsLink
+            count={Number(entry.reply_count)}
+            journal={entry.journal}
+            postId={entry.postId} />
+        </span>
       </li>
     );
   }

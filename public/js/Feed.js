@@ -7,6 +7,8 @@ var { Route, DefaultRoute, RouteHandler, Link } = Router;
 
 var DocumentTitle = require('react-document-title');
 
+var CommentsLink = require('./CommentsLink');
+
 var LJ = require('./LJ');
 
 var FeedEntry = React.createClass({
@@ -31,11 +33,10 @@ var FeedEntry = React.createClass({
 
         <div className="b-entry__body" dangerouslySetInnerHTML={{__html: entry.body}}></div>
 
-        <Link to="post" className="b-boop__comments" params={
-          { journal: entry.journal, postId: entry.postId }
-        }>
-          { entry.reply_count }
-        </Link>
+        <CommentsLink
+            count={Number(entry.reply_count)}
+            journal={entry.journal}
+            postId={entry.postId} />
       </li>
     );
   }
