@@ -5,6 +5,8 @@ var React = require('react');
 var Router = require('react-router');
 var { Route, DefaultRoute, RouteHandler, Link } = Router;
 
+var DocumentTitle = require('react-document-title');
+
 var LJ = require('./LJ');
 
 var FeedEntry = React.createClass({
@@ -72,19 +74,21 @@ var Feed = React.createClass({
 
   render: function() {
     return (
-      <ol className="b-feed">
-        <h1 className="b-header">Френдлента</h1>
+      <DocumentTitle title="Feed">
+        <ol className="b-feed">
+          <h1 className="b-header">Френдлента</h1>
 
-        <div className="b-feed_entries">
-          {
-            this.state.posts.map((entry) => {
-              return <FeedEntry entry={entry} key={entry.postId} />
-            })
-          }
-        </div>
+          <div className="b-feed_entries">
+            {
+              this.state.posts.map((entry) => {
+                return <FeedEntry entry={entry} key={entry.postId} />
+              })
+            }
+          </div>
 
-        <button className="b-feed__loadMore" onClick={this.more}>More</button>
-      </ol>
+          <button className="b-feed__loadMore" onClick={this.more}>More</button>
+        </ol>
+      </DocumentTitle>
     );
   }
 });

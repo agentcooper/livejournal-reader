@@ -5,6 +5,8 @@ var React = require('react');
 var Router = require('react-router');
 var { Route, DefaultRoute, RouteHandler, Link } = Router;
 
+var DocumentTitle = require('react-document-title');
+
 var LJ = require('./LJ');
 
 var JournalEntry = React.createClass({
@@ -56,14 +58,18 @@ var Journal = React.createClass({
   },
 
   render: function ():React {
+    var params = this.context.router.getCurrentParams();
+
     return (
-      <ol className="b-feed">
-        {
-          this.state.journal.events && this.state.journal.events.map((entry) => {
-            return <JournalEntry entry={entry} key={entry.postId} />
-          })
-        }
-      </ol>
+      <DocumentTitle title={params.journal}>
+        <ol className="b-feed">
+          {
+            this.state.journal.events && this.state.journal.events.map((entry) => {
+              return <JournalEntry entry={entry} key={entry.postId} />
+            })
+          }
+        </ol>
+      </DocumentTitle>
     );
   }
 });

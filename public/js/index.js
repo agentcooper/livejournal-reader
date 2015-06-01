@@ -6,6 +6,8 @@ var React = require('react');
 var Router = require('react-router');
 var { Route, DefaultRoute, RouteHandler, Link } = Router;
 
+var DocumentTitle = require('react-document-title');
+
 var Rating  = require('./Rating');
 var Post    = require('./Post');
 var Journal = require('./Journal');
@@ -20,31 +22,33 @@ var App = React.createClass({
 
   render: function () {
     return (
-      <div>
-        <div className="b-main">
-          <RouteHandler/>
+      <DocumentTitle title="Reader">
+        <div>
+          <div className="b-main">
+            <RouteHandler/>
+          </div>
+
+          <div className="b-sidebar" id="sidebar">
+
+            <ul className="b-menu">
+              <li className="b-menu__item">
+                <Link to="/">Top</Link>
+              </li>
+              <li className="b-menu__item">
+                <Link to="feed">Feed</Link>
+              </li>
+              <li className="b-menu__item">
+                <Link to="journal" params={{ journal: 'ljreader-app' }}>About</Link>
+              </li>
+
+              <li className="b-menu__item b-menu-profile">
+                <Profile />
+              </li>
+            </ul>
+
+          </div>
         </div>
-
-        <div className="b-sidebar" id="sidebar">
-
-          <ul className="b-menu">
-            <li className="b-menu__item">
-              <Link to="/">Top</Link>
-            </li>
-            <li className="b-menu__item">
-              <Link to="feed">Feed</Link>
-            </li>
-            <li className="b-menu__item">
-              <Link to="journal" params={{ journal: 'ljreader-app' }}>About</Link>
-            </li>
-
-            <li className="b-menu__item b-menu-profile">
-              <Profile />
-            </li>
-          </ul>
-
-        </div>
-      </div>
+      </DocumentTitle>
     );
   }
 });

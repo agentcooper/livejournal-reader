@@ -5,6 +5,8 @@ var React = require('react');
 var Router = require('react-router');
 var { Route, DefaultRoute, RouteHandler, Link } = Router;
 
+var DocumentTitle = require('react-document-title');
+
 var LJ = require('./LJ');
 
 var Comments = require('./Comments');
@@ -27,7 +29,7 @@ var Post = React.createClass({
       journal: params.journal,
       postId: params.postId
     }, (err, post) => {
-      this.setState({ post: post })
+      this.setState({ post: post });
     });
   },
 
@@ -38,18 +40,20 @@ var Post = React.createClass({
 
     if (post) {
       output = (
-        <article className="b-post">
-          <header className="b-post__header">
-            <h1 className="b-post__title">{ post.subject }</h1>
-            <Link className="b-lj_user b-lj_user--big" to="journal" params={
-              { journal: post.journal || '' }
-            }>{ post.journal }</Link>
-          </header>
-          <div className="b-post__body" dangerouslySetInnerHTML={{__html: post.body}}>
-          </div>
+        <DocumentTitle title={post.subject}>
+          <article className="b-post">
+            <header className="b-post__header">
+              <h1 className="b-post__title">{ post.subject }</h1>
+              <Link className="b-lj_user b-lj_user--big" to="journal" params={
+                { journal: post.journal || '' }
+              }>{ post.journal }</Link>
+            </header>
+            <div className="b-post__body" dangerouslySetInnerHTML={{__html: post.body}}>
+            </div>
 
-          <Comments post={post} />
-        </article>
+            <Comments post={post} />
+          </article>
+        </DocumentTitle>
       )
     }
 
