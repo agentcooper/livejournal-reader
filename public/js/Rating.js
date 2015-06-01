@@ -47,8 +47,8 @@ var Rating = React.createClass({
   },
 
   render: function () {
-    var entries = this.state.rating && this.state.rating.top.map(function(post) {      
-      return <RatingEntry post={post} key={post.postId}/>
+    var entries = this.state.rating && this.state.rating.top.map(function(post, idx) {
+      return <RatingEntry post={post} key={post.postId} position={idx + 1}/>
     });
 
     var rating = (

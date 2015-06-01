@@ -15,6 +15,10 @@
   clear: both;
 }
 
+.b-social-position {
+  color: #222;
+}
+
 .b-social-image {
   max-width: 100%;
 }
@@ -39,7 +43,7 @@
 
 .b-social {
   padding: 0;
-  list-style-position: inside;
+  list-style-type: none;
 }
 
 .b-social-header {

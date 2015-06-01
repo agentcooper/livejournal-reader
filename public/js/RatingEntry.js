@@ -12,6 +12,8 @@ var RatingEntry = React.createClass({
         <Link className="b-social-link" to="post" params={
           { journal: post.journal, postId: post.postId }
         }>
+          <span className="b-social-position">{this.props.position}. </span>
+
           <span className="b-social-header">{ post.title }</span>
           
           <div className="b-social-body" dangerouslySetInnerHTML={{__html: post.body}}></div>
