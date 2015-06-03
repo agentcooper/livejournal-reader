@@ -12,6 +12,7 @@ var Rating  = require('./Rating');
 var Post    = require('./Post');
 var Journal = require('./Journal');
 var Feed    = require('./Feed');
+var Update  = require('./Update');
 
 var Profile = require('./Profile');
 
@@ -38,6 +39,9 @@ var App = React.createClass({
                 <Link to="feed">Feed</Link>
               </li>
               <li className="b-menu__item">
+                <Link to="update">New post</Link>
+              </li>
+              <li className="b-menu__item">
                 <Link to="journal" params={{ journal: 'ljreader-app' }}>About</Link>
               </li>
 
@@ -59,6 +63,7 @@ var routes = (
     <Route name="post" path="/read/:journal/:postId" handler={Post}/>
     <Route name="journal" path="/read/:journal" handler={Journal}/>
     <Route name="feed" path="/feed" handler={Feed}/>
+    <Route name="update" path="/update/:postId?" handler={Update}/>
   </Route>
 );
 

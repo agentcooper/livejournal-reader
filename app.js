@@ -6,6 +6,7 @@ var express = require('express'),
     post     = require('./routes/post'),
     feed     = require('./routes/feed'),
     journal  = require('./routes/journal'),
+    update   = require('./routes/update'),
 
     auth     = require('./routes/auth');
 
@@ -23,6 +24,10 @@ app.use(app.router);
 app.use(function(req, res, next) {
 
   if (/^\/read\//.test(req.url)) {
+    req.url = '/';
+  }
+
+  if (/^\/update\//.test(req.url)) {
     req.url = '/';
   }
 
@@ -68,6 +73,9 @@ app.get( '/auth/feed',  auth.feed  );
 app.get( '/api/login', auth.login );
 
 app.post( '/api/comments/add', comments.add );
+
+app.post('/api/newPost', update.newPost);
+app.post('/api/editPost', update.editPost);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('App is running on port ' + app.get('port'));

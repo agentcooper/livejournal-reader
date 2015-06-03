@@ -1,0 +1,33 @@
+.editor {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.editor__entry:hover {
+    background-color: #EEE;
+}
+
+.editor__button {
+    font-size: 18px;
+    margin: 0px 10px 0px 0px;
+}
+
+.editor__entry {
+    display: block;
+    padding: 5px;
+}
+
+.editor__textarea {
+    width: 100%;
+
+    padding: 10px;
+
+    font-size: 16px;
+    line-height: 1.4em;
+
+    outline: none;
+
+    border: 1px solid #EEE;
+}

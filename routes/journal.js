@@ -11,7 +11,10 @@ exports.get = function(req, res) {
 
     LiveJournal.RPC.getevents({
       journal: req.query.user,
-      auth_method: 'noauth',
+      
+      username: 'ljreader-app',
+      password: 'Burn1ng-d0wn-th3-h0us3',
+
       selecttype: 'lastn',
       howmany: 20,
       parseljtags: 1,
@@ -26,9 +29,9 @@ exports.get = function(req, res) {
         entry.body = entry.event;
       });
 
-      cache[user] = journal;
+      // cache[user] = journal;
 
-      res.json(cache[user]);
+      res.json(journal);
     });
 
   }

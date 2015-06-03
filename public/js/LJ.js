@@ -137,5 +137,21 @@ module.exports = {
         resolve(feed);
       });
     });
+  },
+
+  newPost: function(options):Promise {
+    return new Promise((resolve, reject) => {
+      NProgress.start();
+
+      var url = options.itemid ? '/api/editPost' : '/api/newPost';
+
+      request.post(url).send(options).end((err, res) => {
+        var post = res.body;
+
+        NProgress.done();
+
+        resolve(post);
+      });
+    });
   }
 };
