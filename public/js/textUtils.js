@@ -127,7 +127,7 @@ module.exports = (function() {
       text = '<p>' + text + '</p>';
     }
 
-    return process( p(text) );
+    return process( factory.hightlightUrls(p(text)) );
   }
 
   factory.hightlightUrls = function(text) {
