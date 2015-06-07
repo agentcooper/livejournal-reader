@@ -133,10 +133,19 @@ module.exports = (function() {
   factory.hightlightUrls = function(text) {
     return Autolinker.link(text, {
       replaceFn : function( autolinker, match ) {
+        var tag = autolinker.getTagBuilder().build( match );  // returns an `Autolinker.HtmlTag` instance, which provides mutator methods for easy changes
 
         if (match.getType() === 'url') {
-          var tag = autolinker.getTagBuilder().build( match );  // returns an `Autolinker.HtmlTag` instance, which provides mutator methods for easy changes
           tag.setInnerHtml(decodeURIComponent(match.getAnchorText()));
+
+          return tag;
+        }
+
+        if (match.getType() === 'twitter') {
+          var name = match.getAnchorText().substr(1);
+
+          tag.setAttr('href', '/read/' + name);
+          tag.setAttr('target', "");
 
           return tag;
         }
@@ -145,7 +154,6 @@ module.exports = (function() {
       },
 
       phone: false,
-      twitter: false,
       hashtag: false
     });
   }
