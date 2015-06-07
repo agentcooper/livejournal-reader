@@ -17,6 +17,8 @@ var CommentBox = require('./CommentBox');
 
 var Share = require('./Share');
 
+var textUtils = require('./textUtils');
+
 var CommentsLoader = React.createClass({
   render: function() {
     return (
@@ -83,6 +85,7 @@ var Comments = React.createClass({
         comment.postername = 'Anonymous';
       }
 
+      comment.body = textUtils.hightlightUrls(comment.body);
       comment.userpic = comment.userpic || LJ.USERPIC.DEFAULT;
     });
   },

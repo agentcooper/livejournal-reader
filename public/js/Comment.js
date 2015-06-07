@@ -69,7 +69,7 @@ var Comment = React.createClass({
               : null
           }
 
-          <p className="b-thread__body">{ body }</p>
+          <p className="b-thread__body" dangerouslySetInnerHTML={{__html: comment.body}}/>
         </div>
 
         {commentBox}

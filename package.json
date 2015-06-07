@@ -11,6 +11,7 @@
   "dependencies": {
     "analytics-node": "^0.6.0",
     "async": "~0.2.10",
+    "autolinker": "^0.17.1",
     "babel": "^5.4.3",
     "classnames": "^2.1.1",
     "express": "3.2.0",

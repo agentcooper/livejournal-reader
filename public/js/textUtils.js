@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var Autolinker = require('autolinker');
 
 module.exports = (function() {
 
@@ -14,9 +15,6 @@ module.exports = (function() {
 
   var rx_lj_tag_start = /<lj[^>]*>/g;
   var rx_lj_tag_end = /<\/lj>/g;
-
-  // taken from https://mathiasbynens.be/demo/url-regex solution by @diegoperini
-  var rx_url = /(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9]+-?)*[a-z0-9]+)(?:\.(?:[a-z0-9]+-?)*[a-z0-9]+)*(?:\.(?:[a-z]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?/ig
 
   function process(body) {
     body = body.replace('<a name="Read more..."></a>', '');
@@ -133,10 +131,23 @@ module.exports = (function() {
   }
 
   factory.hightlightUrls = function(text) {
-    return text
-            .replace(rx_url, function(match) {
-              return "<a href=\"" + match + "\">" + decodeURIComponent(match) + "</a>";
-            });
+    return Autolinker.link(text, {
+      replaceFn : function( autolinker, match ) {
+
+        if (match.getType() === 'url') {
+          var tag = autolinker.getTagBuilder().build( match );  // returns an `Autolinker.HtmlTag` instance, which provides mutator methods for easy changes
+          tag.setInnerHtml(decodeURIComponent(match.getAnchorText()));
+
+          return tag;
+        }
+
+        return true;
+      },
+
+      phone: false,
+      twitter: false,
+      hashtag: false
+    });
   }
 
   // auto-paragraph
