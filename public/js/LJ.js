@@ -22,7 +22,7 @@ module.exports = {
       return;
     }
 
-    data.body    = textUtils.prettify(data.event || data.body);
+    data.body    = textUtils.prettifyPost(data.event || data.body);
 
     data.subject = data.subject_raw || data.subject;
 

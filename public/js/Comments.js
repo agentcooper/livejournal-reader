@@ -85,7 +85,7 @@ var Comments = React.createClass({
         comment.postername = 'Anonymous';
       }
 
-      comment.body = textUtils.hightlightUrls(comment.body);
+      comment.body = textUtils.prettifyComment(comment.body);
       comment.userpic = comment.userpic || LJ.USERPIC.DEFAULT;
     });
   },

@@ -6,6 +6,7 @@
     "start": "LOCAL=true node app.js",
     "build": "browserify public/js/index.js -t babelify --outfile public/build/app.js; grunt",
     "watch": "watchify -t babelify --outfile public/build/app.js -v -d public/js/",
+    "test": "mocha --recursive -w",
     "production": "browserify public/js/index.js -t babelify | uglifyjs -c unused,dead_code,warnings > public/build/app.js; grunt"
   },
   "dependencies": {
@@ -32,8 +33,9 @@
     "xmlrpc": "~1.2.0"
   },
   "devDependencies": {
-    "optimist": "~0.6.1",
     "babelify": "^6.1.1",
+    "mocha": "^2.2.5",
+    "optimist": "~0.6.1",
     "watchify": "^3.2.1"
   }
 }
