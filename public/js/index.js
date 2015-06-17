@@ -16,6 +16,8 @@ var Update  = require('./Update');
 
 var Profile = require('./Profile');
 
+var showNewPostInSidebar = false;
+
 var App = React.createClass({
   getInitialState: function () {
     return {};
@@ -38,9 +40,12 @@ var App = React.createClass({
               <li className="b-menu__item">
                 <Link to="feed">Feed</Link>
               </li>
-              <li className="b-menu__item">
-                <Link to="update">New post</Link>
-              </li>
+              {
+                showNewPostInSidebar ?
+                  <li className="b-menu__item">
+                    <Link to="update">New post</Link>
+                  </li> : null
+              }
               <li className="b-menu__item">
                 <Link to="journal" params={{ journal: 'ljreader-app' }}>About</Link>
               </li>
