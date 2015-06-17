@@ -125,7 +125,7 @@ module.exports = {
         password: this.getCookie('password'),
       });
 
-      request.get('/api/feed').query(options).end((err, res) => {
+      request.get('/auth/feed').query(options).end((err, res) => {
         var feed = res.body;
 
         feed.entries.forEach((entry) => {

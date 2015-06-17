@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "LOCAL=true node app.js",
+    "start": "node app.js",
     "build": "browserify public/js/index.js -t babelify --outfile public/build/app.js; grunt",
     "watch": "watchify -t babelify --outfile public/build/app.js -v -d public/js/",
-    "production": "browserify public/js/index.js -t babelify | uglifyjs -c unused,dead_code,warnings > public/build/app.js; grunt"
+
+    "build-production": "browserify public/js/index.js -t babelify | uglifyjs -c unused,dead_code,warnings > public/build/app.js; grunt"
   },
   "dependencies": {
     "analytics-node": "^0.6.0",
@@ -18,7 +19,7 @@
     "grunt-csso": "~0.5.0",
     "grunt-image-embed": "~0.3.1",
     "jquery": "^2.1.4",
-    "livejournal": "0.0.6",
+    "livejournal": "^0.0.8",
     "lru-cache": "~2.5.0",
     "marked": "^0.3.3",
     "nprogress": "^0.2.0",
