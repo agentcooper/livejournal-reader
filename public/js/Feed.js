@@ -3,7 +3,7 @@
 var React = require('react');
 
 var Router = require('react-router');
-var { Route, DefaultRoute, RouteHandler, Link } = Router;
+var { Link } = Router;
 
 var DocumentTitle = require('react-document-title');
 
@@ -18,9 +18,7 @@ var FeedEntry = React.createClass({
     return (
       <li className="b-entry">
         <span className="b-boop__header">
-          <Link to="post" params={
-            { journal: entry.journal, postId: entry.postId }
-          }>
+          <Link to={`/read/${entry.journal}/${entry.postId}`}>
             { entry.subject || '(No suject)' }
           </Link>
         </span>

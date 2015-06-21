@@ -20,12 +20,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <Link to="post" params={
-        {
-          journal: this.props.journal || '',
-          postId: this.props.postId || ''
-        }
-      }>{ text }</Link>
+      <Link to={`/read/${this.props.journal}/${this.props.postId}`}>{ text }</Link>
     );
   }
 });

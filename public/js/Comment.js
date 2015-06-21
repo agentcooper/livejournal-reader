@@ -52,9 +52,7 @@ var Comment = React.createClass({
             { backgroundImage: 'url(' + comment.userpic + ')' }
           }></div>
 
-          <Link className="b-thread__username" to="journal" params={
-            { journal: comment.identity_display || comment.postername || '' }
-          }>
+          <Link className="b-thread__username" to={`/read/${comment.identity_display || comment.postername}`}>
             { journal }
           </Link>
 

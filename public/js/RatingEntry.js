@@ -1,7 +1,7 @@
 var React = require('react');
 
 var Router = require('react-router');
-var { Route, DefaultRoute, RouteHandler, Link } = Router;
+var { Link } = Router;
 
 var RatingEntry = React.createClass({
   render: function() {
@@ -9,9 +9,7 @@ var RatingEntry = React.createClass({
 
     return (
       <li className="b-social-item">
-        <Link className="b-social-link" to="post" params={
-          { journal: post.journal, postId: post.postId }
-        }>
+        <Link className="b-social-link" to={`/read/${post.journal}/${post.postId}`}>
           <span className="b-social-position">{this.props.position}. </span>
 
           <span className="b-social-header">{ post.title }</span>

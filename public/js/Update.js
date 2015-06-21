@@ -3,7 +3,7 @@
 var React = require('react');
 
 var Router = require('react-router');
-var { Route, DefaultRoute, RouteHandler, Link } = Router;
+var { Link } = Router;
 
 var DocumentTitle = require('react-document-title');
 
@@ -130,7 +130,7 @@ var Editor = React.createClass({
       posts = this.state.journal.events.map((event, index) => {
         return (
           <li key={index}>
-            <Link className="editor__entry" to="update" params={{ postId: event.postId }}>{event.body.slice(0, 10) + '...'}</Link>
+            <Link className="editor__entry" to={`/update/${event.postId}`}>{event.body.slice(0, 10) + '...'}</Link>
           </li>
         );
       });
@@ -143,7 +143,7 @@ var Editor = React.createClass({
             { this.state.mode === 'new' ? 'New post' : 'Edit post' }
             { this.state.mode === 'edit' ?
                 <span>
-                  {' '} or <Link to="update">create new post</Link>
+                  {' '} or <Link to="/update/">create new post</Link>
                 </span>
                 : null
             }
@@ -185,12 +185,8 @@ var Editor = React.createClass({
 });
 
 module.exports = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.func
-  },
-
   render: function() {
-    var postId = this.context.router.getCurrentParams().postId;
+    var postId = this.props.params.postId;
 
     return (
       <DocumentTitle title="New post">

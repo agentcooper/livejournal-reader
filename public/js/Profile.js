@@ -58,9 +58,7 @@ var Profile = React.createClass({
     if (this.state.profile) {
       return (
         <div className="b-profile">
-          <Link className="b-profile-link" to="journal" params={
-            { journal: profile.username || '' }
-          }>
+          <Link className="b-profile-link" to={`/read/${profile.username}`}>
             <span className="b-profile-userpic">
                 <img src={profile.defaultpicurl} />
             </span>

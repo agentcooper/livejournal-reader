@@ -3,7 +3,7 @@
 var React = require('react');
 
 var Router = require('react-router');
-var { Route, DefaultRoute, RouteHandler, Link } = Router;
+var { Link } = Router;
 
 var DocumentTitle = require('react-document-title');
 
@@ -18,12 +18,7 @@ var JournalEntry = React.createClass({
     return (
       <li className="b-entry">
         <span className="b-boop__header">
-          <Link to="post" params={
-            {
-              journal: entry.journal || '',
-              postId: entry.postId || ''
-            }
-            }>
+          <Link to={`/read/${entry.journal}/${entry.postId}`}>
             { entry.subject || '(no subject)' }
           </Link>
         </span>
@@ -44,10 +39,6 @@ var JournalEntry = React.createClass({
 });
 
 var Journal = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.func
-  },
-
   getInitialState: function() {
     return {
       journal: {}
@@ -55,7 +46,7 @@ var Journal = React.createClass({
   },
 
   componentDidMount: function() {
-    var params = this.context.router.getCurrentParams();
+    var params = this.props.params;
 
     LJ.getJournal({
       journal: params.journal
@@ -65,7 +56,7 @@ var Journal = React.createClass({
   },
 
   render: function ():React {
-    var params = this.context.router.getCurrentParams();
+    var params = this.props.params;
 
     return (
       <DocumentTitle title={params.journal}>

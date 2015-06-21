@@ -3,7 +3,7 @@
 var React = require('react');
 
 var Router = require('react-router');
-var { Route, DefaultRoute, RouteHandler, Link } = Router;
+var { Link } = Router;
 
 var DocumentTitle = require('react-document-title');
 
@@ -12,10 +12,6 @@ var LJ = require('./LJ');
 var Comments = require('./Comments');
 
 var Post = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.func
-  },
-
   getInitialState: function() {
     return {
       post: null
@@ -23,7 +19,7 @@ var Post = React.createClass({
   },
 
   componentDidMount: function() {
-    var params = this.context.router.getCurrentParams();
+    var params = this.props.params;
 
     LJ.getPost({
       journal: params.journal,
@@ -44,9 +40,7 @@ var Post = React.createClass({
           <article className="b-post">
             <header className="b-post__header">
               <h1 className="b-post__title">{ post.subject }</h1>
-              <Link className="b-lj_user b-lj_user--big" to="journal" params={
-                { journal: post.journal || '' }
-              }>{ post.journal }</Link>
+              <Link className="b-lj_user b-lj_user--big" to={`/read/${post.journal}`}>{ post.journal }</Link>
             </header>
             <div className="b-post__body" dangerouslySetInnerHTML={{__html: post.body}}>
             </div>
