@@ -20,7 +20,7 @@ exports.get = function(req, res) {
 
       journal: req.query.user,
       selecttype: 'lastn',
-      howmany: 20,
+      howmany: 5,
       parseljtags: 1,
       get_video_ids: true
     }, function(err, journal) {
