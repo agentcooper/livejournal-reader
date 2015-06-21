@@ -105,25 +105,6 @@ function buildHeader(req) {
 
 exports.buildHeader = buildHeader;
 
-exports.feed = function(req, res) {
-  LiveJournal.RPC.setAuth(buildHeader(req));
-
-  LiveJournal.RPC.getfriendspage({
-    auth_method: 'oauth',
-    get_video_ids: true,
-    itemshow: req.query.itemshow || 10,
-    skip: req.query.skip || 0
-  }, function(err, feed) {
-
-    feed.entries.forEach(function(entry) {
-      entry.username = entry.postername;
-      entry.body = entry.event_raw;
-    });
-
-    res.json(feed);
-  });
-}
-
 exports.login = function(req, res) {
   LiveJournal.RPC.setAuth(buildHeader(req));
 
