@@ -79,8 +79,12 @@ function requireAuth(nextState, transition) {
   }
 }
 
+function onUpdate() {
+  analytics.page();
+}
+
 React.render((
-  <Router history={new BrowserHistory}>
+  <Router history={new BrowserHistory} onUpdate={onUpdate}>
     <Route path="/" component={App}>
       <Route path="login" component={Login}/>
 

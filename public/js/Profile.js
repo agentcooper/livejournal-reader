@@ -34,6 +34,9 @@ var Profile = React.createClass({
         return console.error('Bad login', profile);
       }
 
+      analytics.identify({ userId: profile.username });
+      analytics.track({ userId: profile.username, event: 'Login' });
+
       that.setState({ profile: profile });
     });
   },

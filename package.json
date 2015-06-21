@@ -9,7 +9,6 @@
     "build-production": "browserify public/js/index.js -t babelify | uglifyjs -c unused,dead_code,warnings > public/build/app.js; grunt"
   },
   "dependencies": {
-    "analytics-node": "^0.6.0",
     "async": "~0.2.10",
     "autolinker": "^0.17.1",
     "babel": "^5.4.3",

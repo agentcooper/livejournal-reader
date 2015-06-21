@@ -1,11 +1,5 @@
 // @TODO: move auth data into separate file
 
-var analytics = require('analytics-node');
-
-analytics.init({
-  secret: 'd1do0wl1lr'
-});
-
 var OAuth = require('oauth');
 
 var LiveJournal = require('livejournal');
@@ -128,8 +122,6 @@ exports.login = function(req, res) {
     }
 
     if (profile) {
-      analytics.identify({ userId: profile.username });
-      analytics.track({ userId: profile.username, event: 'Login' });
       return res.json(profile);
     }
 
