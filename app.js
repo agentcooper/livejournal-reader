@@ -51,6 +51,10 @@ app.use(function(req, res, next) {
     req.url = '/';
   }
 
+  if (/^\/login\/?$/.test(req.url)) {
+    req.url = '/';
+  }
+
   if (/^\/history\/?$/.test(req.url)) {
     req.url = '/';
   }

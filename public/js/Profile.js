@@ -7,6 +7,8 @@ var request = require('superagent');
 
 var LJ = require('./LJ');
 
+var Auth = require('./Auth');
+
 var Profile = React.createClass({
   getInitialState: function() {
     return {
@@ -15,27 +17,19 @@ var Profile = React.createClass({
   },
 
   componentWillMount: function() {
-    var that = this;
+    Auth.events.on('login', () => {
+      this.getData();
+    });
 
-    if (LJ.getCookie('auth')) {
+    if (Auth.isLoggedIn()) {
       this.getData();
     }
-
-    window.onmessage = function(e) {
-      console.log(e);
-
-      if (e.data === 'login ok') {
-        that.getData();
-      }
-    };
   },
 
   getData: function() {
     var that = this;
 
-    request.get('/api/login').end((err, res) => {
-      var profile = res.body;
-
+    Auth.getProfile().then((profile) => {
       if (!profile.username) {
         return console.error('Bad login', profile);
       }
@@ -44,12 +38,8 @@ var Profile = React.createClass({
     });
   },
 
-  isLoggedIn: function() {
-    return Boolean(this.state.profile && this.state.profile.username);
-  },
-
   login: function() {
-    window.open('/auth/run', '/auth/run', 'width=670,height=575');
+    Auth.startLogin();
   },
 
   render: function() {

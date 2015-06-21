@@ -5,7 +5,7 @@ require('babel/polyfill');
 var React = require('react');
 
 var ReactRouter = require('react-router');
-var { Router, Route, Link } = ReactRouter;
+var { Router, Route, Link, Navigation } = ReactRouter;
 
 var BrowserHistory = require('react-router/lib/BrowserHistory');
 
@@ -19,7 +19,13 @@ var Update  = require('./Update');
 
 var Profile = require('./Profile');
 
+var Login = require('./Login');
+
+var Auth = require('./Auth');
+
 var showNewPostInSidebar = true;
+
+Auth.init();
 
 var App = React.createClass({
   getInitialState: function () {
@@ -65,14 +71,25 @@ var App = React.createClass({
   }
 });
 
+function requireAuth(nextState, transition) {
+  if (!Auth.isLoggedIn()) {
+    transition.to('/login', null, {
+      nextPathname: nextState.location.pathname
+    });
+  }
+}
+
 React.render((
   <Router history={new BrowserHistory}>
     <Route path="/" component={App}>
+      <Route path="login" component={Login}/>
+
       <Route path="read/:journal/:postId" component={Post}/>
       <Route path="read/:journal" component={Journal}/>
-      <Route path="feed" component={Feed}/>
-      <Route path="update" component={Update} />
-      <Route path="update/:postId" component={Update} />
+
+      <Route path="feed" component={Feed} onEnter={requireAuth}/>
+      <Route path="update" component={Update} onEnter={requireAuth}/>
+      <Route path="update/:postId" component={Update} onEnter={requireAuth}/>
     </Route>
   </Router>
 ), document.body);
