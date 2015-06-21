@@ -11,10 +11,6 @@ exports.get = function(req, res) {
 
     LiveJournal.RPC.getevents({
       journal: req.query.user,
-      
-      username: 'ljreader-app',
-      password: 'Burn1ng-d0wn-th3-h0us3',
-
       selecttype: 'lastn',
       howmany: 20,
       parseljtags: 1,
