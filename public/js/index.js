@@ -16,7 +16,7 @@ var Update  = require('./Update');
 
 var Profile = require('./Profile');
 
-var showNewPostInSidebar = false;
+var showNewPostInSidebar = true;
 
 var App = React.createClass({
   getInitialState: function () {

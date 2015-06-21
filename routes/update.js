@@ -1,13 +1,16 @@
 var LiveJournal = require('livejournal');
 
+var auth = require('./auth');
+
 exports.newPost = function(req, res) {
   var now = new Date();
 
-  LiveJournal.RPC.postevent({
-    username: 'ljreader-app',
-    password: 'Burn1ng-d0wn-th3-h0us3',
+  LiveJournal.RPC.setAuth(auth.buildHeader(req));
 
-    security: 'private',
+  LiveJournal.RPC.postevent({
+    auth_method: 'oauth',
+
+    security: req.body.security || 'private',
     
     event: req.body.event || '',
 
@@ -30,11 +33,12 @@ exports.newPost = function(req, res) {
 exports.editPost = function(req, res) {
   var now = new Date();
 
-  console.log(req.body);
+  LiveJournal.RPC.setAuth(auth.buildHeader(req));
 
   LiveJournal.RPC.editevent({
-    username: 'ljreader-app',
-    password: 'Burn1ng-d0wn-th3-h0us3',
+    auth_method: 'oauth',
+
+    security: req.body.security || 'private',
 
     event: req.body.event || '',
     itemid: req.body.itemid,

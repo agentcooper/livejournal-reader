@@ -70,7 +70,8 @@ module.exports = {
     NProgress.start();
 
     request.get('/api/journal').query({
-      user: options.journal
+      user: options.journal,
+      auth: options.auth
     }).end(function(err, res) {
       var journal = res.body;
 

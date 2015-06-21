@@ -18,7 +18,7 @@ var Editor = React.createClass({
     console.log(arguments);
 
     LJ.getJournal({
-      journal: 'ljreader-app'
+      auth: true
     }, (err, journal) => {
       this.setState({ journal: journal });
 
@@ -46,6 +46,8 @@ var Editor = React.createClass({
 
       itemid: null,
 
+      security: 'private',
+
       markdown: false,
 
       mode: 'new',
@@ -57,10 +59,15 @@ var Editor = React.createClass({
     event.preventDefault();
 
     LJ.newPost({
-      itemid: this.state.itemid
+      itemid: this.state.itemid,
+      security: this.state.security
     }).then(function() {
       console.log(arguments);
     });
+  },
+
+  onSecurityChange: function(event) {
+    this.setState({ security: event.target.value });
   },
 
   handleSave: function(event) {
@@ -75,7 +82,8 @@ var Editor = React.createClass({
 
     LJ.newPost({
       itemid: this.state.itemid,
-      event: post
+      event: post,
+      security: this.state.security
     }).then(function() {
       console.log(arguments);
     });
@@ -148,6 +156,13 @@ var Editor = React.createClass({
             <button className="editor__button" onClick={this.handleSave}>
               { this.state.mode === 'new' ? 'Create new post' : 'Edit post' }
             </button>
+
+            <div>
+              <select type="checkbox" value={this.state.security} onChange={this.onSecurityChange}>
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+              </select>
+            </div>
 
             {
               this.state.mode === 'edit' ?
