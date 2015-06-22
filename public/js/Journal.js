@@ -11,6 +11,10 @@ var CommentsLink = require('./CommentsLink');
 
 var LJ = require('./LJ');
 
+var ERROR_STRING = {
+  '206': 'Journal does not exist'
+};
+
 var JournalEntry = React.createClass({
   render: function() {
     var entry = this.props.entry;
@@ -41,7 +45,8 @@ var JournalEntry = React.createClass({
 var Journal = React.createClass({
   getInitialState: function() {
     return {
-      journal: {}
+      journal: {},
+      err: null
     }
   },
 
@@ -51,21 +56,39 @@ var Journal = React.createClass({
     LJ.getJournal({
       journal: params.journal
     }, (err, journal) => {
-      this.setState({ journal: journal })
+      if (err) {
+        this.setState({ err: err });
+        return;
+      }
+
+      this.setState({ err: null, journal: journal })
     });
   },
 
   render: function ():React {
-    var params = this.props.params;
+    var params = this.props.params,
+        content;
+
+    if (this.state.err) {
+      content = (
+        <div>
+          <h2>Error</h2>
+          <p>{
+            ERROR_STRING[this.state.err.code] ||
+            ('Something went wrong: ' + JSON.stringify(this.state.err, null, 2) )}
+          </p>
+        </div>
+      );
+    } else {
+      content = this.state.journal.events && this.state.journal.events.map((entry) => {
+        return <JournalEntry entry={entry} key={entry.postId} />
+      })
+    }
 
     return (
       <DocumentTitle title={params.journal}>
         <ol className="b-feed">
-          {
-            this.state.journal.events && this.state.journal.events.map((entry) => {
-              return <JournalEntry entry={entry} key={entry.postId} />
-            })
-          }
+          {content}
         </ol>
       </DocumentTitle>
     );

@@ -24,9 +24,9 @@ exports.get = function(req, res) {
       parseljtags: 1,
       get_video_ids: true
     }, function(err, journal) {
-
       if (err) {
-        console.error(err);
+        console.log(err);
+        return res.status(400).json(err);
       }
 
       journal.events.forEach(function(entry) {

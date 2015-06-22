@@ -75,13 +75,19 @@ module.exports = {
     }).end(function(err, res) {
       var journal = res.body;
 
-      journal.events.forEach(function(event) {
-        that.makePost(event, options);
-      });
+      if (!err) {
+        journal.events.forEach(function(event) {
+          that.makePost(event, options);
+        });
 
-      that.journal[options.journal] = journal;
+        that.journal[options.journal] = journal;
+      }
 
       NProgress.done();
+
+      if (err) {
+        return callback(res.body);
+      }
 
       callback(err, journal);
     });
