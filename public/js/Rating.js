@@ -4,6 +4,8 @@ var request = require('superagent');
 
 var LJ = require('./LJ');
 
+import '../stylesheets/rating.css';
+
 var RatingEntry = require('./RatingEntry');
 
 var Rating = React.createClass({

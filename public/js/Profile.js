@@ -3,6 +3,8 @@ var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
 
+import '../stylesheets/profile.css';
+
 var request = require('superagent');
 
 var LJ = require('./LJ');

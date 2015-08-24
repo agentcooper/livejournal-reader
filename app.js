@@ -23,16 +23,6 @@ app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
 app.use(express.logger('dev'));
 app.use(app.router);
 
-if (!process.env.PRODUCTION) {
-  var browserify = require('browserify-middleware');
-
-  console.log('Will serve /build/app.js on request');
-
-  app.get('/build/app.js', browserify('./public/js/index.js', {
-    transform: ['babelify']
-  }));
-}
-
 app.use(function(req, res, next) {
 
   if (/^\/read\//.test(req.url)) {

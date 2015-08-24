@@ -2,6 +2,10 @@
 
 require('babel/polyfill');
 
+import '../stylesheets/mobile.css';
+import '../stylesheets/style.css';
+import '../stylesheets/main.css';
+
 var React = require('react');
 
 var ReactRouter = require('react-router');
@@ -96,4 +100,4 @@ React.render((
       <Route path="update/:postId" component={Update} onEnter={requireAuth}/>
     </Route>
   </Router>
-), document.body);
+), document.body.querySelector('#container'));

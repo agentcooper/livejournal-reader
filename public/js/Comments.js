@@ -16,6 +16,8 @@ var Share = require('./Share');
 
 var textUtils = require('./textUtils');
 
+import '../stylesheets/comments.css';
+
 var CommentsLoader = React.createClass({
   render: function() {
     return (

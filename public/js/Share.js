@@ -6,6 +6,8 @@ var Popover = require('react-bootstrap/lib/Popover');
 
 var LJ = require('./LJ');
 
+import '../stylesheets/social.css';
+
 var networks = {
   twitter: function(post) {
     return [

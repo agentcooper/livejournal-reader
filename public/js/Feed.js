@@ -5,6 +5,8 @@ var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
 
+import '../stylesheets/feed.css';
+
 var DocumentTitle = require('react-document-title');
 
 var CommentsLink = require('./CommentsLink');

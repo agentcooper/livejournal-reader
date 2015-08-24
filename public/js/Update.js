@@ -5,6 +5,8 @@ var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
 
+import '../stylesheets/update.css';
+
 var DocumentTitle = require('react-document-title');
 
 var Textarea = require('react-textarea-autosize');
