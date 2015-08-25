@@ -9,7 +9,7 @@ var CommentBox = require('./CommentBox');
 
 var Comment = React.createClass({
   getInitialState: function() {
-    return {}
+    return {};
   },
 
   reply: function(event) {
@@ -21,10 +21,10 @@ var Comment = React.createClass({
 
     var isDeleted = comment.state === 'D';
 
-    var commentBox;
+    var commentBox = null;
 
     if (this.props.commentBox) {
-      commentBox = <CommentBox onSubmit={this.props.onSubmit}/>
+      commentBox = <CommentBox onSubmit={this.props.onSubmit}/>;
     }
 
     var journal = comment.identity_display || comment.postername;

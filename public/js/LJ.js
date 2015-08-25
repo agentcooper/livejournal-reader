@@ -17,7 +17,7 @@ module.exports = {
     ANONYMOUS: 'http://stat.livejournal.com/img/userpics/userpic-anonymous.png'
   },
 
-  makePost: function(data:Object, options:Object):void {
+  makePost: function(data, options) {
     if (!data) {
       return;
     }
@@ -34,7 +34,7 @@ module.exports = {
     this.post[data.journal + (data.ditemid || options.postId)] = data;
   },
 
-  getPost: function(options:Object, callback:Function) {
+  getPost: function(options, callback) {
     var that = this;
 
     var cached = this.post[options.journal + options.postId];
@@ -58,7 +58,7 @@ module.exports = {
     });
   },
 
-  getJournal: function(options:Object, callback:Function) {
+  getJournal: function(options, callback) {
     var that = this;
 
     var cached = this.journal[options.journal];
@@ -95,7 +95,7 @@ module.exports = {
 
   _rating: null,
 
-  getRating: function():Promise {
+  getRating: function() {
     return new Promise((resolve, reject) => {
 
       if (this._rating) {
@@ -117,7 +117,7 @@ module.exports = {
     });
   },
 
-  getFeed: function(options):Promise {
+  getFeed: function(options) {
     return new Promise((resolve, reject) => {
       NProgress.start();
 
@@ -135,7 +135,7 @@ module.exports = {
     });
   },
 
-  newPost: function(options):Promise {
+  newPost: function(options) {
     return new Promise((resolve, reject) => {
       NProgress.start();
 

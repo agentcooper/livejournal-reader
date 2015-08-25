@@ -47,7 +47,7 @@ var Feed = React.createClass({
     return {
       skip: 0,
       posts: []
-    }
+    };
   },
 
   loadMore: function() {
@@ -82,7 +82,7 @@ var Feed = React.createClass({
           <div className="b-feed_entries">
             {
               this.state.posts.map((entry) => {
-                return <FeedEntry entry={entry} key={entry.postId} />
+                return <FeedEntry entry={entry} key={entry.postId} />;
               })
             }
           </div>

@@ -15,7 +15,7 @@ var networks = {
       location.href,
       '&text=',
       post.subject
-    ].join('')
+    ].join('');
   },
 
   facebook: function(post) {

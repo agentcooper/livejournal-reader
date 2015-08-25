@@ -54,7 +54,7 @@ var Editor = React.createClass({
 
       mode: 'new',
       journal: null
-    }
+    };
   },
 
   handleRemove: function(event) {

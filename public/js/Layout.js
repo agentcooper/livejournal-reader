@@ -13,11 +13,11 @@ var Profile = require('./Profile');
 var { Link } = ReactRouter;
 
 module.exports = React.createClass({
-  getInitialState: function () {
+  getInitialState: function() {
     return {};
   },
 
-  render: function () {
+  render: function() {
     return (
       <DocumentTitle title="Reader">
         <div>

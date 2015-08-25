@@ -13,22 +13,24 @@ var argv = require('optimist')
   .argv;
 
 function get(prop) {
-  return function(obj) { return obj[prop]; }
+  return function(obj) {
+    return obj[prop];
+  };
 }
 
 function getRating(callback) {
   var obj = {
-    "jsonrpc": "2.0",
-    "method": "homepage.get_rating",
-    "params": {
-      "homepage":1,
-      "sort": "visitors",
-      "page": 0,
-      "country": (argv.lang === 'ru_RU' ? "cyr" : "noncyr"),
-      "locale": argv.lang,
-      "category_id":0
+    'jsonrpc': '2.0',
+    'method': 'homepage.get_rating',
+    'params': {
+      'homepage':1,
+      'sort': 'visitors',
+      'page': 0,
+      'country': (argv.lang === 'ru_RU' ? 'cyr' : 'noncyr'),
+      'locale': argv.lang,
+      'category_id':0
     },
-    "id": Date.now()
+    'id': Date.now()
   };
 
   request({
@@ -84,7 +86,9 @@ function getTwitter(entries, callback) {
   async.eachLimit(entries, 5, function(entry, callback) {
 
     getTwitterCount(entry.post_url, function(err, res) {
-      if (err) { console.log(err); }
+      if (err) {
+        console.log(err);
+      }
 
       entry.twitter_count = (res && res.count) || 0;
 
@@ -117,15 +121,21 @@ getRating(function(err, rating) {
 
   async.parallel([
     function(callback) {
-      getFacebook(entries, function() { console.log('FB done'); callback.apply(this, arguments); });
+      getFacebook(entries, function() {
+        console.log('FB done'); callback.apply(this, arguments);
+      });
     },
 
     function(callback) {
-      getTwitter(entries, function() { console.log('TW done'); callback.apply(this, arguments); });
+      getTwitter(entries, function() {
+        console.log('TW done'); callback.apply(this, arguments);
+      });
     }/*,
 
     function(callback) {
-      getVK(entries, function() { console.log('VK done'); callback.apply(this, arguments); });
+      getVK(entries, function() {
+        console.log('VK done'); callback.apply(this, arguments);
+      });
     }*/
   ], function() {
     var top = entries.map(function(entry) {

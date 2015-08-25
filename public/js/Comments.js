@@ -54,12 +54,12 @@ var Comments = React.createClass({
       loading: false,
 
       comments: []
-    }
+    };
   },
 
   level: {},
 
-  process: function(comments:Array<Object>):void {
+  process: function(comments) {
     var that = this;
 
     comments.forEach(function(comment) {
@@ -166,20 +166,20 @@ var Comments = React.createClass({
     this.setState({ replyingTo: 'new' });
   },
 
-  render: function():React {
+  render: function() {
     const commentBox = this.state.replyingTo === 'new' ?
       <CommentBox onSubmit={this.submit}/> :
       null;
 
     return (
       <div className={classNames(
-        'b-comments',
-        {
-          'b-commentbox-hidden': this.state.replyingTo === '',
-          'b-comments-more': this.state.hasMore,
-          'b-comments-loading': this.state.loading
-        }
-      )}>
+          'b-comments',
+          {
+            'b-commentbox-hidden': this.state.replyingTo === '',
+            'b-comments-more': this.state.hasMore,
+            'b-comments-loading': this.state.loading
+          }
+        )}>
 
         <p>
           <a href="javascript:void(0);" className="b-replybutton"

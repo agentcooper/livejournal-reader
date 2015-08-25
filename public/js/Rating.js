@@ -18,7 +18,7 @@ var Rating = React.createClass({
   getInitialState: function() {
     return {
       rating: null
-    }
+    };
   },
 
   sort: function(type) {
@@ -31,23 +31,27 @@ var Rating = React.createClass({
     }
 
     function compare(a, b) {
-      if (b[type] > a[type]) { return -1; }
-      if (b[type] < a[type]) { return  1; }
+      if (b[type] > a[type]) {
+        return -1;
+      }
+      if (b[type] < a[type]) {
+        return  1;
+      }
       return 0;
     }
 
     rating.top.sort(
       reverse ? function(a, b) {
-        return compare(b, a)
+        return compare(b, a);
       } : compare
     );
 
     this.setState({ rating: rating });
   },
 
-  render: function () {
+  render: function() {
     var entries = this.state.rating && this.state.rating.top.map(function(post, idx) {
-      return <RatingEntry post={post} key={post.postId} position={idx + 1}/>
+      return <RatingEntry post={post} key={post.postId} position={idx + 1}/>;
     });
 
     var rating = (

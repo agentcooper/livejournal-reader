@@ -15,7 +15,7 @@ var Profile = React.createClass({
   getInitialState: function() {
     return {
       profile: null
-    }
+    };
   },
 
   componentWillMount: function() {

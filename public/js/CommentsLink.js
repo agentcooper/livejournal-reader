@@ -12,11 +12,11 @@ module.exports = React.createClass({
     var text = this.props.count + ' comments';
 
     if (this.props.count === 0) {
-        text = 'No comments';
+      text = 'No comments';
     }
 
     if (this.props.count === 1) {
-        text = '1 comment';
+      text = '1 comment';
     }
 
     return (

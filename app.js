@@ -63,7 +63,7 @@ app.use(function(req, res, next) {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if ('development' == app.get('env')) {
+if (app.get('env') === 'development') {
   app.use(express.errorHandler());
 }
 
@@ -82,6 +82,6 @@ app.post( '/api/comments/add', comments.add );
 app.post('/api/newPost', update.newPost);
 app.post('/api/editPost', update.editPost);
 
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), function() {
   console.log('App is running on port ' + app.get('port'));
 });

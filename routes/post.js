@@ -1,8 +1,8 @@
 var LiveJournal = require('livejournal');
 
-var LRU = require('lru-cache');
+var lru = require('lru-cache');
 
-var cache = LRU({
+var cache = lru({
   max: 500,
   maxAge: 1000 * 60 * 10
 });

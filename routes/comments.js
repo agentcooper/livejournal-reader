@@ -50,4 +50,4 @@ exports.add = function(req, res) {
     return res.json(result);
   });
 
-}
+};

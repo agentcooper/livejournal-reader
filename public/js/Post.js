@@ -17,7 +17,7 @@ var Post = React.createClass({
   getInitialState: function() {
     return {
       post: null
-    }
+    };
   },
 
   componentDidMount: function() {
@@ -50,7 +50,7 @@ var Post = React.createClass({
             <Comments post={post} />
           </article>
         </DocumentTitle>
-      )
+      );
     }
 
     return output;

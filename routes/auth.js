@@ -29,7 +29,7 @@ oauth.setClientOptions({
 });
 
 // @TODO: move to session or cookie
-var secret;
+var secret = '';
 
 exports.run = function(req, res) {
   oauth.getOAuthRequestToken(function(err, token, token_secret) {
@@ -44,7 +44,7 @@ exports.run = function(req, res) {
       token
     );
   });
-}
+};
 
 function buildCookie(token, secret) {
   return (token + '|||' + secret).split('').reverse().join('');
@@ -80,7 +80,7 @@ exports.token = function(req, res) {
 
     return res.sendfile('public/reciever.html');
   });
-}
+};
 
 function buildHeader(req) {
   if (req.cookies.auth) {
@@ -127,4 +127,4 @@ exports.login = function(req, res) {
 
     return res.json({ message: err });
   });
-}
+};

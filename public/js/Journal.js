@@ -47,7 +47,7 @@ var Journal = React.createClass({
     return {
       journal: {},
       err: null
-    }
+    };
   },
 
   componentDidMount: function() {
@@ -61,13 +61,13 @@ var Journal = React.createClass({
         return;
       }
 
-      this.setState({ err: null, journal: journal })
+      this.setState({ err: null, journal: journal });
     });
   },
 
-  render: function ():React {
+  render: function() {
     var params = this.props.params,
-        content;
+        content = null;
 
     if (this.state.err) {
       content = (
@@ -81,8 +81,8 @@ var Journal = React.createClass({
       );
     } else {
       content = this.state.journal.events && this.state.journal.events.map((entry) => {
-        return <JournalEntry entry={entry} key={entry.postId} />
-      })
+        return <JournalEntry entry={entry} key={entry.postId}/>;
+      });
     }
 
     return (
