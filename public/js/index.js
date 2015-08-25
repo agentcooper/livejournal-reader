@@ -4,76 +4,21 @@ require('babel/polyfill');
 
 import '../stylesheets/mobile.css';
 import '../stylesheets/style.css';
-import '../stylesheets/main.css';
 
 var React = require('react');
 
 var ReactRouter = require('react-router');
-var { Router, Route, Link, Navigation } = ReactRouter;
-
 var BrowserHistory = require('react-router/lib/BrowserHistory');
 
-var DocumentTitle = require('react-document-title');
+var { Router, Route, Link, Navigation } = ReactRouter;
 
-var Rating  = require('./Rating');
-var Post    = require('./Post');
+var Layout = require('./Layout');
+var Post = require('./Post');
 var Journal = require('./Journal');
-var Feed    = require('./Feed');
-var Update  = require('./Update');
-
-var Profile = require('./Profile');
-
+var Feed = require('./Feed');
+var Update = require('./Update');
 var Login = require('./Login');
-
 var Auth = require('./Auth');
-
-var showNewPostInSidebar = true;
-
-Auth.init();
-
-var App = React.createClass({
-  getInitialState: function () {
-    return {};
-  },
-
-  render: function () {
-    return (
-      <DocumentTitle title="Reader">
-        <div>
-          <div className="b-main">
-            {this.props.children || <Rating/>}
-          </div>
-
-          <div className="b-sidebar" id="sidebar">
-
-            <ul className="b-menu">
-              <li className="b-menu__item">
-                <Link to="/">Top</Link>
-              </li>
-              <li className="b-menu__item">
-                <Link to="feed">Feed</Link>
-              </li>
-              {
-                showNewPostInSidebar ?
-                  <li className="b-menu__item">
-                    <Link to={`/update/`}>New post</Link>
-                  </li> : null
-              }
-              <li className="b-menu__item">
-                <Link to={`/read/ljreader-app`}>About</Link>
-              </li>
-
-              <li className="b-menu__item b-menu-profile">
-                <Profile />
-              </li>
-            </ul>
-
-          </div>
-        </div>
-      </DocumentTitle>
-    );
-  }
-});
 
 function requireAuth(nextState, transition) {
   if (!Auth.isLoggedIn()) {
@@ -87,9 +32,11 @@ function onUpdate() {
   analytics.page();
 }
 
+Auth.init();
+
 React.render((
   <Router history={new BrowserHistory} onUpdate={onUpdate}>
-    <Route path="/" component={App}>
+    <Route path="/" component={Layout}>
       <Route path="login" component={Login}/>
 
       <Route path="read/:journal/:postId" component={Post}/>

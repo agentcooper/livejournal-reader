@@ -6,7 +6,7 @@
     "start": "node app.js",
     "build": "webpack",
     "watch": "webpack --watch",
-    "build-production": "env NODE_ENV=production webpack -p"
+    "build-production": "NODE_ENV=production webpack -p"
   },
   "dependencies": {
     "async": "~0.2.10",
