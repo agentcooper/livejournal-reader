@@ -1,23 +1,10 @@
 var _ = require('underscore');
 
-var OAuth = require('oauth');
-
-var oauth = new OAuth.OAuth(
-  'https://www.livejournal.com/oauth/request_token.bml?oauth_callback=http://ljreader.com/auth',
-  'https://www.livejournal.com/oauth/access_token.bml',
-  'ad3cbab5f7748de3',
-  '8c11db9d8629f41c3cdf9744d1bb',
-  '1.0',
-  null,
-  'HMAC-SHA1'
-);
-
 var auth = require('./auth');
 
 var LiveJournal = require('livejournal');
 
 exports.get = function(req, res) {
-
   LiveJournal.RPC.getcomments({
     journal: req.query.user,
     ditemid: req.query.post_id,
@@ -32,7 +19,6 @@ exports.get = function(req, res) {
   }, function(err, result) {
     res.json(result);
   });
-
 };
 
 exports.add = function(req, res) {
