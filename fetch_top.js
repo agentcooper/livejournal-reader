@@ -4,21 +4,13 @@ var async   = require('async');
 
 var LiveJournal = require('livejournal');
 
-var argv = require('optimist')
-  .usage('Fetch top from livejournal.com and build new one with social stats.')
-  .demand('lang')
-  .describe('lang', 'ru_RU or en_US')
-  .default('path', 'public')
-  .describe('path', 'path for output (relative to bin)')
-  .argv;
-
 function get(prop) {
   return function(obj) {
     return obj[prop];
   };
 }
 
-function getRating(callback) {
+function getRating(argv, callback) {
   var obj = {
     'jsonrpc': '2.0',
     'method': 'homepage.get_rating',
@@ -110,67 +102,77 @@ function getVK(entries, callback) {
   }, callback);
 }
 
-getRating(function(err, rating) {
-  var entries = rating.slice();
+function run(argv) {
+  getRating(argv, function(err, rating) {
+    var entries = rating.slice();
 
-  console.log('Got rating: %s entries', rating.length, argv.lang);
+    console.log('Got rating: %s entries', rating.length, argv.lang);
 
-  if (!rating || rating.length === 0) {
-    throw new Error('Bad data!');
-  }
-
-  async.parallel([
-    function(callback) {
-      getFacebook(entries, function() {
-        console.log('FB done'); callback.apply(this, arguments);
-      });
-    },
-
-    function(callback) {
-      getTwitter(entries, function() {
-        console.log('TW done'); callback.apply(this, arguments);
-      });
-    }/*,
-
-    function(callback) {
-      getVK(entries, function() {
-        console.log('VK done'); callback.apply(this, arguments);
-      });
-    }*/
-  ], function() {
-    var top = entries.map(function(entry) {
-      return {
-        postId:  Number(entry.post_id),
-        journal: entry.ljuser[0].journal,
-        
-        title: entry.subject,
-        body:  entry.body,
-
-        fb_count: entry.fb_count,
-        tw_count: entry.twitter_count,
-        vk_count: entry.vk_count,
-
-        reply_count: Number(entry.reply_count || 0),
-        
-        image: entry.image_url,
-
-        position: Number(entry.position)
-      };
-    });
-
-    if (top.length > 0) {
-      var output = JSON.stringify({
-        top: top,
-        built_at: Date.now()
-      });
-
-      fs.writeFileSync(
-        __dirname + '/' + argv.path + '/top_' + argv.lang + '.json',
-        output
-      );
-    } else {
-      console.error('Bad data', top);
+    if (!rating || rating.length === 0) {
+      throw new Error('Bad data!');
     }
 
+    async.parallel([
+      function(callback) {
+        getFacebook(entries, function() {
+          console.log('FB done'); callback.apply(this, arguments);
+        });
+      },
+
+      function(callback) {
+        getTwitter(entries, function() {
+          console.log('TW done'); callback.apply(this, arguments);
+        });
+      }/*,
+
+      function(callback) {
+        getVK(entries, function() {
+          console.log('VK done'); callback.apply(this, arguments);
+        });
+      }*/
+    ], function() {
+      var top = entries.map(function(entry) {
+        return {
+          postId:  Number(entry.post_id),
+          journal: entry.ljuser[0].journal,
+
+          title: entry.subject,
+          body:  entry.body,
+
+          fb_count: entry.fb_count,
+          tw_count: entry.twitter_count,
+          vk_count: entry.vk_count,
+
+          reply_count: Number(entry.reply_count || 0),
+
+          image: entry.image_url,
+
+          position: Number(entry.position)
+        };
+      });
+
+      if (top.length > 0) {
+        var output = JSON.stringify({
+          top: top,
+          built_at: Date.now()
+        });
+
+        fs.writeFileSync(
+          __dirname + '/' + argv.path + '/top_' + argv.lang + '.json',
+          output
+        );
+      } else {
+        console.error('Bad data', top);
+      }
+
+    });
   });
+}
+
+require('node-schedule').scheduleJob('*/15 * * * *', function() {
+  run({ lang: 'ru_RU', path: 'public' });
+});
+
+require('node-schedule').scheduleJob('*/25 * * * *', function() {
+  run({ lang: 'en_US', path: 'public' });
 });
