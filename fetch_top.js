@@ -10,7 +10,15 @@ function get(prop) {
   };
 }
 
-function getRating(argv, callback) {
+var argv = require('optimist')
+  .usage('Fetch top from livejournal.com and build new one with social stats.')
+  .demand('lang')
+  .describe('lang', 'ru_RU or en_US')
+  .default('path', 'public')
+  .describe('path', 'path for output (relative to bin)')
+  .argv;
+
+function getRating(callback) {
   var obj = {
     'jsonrpc': '2.0',
     'method': 'homepage.get_rating',
@@ -103,7 +111,7 @@ function getVK(entries, callback) {
 }
 
 function run(argv) {
-  getRating(argv, function(err, rating) {
+  getRating(function(err, rating) {
     var entries = rating.slice();
 
     console.log('Got rating: %s entries', rating.length, argv.lang);
@@ -169,10 +177,4 @@ function run(argv) {
   });
 }
 
-require('node-schedule').scheduleJob('*/15 * * * *', function() {
-  run({ lang: 'ru_RU', path: 'public' });
-});
-
-require('node-schedule').scheduleJob('*/25 * * * *', function() {
-  run({ lang: 'en_US', path: 'public' });
-});
+run(argv);

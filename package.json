@@ -25,7 +25,6 @@
     "lru-cache": "~2.5.0",
     "marked": "^0.3.3",
     "morgan": "^1.6.1",
-    "node-schedule": "^0.2.9",
     "nprogress": "^0.2.0",
     "oauth": "~0.9.11",
     "react": "^0.13.3",
