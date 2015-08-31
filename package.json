@@ -31,6 +31,7 @@
     "react": "^0.13.3",
     "react-bootstrap": "^0.23.0",
     "react-document-title": "^1.0.2",
+    "react-intl": "^1.2.0",
     "react-router": "1.0.0-beta2",
     "react-textarea-autosize": "^2.2.3",
     "request": "~2.33.0",

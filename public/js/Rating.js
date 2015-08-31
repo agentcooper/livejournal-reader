@@ -2,11 +2,15 @@ var React = require('react');
 
 var request = require('superagent');
 
+var ReactIntl = require('react-intl');
+
 var LJ = require('./LJ');
 
 import '../stylesheets/rating.css';
 
 var RatingEntry = require('./RatingEntry');
+
+var FormattedRelative = ReactIntl.FormattedRelative;
 
 var Rating = React.createClass({
   componentDidMount: function() {
@@ -54,6 +58,14 @@ var Rating = React.createClass({
       return <RatingEntry post={post} key={post.postId} position={idx + 1}/>;
     });
 
+    var builtAt = null;
+
+    if (this.state.rating) {
+      builtAt = <p>
+        Рейтинг обновлен <FormattedRelative value={this.state.rating.built_at} />
+      </p>;
+    }
+
     var rating = (
       <div>
         <div className="b-rating">
@@ -69,7 +81,9 @@ var Rating = React.createClass({
             {" "}
             <a href="javascript:void(0);" className="b-pseudo" onClick={this.sort.bind(null, '-vk_count')}>вконтакте</a>,
             {" "}
-            <a href="javascript:void(0);" className="b-pseudo" onClick={this.sort.bind(null, '-reply_count')}>комментариям</a>. <p>Рейтинг обновлен</p> 
+            <a href="javascript:void(0);" className="b-pseudo" onClick={this.sort.bind(null, '-reply_count')}>комментариям</a>.
+
+            {builtAt}
           </div>
 
           <ol className="b-social">
