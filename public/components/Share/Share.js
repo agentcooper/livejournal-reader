@@ -4,7 +4,7 @@ var OverlayTrigger = require('react-bootstrap/lib/OverlayTrigger');
 
 var Popover = require('react-bootstrap/lib/Popover');
 
-var LJ = require('../LJ');
+var LJ = require('../../lib/LJ');
 
 import './social.css';
 

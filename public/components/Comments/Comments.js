@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-var LJ = require('../LJ');
+var LJ = require('../../lib/LJ');
 
 var request = require('superagent');
 
@@ -14,7 +14,7 @@ var CommentBox = require('./CommentBox');
 
 var Share = require('../Share/Share');
 
-var textUtils = require('../textUtils');
+var textUtils = require('../../lib/textUtils');
 
 import './comments.css';
 

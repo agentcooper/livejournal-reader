@@ -9,7 +9,7 @@ var DocumentTitle = require('react-document-title');
 
 var CommentsLink = require('../Comments/CommentsLink');
 
-var LJ = require('../LJ');
+var LJ = require('../../lib/LJ');
 
 var ERROR_STRING = {
   '206': 'Journal does not exist'

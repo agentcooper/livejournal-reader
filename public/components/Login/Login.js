@@ -3,7 +3,7 @@ var React = require('react');
 var ReactRouter = require('react-router');
 var { Router, Route, Link, Navigation } = ReactRouter;
 
-var Auth = require('./Auth');
+var Auth = require('../../lib/Auth');
 
 module.exports = React.createClass({
   mixins: [ Navigation ],

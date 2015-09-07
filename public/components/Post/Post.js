@@ -9,7 +9,7 @@ import './post.css';
 
 var DocumentTitle = require('react-document-title');
 
-var LJ = require('../LJ');
+var LJ = require('../../lib/LJ');
 
 var Comments = require('../Comments/Comments');
 

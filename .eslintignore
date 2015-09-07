@@ -1,2 +1,2 @@
 public/build/**/*.js
-public/js/textUtils.js
+public/lib/textUtils.js

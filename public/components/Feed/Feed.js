@@ -11,7 +11,7 @@ var DocumentTitle = require('react-document-title');
 
 var CommentsLink = require('../Comments/CommentsLink');
 
-var LJ = require('../LJ');
+var LJ = require('../../lib/LJ');
 
 var FeedEntry = React.createClass({
   render: function() {

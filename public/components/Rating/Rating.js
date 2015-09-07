@@ -4,7 +4,7 @@ var request = require('superagent');
 
 var ReactIntl = require('react-intl');
 
-var LJ = require('../LJ');
+var LJ = require('../../lib/LJ');
 
 import './rating.css';
 

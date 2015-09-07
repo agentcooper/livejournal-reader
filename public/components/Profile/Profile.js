@@ -7,9 +7,9 @@ import './profile.css';
 
 var request = require('superagent');
 
-var LJ = require('../LJ');
+var LJ = require('../../lib/LJ');
 
-var Auth = require('../Auth');
+var Auth = require('../../lib/Auth');
 
 var Profile = React.createClass({
   getInitialState: function() {

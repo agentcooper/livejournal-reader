@@ -13,7 +13,7 @@ var Textarea = require('react-textarea-autosize');
 
 var marked = require('marked');
 
-var LJ = require('../LJ');
+var LJ = require('../../lib/LJ');
 
 var Editor = React.createClass({
   componentWillMount: function() {

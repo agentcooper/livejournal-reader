@@ -17,8 +17,9 @@ var Post = require('./Components/Post/Post');
 var Journal = require('./Components/Journal/Journal');
 var Feed = require('./Components/Feed/Feed');
 var Update = require('./Components/Update/Update');
-var Login = require('./Components/Login');
-var Auth = require('./Components/Auth');
+var Login = require('./Components/Login/Login');
+
+var Auth = require('./lib/Auth');
 
 function requireAuth(nextState, transition) {
   if (!Auth.isLoggedIn()) {
