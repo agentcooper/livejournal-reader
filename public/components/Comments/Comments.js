@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-var LJ = require('./LJ');
+var LJ = require('../LJ');
 
 var request = require('superagent');
 
@@ -12,11 +12,11 @@ var Comment = require('./Comment');
 
 var CommentBox = require('./CommentBox');
 
-var Share = require('./Share');
+var Share = require('../Share/Share');
 
-var textUtils = require('./textUtils');
+var textUtils = require('../textUtils');
 
-import '../stylesheets/comments.css';
+import './comments.css';
 
 var CommentsLoader = React.createClass({
   render: function() {

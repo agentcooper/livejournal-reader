@@ -3,13 +3,13 @@ var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
 
-import '../stylesheets/profile.css';
+import './profile.css';
 
 var request = require('superagent');
 
-var LJ = require('./LJ');
+var LJ = require('../LJ');
 
-var Auth = require('./Auth');
+var Auth = require('../Auth');
 
 var Profile = React.createClass({
   getInitialState: function() {

@@ -4,7 +4,7 @@ module.exports = {
   devtool:
     process.env.NODE_ENV === 'production' ? undefined : 'inline-source-map',
 
-  entry: path.resolve(__dirname, 'public/js/index.js'),
+  entry: path.resolve(__dirname, 'public/index.js'),
 
   output: {
     path: path.resolve(__dirname, 'public/build'),

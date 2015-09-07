@@ -5,7 +5,7 @@ var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
 
-import '../stylesheets/update.css';
+import './update.css';
 
 var DocumentTitle = require('react-document-title');
 
@@ -13,7 +13,7 @@ var Textarea = require('react-textarea-autosize');
 
 var marked = require('marked');
 
-var LJ = require('./LJ');
+var LJ = require('../LJ');
 
 var Editor = React.createClass({
   componentWillMount: function() {

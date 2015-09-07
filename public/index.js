@@ -2,8 +2,8 @@
 
 require('babel/polyfill');
 
-import '../stylesheets/mobile.css';
-import '../stylesheets/style.css';
+import './stylesheets/mobile.css';
+import './stylesheets/style.css';
 
 var React = require('react');
 
@@ -12,13 +12,13 @@ var BrowserHistory = require('react-router/lib/BrowserHistory');
 
 var { Router, Route, Link, Navigation } = ReactRouter;
 
-var Layout = require('./Layout');
-var Post = require('./Post');
-var Journal = require('./Journal');
-var Feed = require('./Feed');
-var Update = require('./Update');
-var Login = require('./Login');
-var Auth = require('./Auth');
+var Layout = require('./Components/Layout/Layout');
+var Post = require('./Components/Post/Post');
+var Journal = require('./Components/Journal/Journal');
+var Feed = require('./Components/Feed/Feed');
+var Update = require('./Components/Update/Update');
+var Login = require('./Components/Login');
+var Auth = require('./Components/Auth');
 
 function requireAuth(nextState, transition) {
   if (!Auth.isLoggedIn()) {

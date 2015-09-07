@@ -5,13 +5,13 @@ var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
 
-import '../stylesheets/post.css';
+import './post.css';
 
 var DocumentTitle = require('react-document-title');
 
-var LJ = require('./LJ');
+var LJ = require('../LJ');
 
-var Comments = require('./Comments');
+var Comments = require('../Comments/Comments');
 
 var Post = React.createClass({
   getInitialState: function() {

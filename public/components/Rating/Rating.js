@@ -4,9 +4,9 @@ var request = require('superagent');
 
 var ReactIntl = require('react-intl');
 
-var LJ = require('./LJ');
+var LJ = require('../LJ');
 
-import '../stylesheets/rating.css';
+import './rating.css';
 
 var RatingEntry = require('./RatingEntry');
 

@@ -4,9 +4,9 @@ var OverlayTrigger = require('react-bootstrap/lib/OverlayTrigger');
 
 var Popover = require('react-bootstrap/lib/Popover');
 
-var LJ = require('./LJ');
+var LJ = require('../LJ');
 
-import '../stylesheets/social.css';
+import './social.css';
 
 var networks = {
   twitter: function(post) {

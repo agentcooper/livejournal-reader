@@ -5,13 +5,13 @@ var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
 
-import '../stylesheets/feed.css';
+import './feed.css';
 
 var DocumentTitle = require('react-document-title');
 
-var CommentsLink = require('./CommentsLink');
+var CommentsLink = require('../Comments/CommentsLink');
 
-var LJ = require('./LJ');
+var LJ = require('../LJ');
 
 var FeedEntry = React.createClass({
   render: function() {

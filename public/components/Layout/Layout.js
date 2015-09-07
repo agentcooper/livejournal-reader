@@ -5,10 +5,10 @@ var DocumentTitle = require('react-document-title');
 
 var showNewPostInSidebar = true;
 
-import '../stylesheets/main.css';
+import './layout.css';
 
-var Rating  = require('./Rating');
-var Profile = require('./Profile');
+var Rating  = require('../Rating/Rating');
+var Profile = require('../Profile/Profile');
 
 var { Link } = ReactRouter;
 

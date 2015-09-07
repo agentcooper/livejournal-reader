@@ -103,7 +103,7 @@
     }
 
     .b-entry__livejournal:before {
-      content: url('../images/livejournal.png');
+      content: url('../../images/livejournal.png');
       vertical-align: middle;
       padding-right: 3px;
       }
@@ -113,7 +113,7 @@
     }
 
     .b-entry__fb:before {
-      content: url('../images/facebook.png');
+      content: url('../../images/facebook.png');
       vertical-align: middle;
       padding-right: 3px;
       }
@@ -123,7 +123,7 @@
     }
 
       .b-entry__vk:before {
-        content: url('../images/vkontakte.ico');
+        content: url('../../images/vkontakte.ico');
         vertical-align: middle;
         padding-right: 3px;
       }

@@ -7,9 +7,9 @@ var { Link } = Router;
 
 var DocumentTitle = require('react-document-title');
 
-var CommentsLink = require('./CommentsLink');
+var CommentsLink = require('../Comments/CommentsLink');
 
-var LJ = require('./LJ');
+var LJ = require('../LJ');
 
 var ERROR_STRING = {
   '206': 'Journal does not exist'
