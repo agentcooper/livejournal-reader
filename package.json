@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
+    "start-production": "NODE_ENV=production pm2 start app.js",
     "build": "webpack",
     "watch": "webpack --watch",
     "build-production": "NODE_ENV=production webpack -p",
