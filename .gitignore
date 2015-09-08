@@ -1,6 +1,5 @@
 node_modules
 
-config.js
 public/build
 public/top.json
 public/app.js

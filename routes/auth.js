@@ -4,19 +4,13 @@ var OAuth = require('oauth');
 
 var LiveJournal = require('livejournal');
 
-if (process.env.NODE_ENV === 'production') {
-  var COOKIE_DOMAIN = '.ljreader.com';
-  var DOMAIN_FULL = 'http://ljreader.com';
-} else {
-  var COOKIE_DOMAIN = 'localhost';
-  var DOMAIN_FULL = 'http://localhost:4000';
-}
+var config = require('../config');
 
 var oauth = new OAuth.OAuth(
-  'https://www.livejournal.com/oauth/request_token.bml?oauth_callback=' + DOMAIN_FULL + '/auth',
-  'https://www.livejournal.com/oauth/access_token.bml',
-  'ad3cbab5f7748de3',
-  '8c11db9d8629f41c3cdf9744d1bb',
+  config.oauth.request_token + '?oauth_callback=' + config.domain_full + '/auth',
+  config.oauth.access_token,
+  config.oauth.consumer_key,
+  config.oauth.secret,
   '1.0',
   null,
   'HMAC-SHA1'
@@ -40,8 +34,7 @@ exports.run = function(req, res) {
     secret = token_secret;
 
     res.redirect(
-      'https://www.livejournal.com/oauth/authorize_token.bml?oauth_token=' +
-      token
+      config.oauth.authorize_token + '?oauth_token=' + token
     );
   });
 };
@@ -73,7 +66,7 @@ exports.token = function(req, res) {
     oauth_token_secret = oauth_token_secret.trim();
 
     var authCookie = buildCookie(oauth_token, oauth_token_secret, {
-      domain: COOKIE_DOMAIN
+      domain: config.cookie_domain
     });
 
     res.cookie('auth', authCookie);
@@ -88,7 +81,7 @@ function buildHeader(req) {
   }
 
   var oauth_header = oauth.authHeader(
-    'http://www.livejournal.com/interface/xmlrpc',
+    config.oauth.endpoint,
     req.query.oauth_token || auth.oauth_token,
     req.query.oauth_token_secret || auth.oauth_token_secret,
     'POST'
