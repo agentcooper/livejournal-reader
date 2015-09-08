@@ -46,7 +46,7 @@ app.post('/api/newPost', update.newPost);
 app.post('/api/editPost', update.editPost);
 
 app.all('*', function(req, res) {
-  res.sendfile('./public/index.html');
+  res.sendFile('./public/index.html');
 });
 
 app.set('port', process.env.PORT || 4000);
