@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var fs      = require('fs');
 var request = require('request');
 var async   = require('async');
@@ -14,8 +16,8 @@ var argv = require('optimist')
   .usage('Fetch top from livejournal.com and build new one with social stats.')
   .demand('lang')
   .describe('lang', 'ru_RU or en_US')
-  .default('path', 'public')
-  .describe('path', 'path for output (relative to bin)')
+  .demand('path')
+  .describe('path', 'directory path to store output')
   .argv;
 
 function getRating(callback) {
@@ -122,6 +124,7 @@ function run(argv) {
 
     async.parallel([
       function(callback) {
+        console.log('')
         getFacebook(entries, function() {
           console.log('FB done'); callback.apply(this, arguments);
         });
@@ -131,13 +134,13 @@ function run(argv) {
         getTwitter(entries, function() {
           console.log('TW done'); callback.apply(this, arguments);
         });
-      }/*,
+      },
 
       function(callback) {
         getVK(entries, function() {
           console.log('VK done'); callback.apply(this, arguments);
         });
-      }*/
+      }
     ], function() {
       var top = entries.map(function(entry) {
         return {
@@ -165,14 +168,14 @@ function run(argv) {
           built_at: Date.now()
         });
 
-        fs.writeFileSync(
-          __dirname + '/' + argv.path + '/top_' + argv.lang + '.json',
-          output
-        );
+        var path = argv.path + '/top_' + argv.lang + '.json';
+
+        fs.writeFileSync(path, output);
+
+        console.log('Wrote %s', path);
       } else {
         console.error('Bad data', top);
       }
-
     });
   });
 }

@@ -14,3 +14,11 @@ npm install
 npm build
 npm start
 ```
+
+### Top
+
+```
+# fetch public/top_ru_RU.json
+
+./bin/fetch-top --lang ru_RU --path public
+```
