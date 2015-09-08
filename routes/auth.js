@@ -4,7 +4,7 @@ var OAuth = require('oauth');
 
 var LiveJournal = require('livejournal');
 
-if (process.env.PRODUCTION) {
+if (process.env.NODE_ENV === 'production') {
   var COOKIE_DOMAIN = '.ljreader.com';
   var DOMAIN_FULL = 'http://ljreader.com';
 } else {
