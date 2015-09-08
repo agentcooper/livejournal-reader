@@ -12,12 +12,12 @@ var BrowserHistory = require('react-router/lib/BrowserHistory');
 
 var { Router, Route, Link, Navigation } = ReactRouter;
 
-var Layout = require('./Components/Layout/Layout');
-var Post = require('./Components/Post/Post');
-var Journal = require('./Components/Journal/Journal');
-var Feed = require('./Components/Feed/Feed');
-var Update = require('./Components/Update/Update');
-var Login = require('./Components/Login/Login');
+var Layout = require('./components/Layout/Layout');
+var Post = require('./components/Post/Post');
+var Journal = require('./components/Journal/Journal');
+var Feed = require('./components/Feed/Feed');
+var Update = require('./components/Update/Update');
+var Login = require('./components/Login/Login');
 
 var Auth = require('./lib/Auth');
 
