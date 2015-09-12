@@ -3,12 +3,8 @@ var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
 
-module.exports = React.createClass({
-  propTypes: {
-    count: React.PropTypes.number.isRequired
-  },
-
-  render: function() {
+module.exports = class extends React.Component {
+  render() {
     var text = this.props.count + ' comments';
 
     if (this.props.count === 0) {
@@ -23,4 +19,8 @@ module.exports = React.createClass({
       <Link to={`/read/${this.props.journal}/${this.props.postId}`}>{ text }</Link>
     );
   }
-});
+};
+
+module.exports.propTypes = {
+  count: React.PropTypes.number.isRequired
+};

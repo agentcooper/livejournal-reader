@@ -18,8 +18,8 @@ var textUtils = require('../../lib/textUtils');
 
 import './comments.css';
 
-var CommentsLoader = React.createClass({
-  render: function() {
+class CommentsLoader extends React.Component {
+  render() {
     return (
       <div className="b-comments--loading">
         Loading comments
@@ -37,7 +37,7 @@ var CommentsLoader = React.createClass({
       </div>
     );
   }
-});
+}
 
 var Comments = React.createClass({
   getInitialState: function() {

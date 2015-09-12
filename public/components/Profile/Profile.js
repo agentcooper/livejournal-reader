@@ -11,14 +11,17 @@ var LJ = require('../../lib/LJ');
 
 var Auth = require('../../lib/Auth');
 
-var Profile = React.createClass({
-  getInitialState: function() {
-    return {
+class Profile extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.login = this.login.bind(this);
+
+    this.state = {
       profile: null
     };
-  },
+  }
 
-  componentWillMount: function() {
+  componentWillMount() {
     Auth.events.on('login', () => {
       this.getData();
     });
@@ -26,9 +29,9 @@ var Profile = React.createClass({
     if (Auth.isLoggedIn()) {
       this.getData();
     }
-  },
+  }
 
-  getData: function() {
+  getData() {
     var that = this;
 
     Auth.getProfile().then((profile) => {
@@ -41,13 +44,13 @@ var Profile = React.createClass({
 
       that.setState({ profile: profile });
     });
-  },
+  }
 
-  login: function() {
+  login() {
     Auth.startLogin();
-  },
+  }
 
-  render: function() {
+  render() {
     var profile = this.state.profile;
 
     if (this.state.profile) {
@@ -71,6 +74,6 @@ var Profile = React.createClass({
       </a>
     );
   }
-});
+}
 
 module.exports = Profile;

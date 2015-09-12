@@ -15,8 +15,8 @@ var ERROR_STRING = {
   '206': 'Journal does not exist'
 };
 
-var JournalEntry = React.createClass({
-  render: function() {
+class JournalEntry extends React.Component {
+  render() {
     var entry = this.props.entry;
 
     return (
@@ -40,17 +40,19 @@ var JournalEntry = React.createClass({
       </li>
     );
   }
-});
+}
 
-var Journal = React.createClass({
-  getInitialState: function() {
-    return {
+class Journal extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
       journal: {},
       err: null
     };
-  },
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
     var params = this.props.params;
 
     LJ.getJournal({
@@ -63,9 +65,9 @@ var Journal = React.createClass({
 
       this.setState({ err: null, journal: journal });
     });
-  },
+  }
 
-  render: function() {
+  render() {
     var params = this.props.params,
         content = null;
 
@@ -93,6 +95,6 @@ var Journal = React.createClass({
       </DocumentTitle>
     );
   }
-});
+}
 
 module.exports = Journal;

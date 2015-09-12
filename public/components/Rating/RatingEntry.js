@@ -3,8 +3,8 @@ var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
 
-var RatingEntry = React.createClass({
-  render: function() {
+class RatingEntry extends React.Component {
+  render() {
     var post = this.props.post;
 
     return (
@@ -41,6 +41,6 @@ var RatingEntry = React.createClass({
       </li>
     );
   }
-});
+}
 
 module.exports = RatingEntry;

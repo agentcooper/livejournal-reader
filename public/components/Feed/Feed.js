@@ -13,8 +13,8 @@ var CommentsLink = require('../Comments/CommentsLink');
 
 var LJ = require('../../lib/LJ');
 
-var FeedEntry = React.createClass({
-  render: function() {
+class FeedEntry extends React.Component {
+  render() {
     var entry = this.props.entry;
 
     return (
@@ -40,17 +40,20 @@ var FeedEntry = React.createClass({
       </li>
     );
   }
-});
+}
 
-var Feed = React.createClass({
-  getInitialState: function() {
-    return {
+class Feed extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.more = this.more.bind(this);
+
+    this.state = {
       skip: 0,
       posts: []
     };
-  },
+  }
 
-  loadMore: function() {
+  loadMore() {
     LJ.getFeed({
       skip: this.state.skip,
       itemshow: 7
@@ -59,21 +62,21 @@ var Feed = React.createClass({
         posts: this.state.posts.concat(feed.entries)
       });
     });
-  }, 
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.loadMore();
-  },
+  }
 
-  more: function() {
+  more() {
     this.setState({
       skip: this.state.skip + this.state.posts.length
     }, () => {
       this.loadMore();
     });
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <DocumentTitle title="Feed">
         <ol className="b-feed">
@@ -92,6 +95,6 @@ var Feed = React.createClass({
       </DocumentTitle>
     );
   }
-});
+}
 
 module.exports = Feed;

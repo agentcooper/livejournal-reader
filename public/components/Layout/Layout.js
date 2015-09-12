@@ -12,12 +12,13 @@ var Profile = require('../Profile/Profile');
 
 var { Link } = ReactRouter;
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return {};
-  },
+module.exports = class extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {};
+  }
 
-  render: function() {
+  render() {
     return (
       <DocumentTitle title="Reader">
         <div>
@@ -54,4 +55,4 @@ module.exports = React.createClass({
       </DocumentTitle>
     );
   }
-});
+};

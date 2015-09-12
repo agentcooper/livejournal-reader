@@ -7,16 +7,17 @@ var classNames = require('classnames');
 
 var CommentBox = require('./CommentBox');
 
-var Comment = React.createClass({
-  getInitialState: function() {
-    return {};
-  },
+class Comment extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {};
+  }
 
-  reply: function(event) {
+  reply(event) {
     event.preventDefault();
-  },
+  }
 
-  render: function() {
+  render() {
     var comment = this.props.comment;
 
     var isDeleted = comment.state === 'D';
@@ -37,13 +38,13 @@ var Comment = React.createClass({
 
     return (
       <li className={classNames(
-          'b-comment',
-          'b-comment-level-' + (comment.level > 15 ? 'over-15' : comment.level),
-          {
-            'b-comment--anonymous': comment.isAnonymous,
-            'b-comment--deleted': isDeleted
-          }
-        )} id={ 'c' + comment.dtalkid }>
+        'b-comment',
+        'b-comment-level-' + (comment.level > 15 ? 'over-15' : comment.level),
+        {
+          'b-comment--anonymous': comment.isAnonymous,
+          'b-comment--deleted': isDeleted
+        }
+      )} id={ 'c' + comment.dtalkid }>
         <div className={classNames(
           'b-thread__comment',
           { 'b-thread__comment_author': comment.isAuthor }
@@ -74,6 +75,6 @@ var Comment = React.createClass({
       </li>
     );
   }
-});
+}
 
 module.exports = Comment;

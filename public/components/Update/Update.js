@@ -15,8 +15,29 @@ var marked = require('marked');
 
 var LJ = require('../../lib/LJ');
 
-var Editor = React.createClass({
-  componentWillMount: function() {
+class Editor extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+    this.onSecurityChange = this.onSecurityChange.bind(this);
+
+    this.state = {
+      body: '',
+
+      itemid: null,
+
+      security: 'private',
+
+      markdown: false,
+
+      mode: 'new',
+      journal: null
+    };
+  }
+
+  componentWillMount() {
     console.log(arguments);
 
     LJ.getJournal({
@@ -30,9 +51,9 @@ var Editor = React.createClass({
         this.setPost(event);
       }
     });
-  },
+  }
 
-  componentWillReceiveProps: function(newProps) {
+  componentWillReceiveProps(newProps) {
     if (newProps.postId) {
       var event = this.state.journal.events.find((event) => event.postId == newProps.postId);
 
@@ -40,24 +61,9 @@ var Editor = React.createClass({
     } else {
       this.backToNew();
     }
-  },
+  }
 
-  getInitialState: function() {
-    return {
-      body: '',
-
-      itemid: null,
-
-      security: 'private',
-
-      markdown: false,
-
-      mode: 'new',
-      journal: null
-    };
-  },
-
-  handleRemove: function(event) {
+  handleRemove(event) {
     event.preventDefault();
 
     LJ.newPost({
@@ -66,13 +72,13 @@ var Editor = React.createClass({
     }).then(function() {
       console.log(arguments);
     });
-  },
+  }
 
-  onSecurityChange: function(event) {
+  onSecurityChange(event) {
     this.setState({ security: event.target.value });
-  },
+  }
 
-  handleSave: function(event) {
+  handleSave(event) {
     event.preventDefault();
 
     var value = this.state.body;
@@ -89,9 +95,9 @@ var Editor = React.createClass({
     }).then(function() {
       console.log(arguments);
     });
-  },
+  }
 
-  setPost: function(event) {
+  setPost(event) {
     var markdown = '';
 
     var body = event.body;
@@ -111,21 +117,21 @@ var Editor = React.createClass({
       mode: 'edit',
       body: body
     });
-  },
+  }
 
-  handleChange: function(event) {
+  handleChange(event) {
     this.setState({ body: event.target.value });
-  },
+  }
 
-  backToNew: function() {
+  backToNew() {
     this.setState({
       itemid: null,
       mode: 'new',
       body: ''
     });
-  },
+  }
 
-  render: function() {
+  render() {
     var posts = null;
 
     if (this.state.journal) {
@@ -184,10 +190,10 @@ var Editor = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = React.createClass({
-  render: function() {
+module.exports = class extends React.Component {
+  render() {
     var postId = this.props.params.postId;
 
     return (
@@ -196,4 +202,4 @@ module.exports = React.createClass({
       </DocumentTitle>
     );
   }
-});
+};

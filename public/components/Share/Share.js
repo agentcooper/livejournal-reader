@@ -24,8 +24,13 @@ var networks = {
   }
 };
 
-var Share = React.createClass({
-  share: function(network, event) {
+class Share extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.share = this.share.bind(this);
+  }
+
+  share(network, event) {
     event.preventDefault();
 
     LJ.getPost({
@@ -38,9 +43,9 @@ var Share = React.createClass({
         'width=550,height=420'
       );
     });
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <OverlayTrigger trigger='click' rootClose={true} placement='bottom' overlay={
         <Popover>
@@ -59,6 +64,6 @@ var Share = React.createClass({
       </OverlayTrigger>
     );
   }
-});
+}
 
 module.exports = Share;

@@ -13,14 +13,16 @@ var LJ = require('../../lib/LJ');
 
 var Comments = require('../Comments/Comments');
 
-var Post = React.createClass({
-  getInitialState: function() {
-    return {
+class Post extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
       post: null
     };
-  },
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
     var params = this.props.params;
 
     LJ.getPost({
@@ -29,9 +31,9 @@ var Post = React.createClass({
     }, (err, post) => {
       this.setState({ post: post });
     });
-  },
+  }
 
-  render: function() {
+  render() {
     var post = this.state.post;
 
     var output = null;
@@ -55,6 +57,6 @@ var Post = React.createClass({
 
     return output;
   }
-});
+}
 
 module.exports = Post;

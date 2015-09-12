@@ -12,20 +12,23 @@ var RatingEntry = require('./RatingEntry');
 
 var FormattedRelative = ReactIntl.FormattedRelative;
 
-var Rating = React.createClass({
-  componentDidMount: function() {
+class Rating extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.sort = this.sort.bind(this);
+
+    this.state = {
+      rating: null
+    };
+  }
+
+  componentDidMount() {
     LJ.getRating().then((rating) => {
       this.setState({ rating: rating });
     });
-  },
+  }
 
-  getInitialState: function() {
-    return {
-      rating: null
-    };
-  },
-
-  sort: function(type) {
+  sort(type) {
     var rating = this.state.rating;
 
     var reverse = type.charAt(0) === '-';
@@ -51,9 +54,9 @@ var Rating = React.createClass({
     );
 
     this.setState({ rating: rating });
-  },
+  }
 
-  render: function() {
+  render() {
     var entries = this.state.rating && this.state.rating.top.map(function(post, idx) {
       return <RatingEntry post={post} key={post.postId} position={idx + 1}/>;
     });
@@ -95,6 +98,6 @@ var Rating = React.createClass({
 
     return this.state.rating ? rating : null;
   }
-});
+}
 
 module.exports = Rating;

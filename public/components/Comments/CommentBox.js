@@ -1,13 +1,18 @@
 var React = require('react');
 
-var Comments = React.createClass({
-  onSubmit: function() {
-    var text = this.refs.textarea.getDOMNode().value;
+class Comments extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit() {
+    var text = React.findDOMNode(this.refs.textarea).value;
 
     this.props.onSubmit(text);
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="b-commentbox">
         <p>
@@ -25,6 +30,6 @@ var Comments = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Comments;
