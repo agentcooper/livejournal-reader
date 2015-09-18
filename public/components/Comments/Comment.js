@@ -1,13 +1,11 @@
-var React = require('react');
+import React from 'react';
+import { Link } from 'react-router';
 
-var Router = require('react-router');
-var { Link } = Router;
+import classNames from 'classnames';
 
-var classNames = require('classnames');
+import CommentBox from './CommentBox';
 
-var CommentBox = require('./CommentBox');
-
-class Comment extends React.Component {
+export default class extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {};
@@ -76,5 +74,3 @@ class Comment extends React.Component {
     );
   }
 }
-
-module.exports = Comment;

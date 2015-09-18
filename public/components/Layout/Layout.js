@@ -1,18 +1,16 @@
-var React = require('react');
-var ReactRouter = require('react-router');
+import React from 'react';
+import { Link } from 'react-router';
 
-var DocumentTitle = require('react-document-title');
-
-var showNewPostInSidebar = true;
+import DocumentTitle from 'react-document-title';
 
 import './layout.css';
 
-var Rating  = require('../Rating/Rating');
-var Profile = require('../Profile/Profile');
+import Rating from '../Rating/Rating';
+import Profile from '../Profile/Profile';
 
-var { Link } = ReactRouter;
+const showNewPostInSidebar = true;
 
-module.exports = class extends React.Component {
+export default class extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {};

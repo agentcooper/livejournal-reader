@@ -1,17 +1,15 @@
-var React = require('react');
-
-var Router = require('react-router');
-var { Link } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
 import './profile.css';
 
-var request = require('superagent');
+import request from 'superagent';
 
-var LJ = require('../../lib/LJ');
+import LJ from '../../lib/LJ';
 
-var Auth = require('../../lib/Auth');
+import Auth from '../../lib/Auth';
 
-class Profile extends React.Component {
+export default class extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.login = this.login.bind(this);
@@ -75,5 +73,3 @@ class Profile extends React.Component {
     );
   }
 }
-
-module.exports = Profile;

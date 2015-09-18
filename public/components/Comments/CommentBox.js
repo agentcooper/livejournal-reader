@@ -1,6 +1,6 @@
-var React = require('react');
+import React from 'react';
 
-class Comments extends React.Component {
+export default class extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.onSubmit = this.onSubmit.bind(this);
@@ -31,5 +31,3 @@ class Comments extends React.Component {
     );
   }
 }
-
-module.exports = Comments;

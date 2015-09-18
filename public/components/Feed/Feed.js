@@ -1,17 +1,15 @@
 /* @flow */
 
-var React = require('react');
-
-var Router = require('react-router');
-var { Link } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
 import './feed.css';
 
-var DocumentTitle = require('react-document-title');
+import DocumentTitle from 'react-document-title';
 
-var CommentsLink = require('../Comments/CommentsLink');
+import CommentsLink from '../Comments/CommentsLink';
 
-var LJ = require('../../lib/LJ');
+import LJ from '../../lib/LJ';
 
 class FeedEntry extends React.Component {
   render() {
@@ -42,7 +40,7 @@ class FeedEntry extends React.Component {
   }
 }
 
-class Feed extends React.Component {
+export default class extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.more = this.more.bind(this);
@@ -96,5 +94,3 @@ class Feed extends React.Component {
     );
   }
 }
-
-module.exports = Feed;

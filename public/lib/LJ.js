@@ -1,13 +1,12 @@
 /* @flow */
 
-var request = require('superagent');
+import request from 'superagent';
 
-var NProgress = require('nprogress');
+import NProgress from 'nprogress';
 
-var textUtils = require('./textUtils');
+import textUtils from './textUtils';
 
-module.exports = {
-
+export default {
   post: {},
   
   journal: {},

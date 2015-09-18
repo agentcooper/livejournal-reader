@@ -1,8 +1,8 @@
-var EventEmitter = require('events').EventEmitter;
+import { EventEmitter } from 'events';
 
-var request = require('superagent');
+import request from 'superagent';
 
-module.exports = {
+export default {
   events: new EventEmitter(),
 
   getCookie: function(name) {

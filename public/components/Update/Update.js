@@ -1,19 +1,17 @@
 /* @flow */
 
-var React = require('react');
+import React from 'react';
+import { Link } from 'react-router';
 
-var Router = require('react-router');
-var { Link } = Router;
+import DocumentTitle from 'react-document-title';
+
+import Textarea from 'react-textarea-autosize';
+
+import marked from 'marked';
+
+import LJ from '../../lib/LJ';
 
 import './update.css';
-
-var DocumentTitle = require('react-document-title');
-
-var Textarea = require('react-textarea-autosize');
-
-var marked = require('marked');
-
-var LJ = require('../../lib/LJ');
 
 class Editor extends React.Component {
   constructor(props, context) {
@@ -192,7 +190,7 @@ class Editor extends React.Component {
   }
 }
 
-module.exports = class extends React.Component {
+export default class extends React.Component {
   render() {
     var postId = this.props.params.postId;
 

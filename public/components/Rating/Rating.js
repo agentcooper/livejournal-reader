@@ -1,18 +1,18 @@
-var React = require('react');
+import React from 'react';
 
-var request = require('superagent');
+import request from 'superagent';
 
-var ReactIntl = require('react-intl');
+import ReactIntl from 'react-intl';
 
-var LJ = require('../../lib/LJ');
+import LJ from '../../lib/LJ';
 
 import './rating.css';
 
-var RatingEntry = require('./RatingEntry');
+import RatingEntry from './RatingEntry';
 
 var FormattedRelative = ReactIntl.FormattedRelative;
 
-class Rating extends React.Component {
+export default class extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.sort = this.sort.bind(this);
@@ -99,5 +99,3 @@ class Rating extends React.Component {
     return this.state.rating ? rating : null;
   }
 }
-
-module.exports = Rating;

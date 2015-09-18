@@ -1,9 +1,7 @@
-var React = require('react');
+import React from 'react';
+import { Link } from 'react-router';
 
-var Router = require('react-router');
-var { Link } = Router;
-
-class RatingEntry extends React.Component {
+export default class extends React.Component {
   render() {
     var post = this.props.post;
 
@@ -42,5 +40,3 @@ class RatingEntry extends React.Component {
     );
   }
 }
-
-module.exports = RatingEntry;

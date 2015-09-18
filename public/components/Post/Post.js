@@ -1,19 +1,17 @@
 /* @flow */
 
-var React = require('react');
-
-var Router = require('react-router');
-var { Link } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
 import './post.css';
 
-var DocumentTitle = require('react-document-title');
+import DocumentTitle from 'react-document-title';
 
-var LJ = require('../../lib/LJ');
+import LJ from '../../lib/LJ';
 
-var Comments = require('../Comments/Comments');
+import Comments from '../Comments/Comments';
 
-class Post extends React.Component {
+export default class extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -58,5 +56,3 @@ class Post extends React.Component {
     return output;
   }
 }
-
-module.exports = Post;

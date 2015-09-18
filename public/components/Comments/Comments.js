@@ -1,20 +1,20 @@
 /* @flow */
 
-var React = require('react');
+import React from 'react';
 
-var LJ = require('../../lib/LJ');
+import LJ from '../../lib/LJ';
 
-var request = require('superagent');
+import request from 'superagent';
 
-var classNames = require('classnames');
+import classNames from 'classnames';
 
-var Comment = require('./Comment');
+import Comment from './Comment';
 
-var CommentBox = require('./CommentBox');
+import CommentBox from './CommentBox';
 
-var Share = require('../Share/Share');
+import Share from '../Share/Share';
 
-var textUtils = require('../../lib/textUtils');
+import textUtils from '../../lib/textUtils';
 
 import './comments.css';
 

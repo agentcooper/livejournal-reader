@@ -1,17 +1,15 @@
 /* @flow */
 
-var React = require('react');
+import React from 'react';
+import { Link } from 'react-router';
 
-var Router = require('react-router');
-var { Link } = Router;
+import DocumentTitle from 'react-document-title';
 
-var DocumentTitle = require('react-document-title');
+import CommentsLink from '../Comments/CommentsLink';
 
-var CommentsLink = require('../Comments/CommentsLink');
+import LJ from '../../lib/LJ';
 
-var LJ = require('../../lib/LJ');
-
-var ERROR_STRING = {
+const ERROR_STRING = {
   '206': 'Journal does not exist'
 };
 
@@ -42,7 +40,7 @@ class JournalEntry extends React.Component {
   }
 }
 
-class Journal extends React.Component {
+export default class extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -96,5 +94,3 @@ class Journal extends React.Component {
     );
   }
 }
-
-module.exports = Journal;

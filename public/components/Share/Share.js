@@ -1,14 +1,14 @@
-var React = require('react');
+import React from 'react';
 
-var OverlayTrigger = require('react-bootstrap/lib/OverlayTrigger');
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 
-var Popover = require('react-bootstrap/lib/Popover');
+import Popover from 'react-bootstrap/lib/Popover';
 
-var LJ = require('../../lib/LJ');
+import LJ from '../../lib/LJ';
 
 import './social.css';
 
-var networks = {
+const networks = {
   twitter: function(post) {
     return [
       'https://twitter.com/intent/tweet?url=',
@@ -24,7 +24,7 @@ var networks = {
   }
 };
 
-class Share extends React.Component {
+export default class extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.share = this.share.bind(this);
@@ -65,5 +65,3 @@ class Share extends React.Component {
     );
   }
 }
-
-module.exports = Share;
