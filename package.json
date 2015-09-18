@@ -34,7 +34,6 @@
     "oauth": "~0.9.11",
     "object-assign": "^4.0.1",
     "react": "^0.13.3",
-    "react-bootstrap": "^0.23.0",
     "react-document-title": "^2.0.1",
     "react-intl": "^1.2.0",
     "react-router": "^1.0.0-rc1",
