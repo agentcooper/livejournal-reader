@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-var fs      = require('fs');
-var request = require('request');
-var async   = require('async');
+var fs = require('fs');
+var request = require('superagent');
+var async = require('async');
 
 var LiveJournal = require('livejournal');
 
@@ -21,47 +21,38 @@ var argv = require('optimist')
   .argv;
 
 function getRating(callback) {
-  var obj = {
-    'jsonrpc': '2.0',
-    'method': 'homepage.get_rating',
-    'params': {
-      'homepage':1,
-      'sort': 'visitors',
-      'page': 0,
-      'country': (argv.lang === 'ru_RU' ? 'cyr' : 'noncyr'),
-      'locale': argv.lang,
-      'category_id':0
-    },
-    'id': Date.now()
-  };
-
-  request({
-    url: 'http://l-api.livejournal.com/__api/?request=' + encodeURIComponent(JSON.stringify(obj)),
-    json: true
-  }, function(err, res, body) {
-    var rating = body.result.rating; 
+  LiveJournal.jsonrpc.request('homepage.get_rating', {
+    'homepage':1,
+    'sort': 'visitors',
+    'page': 0,
+    'country': (argv.lang === 'ru_RU' ? 'cyr' : 'noncyr'),
+    'locale': argv.lang,
+    'category_id': 0
+  }, function(err, res) {
+    var rating = res.body.result.rating;
 
     callback(err, rating);
   });
 }
 
 function getTwitterCount(url, callback) {
-  request({
-    url: 'http://urls.api.twitter.com/1/urls/count.json?url=' + url,
-    json: true
-  }, function(err, res, body) {
+  request
+  .get('http://urls.api.twitter.com/1/urls/count.json')
+  .query({ url: url })
+  .end(function(err, res) {
     setTimeout(function() {
-      callback(err, body);
+      callback(err, res.body);
     }, 200);
   });
 }
 
 function getVKCount(url, callback) {
-  request({
-    url: 'http://vk.com/share.php?act=count&url=' + url
-  }, function(err, res, body) {
+  request
+  .get('http://vk.com/share.php')
+  .query({ act: 'count', url: url })
+  .end(function(err, res) {
     setTimeout(function() {
-      var count = Number(body.match( /^VK\.Share\.count\(\d, (\d+)\);$/ )[ 1 ]);
+      var count = Number(res.text.match( /^VK\.Share\.count\(\d, (\d+)\);$/ )[ 1 ]);
 
       callback(err, count || 0);
     }, 200);
@@ -73,7 +64,7 @@ function getFacebook(entries, callback) {
     return hash[entry.post_url] = entry, hash;
   }, {});
 
-  LiveJournal.getFBStats(entries.map(get('post_url')), function(err, res) {
+  LiveJournal.utils.getFacebookStats(entries.map(get('post_url')), function(err, res) {
     if (typeof res === 'object') {
       for (url in res) {
         hash[url].fb_count = res[url] || 0;
