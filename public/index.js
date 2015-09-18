@@ -8,7 +8,7 @@ import './stylesheets/style.css';
 import React from 'react';
 import { Router, Route, Link } from 'react-router';
 
-import BrowserHistory from 'react-router/lib/BrowserHistory';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 import Layout from './components/Layout/Layout';
 import Post from './components/Post/Post';
@@ -35,7 +35,7 @@ function onUpdate() {
 Auth.init();
 
 React.render((
-  <Router history={new BrowserHistory} onUpdate={onUpdate}>
+  <Router history={createBrowserHistory()} onUpdate={onUpdate}>
     <Route path="/" component={Layout}>
       <Route path="login" component={Login}/>
 
