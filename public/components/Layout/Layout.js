@@ -31,7 +31,7 @@ export default class extends React.Component {
                 <Link to="/">Top</Link>
               </li>
               <li className="b-menu__item">
-                <Link to="feed">Feed</Link>
+                <Link to="/feed">Feed</Link>
               </li>
               {
                 showNewPostInSidebar ?
