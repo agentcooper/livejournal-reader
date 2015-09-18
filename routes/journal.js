@@ -12,10 +12,10 @@ exports.get = function(req, res) {
   } else {
 
     if (req.query.auth) {
-      LiveJournal.RPC.setAuth(auth.buildHeader(req));
+      LiveJournal.xmlrpc.setAuth(auth.buildHeader(req));
     }
 
-    LiveJournal.RPC.getevents({
+    LiveJournal.xmlrpc.getevents({
       auth_method: req.query.auth ? 'oauth' : undefined,
 
       journal: req.query.user,

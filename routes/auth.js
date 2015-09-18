@@ -93,9 +93,9 @@ function buildHeader(req) {
 exports.buildHeader = buildHeader;
 
 exports.login = function(req, res) {
-  LiveJournal.RPC.setAuth(buildHeader(req));
+  LiveJournal.xmlrpc.setAuth(buildHeader(req));
 
-  LiveJournal.RPC.login({
+  LiveJournal.xmlrpc.login({
     getpickws: 1,
     getpickwurls: 1,
     auth_method: 'oauth'

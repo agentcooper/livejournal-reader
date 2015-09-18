@@ -5,9 +5,9 @@ var auth = require('./auth');
 exports.newPost = function(req, res) {
   var now = new Date();
 
-  LiveJournal.RPC.setAuth(auth.buildHeader(req));
+  LiveJournal.xmlrpc.setAuth(auth.buildHeader(req));
 
-  LiveJournal.RPC.postevent({
+  LiveJournal.xmlrpc.postevent({
     auth_method: 'oauth',
 
     security: req.body.security || 'private',
@@ -33,9 +33,9 @@ exports.newPost = function(req, res) {
 exports.editPost = function(req, res) {
   var now = new Date();
 
-  LiveJournal.RPC.setAuth(auth.buildHeader(req));
+  LiveJournal.xmlrpc.setAuth(auth.buildHeader(req));
 
-  LiveJournal.RPC.editevent({
+  LiveJournal.xmlrpc.editevent({
     auth_method: 'oauth',
 
     security: req.body.security || 'private',

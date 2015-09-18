@@ -14,7 +14,7 @@ exports.get = function(req, res) {
     return res.json(cache.get(key));
   }
 
-  LiveJournal.RPC.getevents({
+  LiveJournal.xmlrpc.getevents({
     journal: req.query.user,
     ditemid: req.query.post_id,
 

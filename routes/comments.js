@@ -5,7 +5,7 @@ var auth = require('./auth');
 var LiveJournal = require('livejournal');
 
 exports.get = function(req, res) {
-  LiveJournal.RPC.getcomments({
+  LiveJournal.xmlrpc.getcomments({
     journal: req.query.user,
     ditemid: req.query.post_id,
 
@@ -22,9 +22,9 @@ exports.get = function(req, res) {
 };
 
 exports.add = function(req, res) {
-  LiveJournal.RPC.setAuth(auth.buildHeader(req));
+  LiveJournal.xmlrpc.setAuth(auth.buildHeader(req));
 
-  LiveJournal.RPC.addcomment(objectAssign(req.body, {
+  LiveJournal.xmlrpc.addcomment(objectAssign(req.body, {
     auth_method: 'oauth'
   }), function(err, result) {
     if (err) {

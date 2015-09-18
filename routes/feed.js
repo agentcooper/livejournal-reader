@@ -5,9 +5,9 @@ var LiveJournal = require('livejournal');
 var auth = require('./auth');
 
 exports.get = function(req, res) {
-  LiveJournal.RPC.setAuth(auth.buildHeader(req));
+  LiveJournal.xmlrpc.setAuth(auth.buildHeader(req));
 
-  LiveJournal.RPC.getfriendspage({
+  LiveJournal.xmlrpc.getfriendspage({
     auth_method: 'oauth',
     get_video_ids: true,
     itemshow: req.query.itemshow || 10,
