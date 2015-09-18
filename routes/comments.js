@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var objectAssign = require('object-assign');
 
 var auth = require('./auth');
 
@@ -24,7 +24,7 @@ exports.get = function(req, res) {
 exports.add = function(req, res) {
   LiveJournal.RPC.setAuth(auth.buildHeader(req));
 
-  LiveJournal.RPC.addcomment(_.extend(req.body, {
+  LiveJournal.RPC.addcomment(objectAssign(req.body, {
     auth_method: 'oauth'
   }), function(err, result) {
     if (err) {
