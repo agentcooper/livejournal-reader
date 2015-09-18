@@ -51,6 +51,10 @@ function getVKCount(url, callback) {
   .get('http://vk.com/share.php')
   .query({ act: 'count', url: url })
   .end(function(err, res) {
+    if (err) {
+      return callback(err, null);
+    }
+
     setTimeout(function() {
       var count = Number(res.text.match( /^VK\.Share\.count\(\d, (\d+)\);$/ )[ 1 ]);
 
