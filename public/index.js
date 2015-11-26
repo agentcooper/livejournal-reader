@@ -20,11 +20,11 @@ import Login from './components/Login/Login';
 
 import Auth from './lib/Auth';
 
-function requireAuth(nextState, transition) {
+function requireAuth(nextState, replaceState) {
   if (!Auth.isLoggedIn()) {
-    transition.to('/login', null, {
+    replaceState({
       nextPathname: nextState.location.pathname
-    });
+    }, '/login');
   }
 }
 

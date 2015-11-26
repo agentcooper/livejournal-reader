@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link, Navigation } from 'react-router';
+import { Link, History } from 'react-router';
+
+import { createHistory, useBasename } from 'history';
 
 import Auth from '../../lib/Auth';
 
 module.exports = React.createClass({
-  mixins: [ Navigation ],
+  mixins: [ History ],
 
   login: function() {
     Auth.startLogin({
@@ -12,9 +14,9 @@ module.exports = React.createClass({
         var { location } = this.props;
 
         if (location.state && location.state.nextPathname) {
-          this.replaceWith(location.state.nextPathname);
+          this.history.replaceState(null, location.state.nextPathname);
         } else {
-          this.replaceWith('/');
+          this.history.replaceState(null, '/');
         }
       }
     });
